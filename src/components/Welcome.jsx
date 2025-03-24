@@ -36,7 +36,7 @@ export default function Welcome() {
   }, [])
 
   return (
-    <div className="min-h-full  bg-white overflow-hidden my-8 border-b-2">
+    <div className="min-h-full  bg-white overflow-hidden my-8 ">
       <div className="container px-4 md:px-6 flex flex-col lg:flex-row items-center justify-between gap-8 py-12 mx-auto  max-w-screen-2xl ">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
@@ -44,21 +44,21 @@ export default function Welcome() {
           transition={{ duration: 0.5 }}
           className="flex flex-col space-y-4 lg:w-1/2"
         >
-          <span className="text-sm  text-blue-400 font-bold">
-          Welcome to Zep Research
-          </span>
+          <Subheading> Welcome to Zep Research</Subheading>
+        <Heading as="h3" className="mt-2 max-w-3xl">
+        All-in-One <br />platform for <br /> conferences
+        </Heading>
+          
           {/* <h1 className="text-5xl font-bold tracking-normal sm:text-6xl xl:text-7xl/none">
             All-in-One <br />platform for <br /> conferences
           </h1> */}
-          <Heading className="text-5xl font-bold tracking-normal sm:text-6xl xl:text-7xl/none">
-          All-in-One <br />platform for <br /> conferences
-          </Heading>
+         
           <p className="max-w-[550px] ml-2 text-gray-500 md:text-base">
           We take pride in being a leading conference planner, organizing impactful events and webinars that connect faculty, researchers, and students.
            Our mission is to drive academic growth and innovation through exceptional academic interactions.
           </p>
           <div className="flex flex-col gap-3 min-[400px]:flex-row">
-            <Button size="lg" >
+            <Button size="lg" className="bg-gradient-to-tr from-cyan-400 to-blue-500 " >
               Learn more
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

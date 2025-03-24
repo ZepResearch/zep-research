@@ -1,4 +1,5 @@
 import { CoOrganizationLogosClient } from "./ui/co-org-logo";
+import { Heading } from "./ui/text";
 
 const logos = [
   {
@@ -100,9 +101,12 @@ export default function CoOrganizationLogos() {
   return (
       <section className="w-full py-8 mt-8 ">
       <div className="container mx-auto px-4 md:px-6  ">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-4xl md:ml-24 text-center sm:text-left mb-8 underline underline-offset-2 decoration-cyan-500 dark:decoration-yellow-50">
-          Our Co-organizations
-        </h2>
+        {/* <h2 className="text-3xl font-medium tracking-tighter sm:text-4xl md:text-5xl md:ml-24 text-center mb-8 text-pretty  ">
+         
+        </h2> */}
+        <Heading as="h3" className="mt-2  text-center">
+                Our Co-organizations
+                </Heading>
         <CoOrganizationLogosClient logos={logos} />
       </div>
     </section>

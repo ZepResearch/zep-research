@@ -24,7 +24,7 @@ export function FeatureCard({ title, description, isVisible, imageUrl }) {
         }}
         className="absolute inset-0"
       >
-        <Card className="group overflow-hidden bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-purple-500/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 p-6">
+        <Card className="group overflow-hidden bg-blue-50 backdrop-blur-xl border border-white/20  transition-all duration-500 p-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -36,9 +36,9 @@ export function FeatureCard({ title, description, isVisible, imageUrl }) {
             className="relative z-10"
           >
             <div className="flex items-center justify-between mb-4">
-              <Badge variant="secondary" className="bg-blue-500/10 text-blue-600 hover:bg-blue-500/20">
+              {/* <Badge variant="secondary" className="bg-blue-500/10 text-blue-600 hover:bg-blue-500/20">
                 Feature 
-              </Badge>
+              </Badge> */}
               <motion.div
                 whileHover={{ x: 5 }}
                 className="text-blue-600"
@@ -55,13 +55,13 @@ export function FeatureCard({ title, description, isVisible, imageUrl }) {
               {description}
             </p>
 
-            <div className="relative h-[400px] w-full rounded-2xl overflow-hidden group-hover:scale-[1.02] transition-transform duration-500">
+            <div className="relative h-[400px] w-full rounded-2xl overflow-hidden  transition-transform duration-500">
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
               <Image
                 src={imageUrl}
                 alt={title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover transition-transform duration-500 "
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
