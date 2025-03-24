@@ -239,9 +239,9 @@ export default function LoginForm() {
             <span className="text-xs text-muted-foreground">Or</span>
           </div>
 
-          <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={googleLoading}>
+          {/* <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={googleLoading}>
             {googleLoading ? "Connecting..." : "Login with Google"}
-          </Button>
+          </Button> */}
         </CardContent>
       </Card>
     </div>
