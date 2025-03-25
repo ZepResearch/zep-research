@@ -2,7 +2,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar1 } from "@/components/Navbar"
 import Footer from "@/components/Footer";
-import { Book, Sunset, Trees, Zap } from "lucide-react";
+import { Book, GalleryHorizontal, GraduationCap, GroupIcon, NotepadText, ScrollText, StarHalf, Sunset, Tickets, Trees, UserRound, UserRoundIcon, UsersRound, Zap } from "lucide-react";
+import { PhotoIcon } from "@heroicons/react/24/solid";
+import { IconPodium } from "@tabler/icons-react";
+import { FaRegObjectGroup, FaRobot } from "react-icons/fa";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,50 +40,50 @@ const demoData = {
         {
           title: "Manuscript Preparation",
           description: "The latest industry news, updates, and info",
-          icon: <Book className="size-5 shrink-0" />,
+          icon: <ScrollText className="size-5 shrink-0" />,
           url: "/manuscript-preparation",
         },
         {
           title: "Research Training & Workshops",
           description: "Our mission is to innovate and empower the world",
-          icon: <Trees className="size-5 shrink-0" />,
+          icon: <FaRegObjectGroup className="size-5 shrink-0" />,
           url: "/research-training-workshops",
         },
         {
           title: "Event Promotion & Marketing",
           description: "Browse job listing and discover our workspace",
-          icon: <Sunset className="size-5 shrink-0" />,
+          icon: <Tickets className="size-5 shrink-0" />,
           url: "/event-promotion-marketing",
         },
         {
           title: "Journals & Publications",
           description:
             "Get in touch with our support team or visit our community forums",
-          icon: <Zap className="size-5 shrink-0" />,
+          icon: <NotepadText className="size-5 shrink-0" />,
           url: "/journals",
         },
         {
           title: "Conferences & Webinars",
           description: "Get all the answers you need right here",
-          icon: <Zap className="size-5 shrink-0" />,
+          icon: <IconPodium className="size-5 shrink-0" />,
           url: "/conferences-webinars",
         },
         {
           title: "Peer Review Management",
           description: "We are here to help you with any questions you have",
-          icon: <Sunset className="size-5 shrink-0" />,
+          icon: <StarHalf className="size-5 shrink-0" />,
           url: "/peer-review-management",
         },
         {
           title: "Networking & Collaboration",
           description: "Check the current status of our services and APIs",
-          icon: <Trees className="size-5 shrink-0" />,
+          icon: <UsersRound className="size-5 shrink-0" />,
           url: "/networking-collaboration",
         },
         {
           title: "Online Courses",
           description: "Our terms and conditions for using our services",
-          icon: <Book className="size-5 shrink-0" />,
+          icon: <GraduationCap className="size-5 shrink-0" />,
           url: "/online-courses",
         },
       ],
@@ -90,21 +93,27 @@ const demoData = {
       url: "#",
       items: [
         {
+          title: "Gallery",
+          description: "Explore a collection of images and media showcasing our work.",
+          icon: <PhotoIcon className="size-5 shrink-0" />,
+          url: "/Gallery",
+        },
+        {
           title: "Courses",
-          description: "Get all the answers you need right here",
-          icon: <Zap className="size-5 shrink-0" />,
+          description: "Access a variety of educational courses to enhance your knowledge.",
+          icon: <GraduationCap className="size-5 shrink-0" />,
           url: "/courses",
         },
         {
           title: "Conference",
-          description: "We are here to help you with any questions you have",
-          icon: <Sunset className="size-5 shrink-0" />,
+          description: "Stay informed about our upcoming conferences and events.",
+          icon: <IconPodium className="size-5 shrink-0" />,
           url: "/conference",
         },
         {
           title: "ChatBot",
-          description: "Check the current status of our services and APIs",
-          icon: <Trees className="size-5 shrink-0" />,
+          description: "Interact with our AI-powered chatbot for assistance and support.",
+          icon: <FaRobot className="size-5 shrink-0" />,
           url: "/ResearchChatbot",
         },
       ],

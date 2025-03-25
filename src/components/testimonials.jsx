@@ -17,46 +17,46 @@ import { Heading, Subheading } from './ui/text'
 
 const testimonials = [
   {
-    img: '/testimonials/tina-yards.jpg',
+    img: '/testimonials/t1.jpg',
     name: 'Tina Yards',
     title: 'VP of Research, Protocol',
     quote:
-      'Thanks to Zep Research, weve connected with innovative researchers that we never would have encountered through traditional academic channels.',
+      'I attended MEET24 in Seoul as an advisory member. A well-managed conference with insightful speakers and great networking.',
   },
   {
-    img: '/testimonials/conor-neville.jpg',
-    name: 'Conor Neville',
-    title: 'Head of Academic Partnerships, TaxPal',
+    img: '/testimonials/t2.jpg',
+    name: 'Thamer Yousif ',
+    title: 'Professor in Public Health and Health Profession Education',
     quote:
-      'Zep Research made establishing meaningful collaborations across disciplines an absolute breeze.',
+      'The sessions were excellent. Conducting them more frequently would enhance engagement and experience-sharing in the future.',
   },
   {
-    img: '/testimonials/amy-chase.jpg',
-    name: 'Amy Chase',
-    title: 'Head of Innovation, Pocket',
+    img: '/testimonials/t3.png',
+    name: 'Miles Peroja Viado ',
+    title: 'Former Instructor at Nevada City, California',
     quote:
-      'We finalized a research partnership in just a few days because Zeps conferences created the perfect environment for meaningful dialogue.',
+      'I was a proud presenter and member of this reputable organization, which supports speakers, mentors, and researchers. It also provides a platform for publishing papers. Thank you, and congratulations!👋',
   },
   {
-    img: '/testimonials/veronica-winton.jpg',
-    name: 'Veronica Winton',
-    title: 'CSO, Planeteria',
+    img: '/testimonials/t4.jpg',
+    name: 'Ahmed Jalal ',
+    title: 'Senior Political Analyst',
     quote:
-      'Weve managed to publish six groundbreaking sustainability studies in the last 6 months thanks to connections made at Zep events.',
+      'ZEP Research organizes global conferences uniting experts to present research, discuss trends, and network with industry leaders.',
   },
   {
-    img: '/testimonials/dillon-lenora.jpg',
-    name: 'Dillon Lenora',
-    title: 'VP of Education, Detax',
-    quote: 'I was able to enhance our curriculum with cutting-edge research insights from Zeps academic network.',
+    img: '/testimonials/t5.jpg',
+    name: 'Jhanghiz Syahrivar ',
+    title: 'Associate Professor of Marketing Innovation and Consumer Ethics',
+    quote: 'I joined MEET24 in Seoul as an advisory member. The well-managed conference featured engaging speakers and valuable networking.',
   },
-  {
-    img: '/testimonials/harriet-arron.jpg',
-    name: 'Harriet Arron',
-    title: 'Research Director, Commit',
-    quote:
-      'I ve published more high-impact papers this year than ever before, thanks to the collaborative opportunities Zep Research provides.',
-  },
+  // {
+  //   img: '/testimonials/t5.jpg',
+  //   name: 'Harriet Arron',
+  //   title: 'Research Director, Commit',
+  //   quote:
+  //     'I ve published more high-impact papers this year than ever before, thanks to the collaborative opportunities Zep Research provides.',
+  // }, 
 ]
 
 function TestimonialCard({
@@ -120,7 +120,7 @@ function TestimonialCard({
       />
       <figure className="relative p-10">
         <blockquote>
-          <p className="relative text-xl/7 text-white">
+          <p className="relative text-lg/7 text-white">
             <span aria-hidden="true" className="absolute -translate-x-full">
               “
             </span>
@@ -147,15 +147,14 @@ function CallToAction() {
   return (
     <div>
       <p className="max-w-sm text-sm/6 text-gray-600">
-        Join the best sellers in the business and start using Radiant to hit
-        your targets today.
+      Join industry leaders and innovators at our premier conference. Gain insights, network, and shape the future.
       </p>
       <div className="mt-2">
         <Link
-          href="#"
+          href="/"
           className="inline-flex items-center gap-2 text-sm/6 font-medium text-pink-600"
         >
-          Get started
+          Register Now 
           <ArrowLongRightIcon className="size-5" />
         </Link>
       </div>

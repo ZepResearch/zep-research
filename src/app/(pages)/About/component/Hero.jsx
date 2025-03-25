@@ -24,10 +24,12 @@ export default function HeroAbout() {
 
           <div className="flex flex-wrap gap-4">
         
-            <Button className="rounded-full  bg-gradient-to-tr from-cyan-400 to-blue-500 px-8">Learn More</Button>
+            {/* <Button className="rounded-full  bg-gradient-to-tr from-cyan-400 to-blue-500 px-8">Learn More</Button> */}
+            <Link href="/contact">
             <Button variant="outline" className="rounded-full px- border-2 border-cyan-300 font-semibold">
               Contact Us
             </Button>
+            </Link>
           </div>
 
           <div className="pt-8 border-t border-muted">

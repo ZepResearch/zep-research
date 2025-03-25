@@ -15,24 +15,37 @@ import { FaqSection } from "@/components/faq";
 
 const DEMO_FAQS = [
   {
-    question: "What types of conferences does Zep Research organize?",
-    answer: "Zep Research organizes a diverse range of academic and industry conferences across multiple disciplines including tourism, hospitality, education, sustainability, and technology. Our events are designed to foster meaningful exchange of ideas and facilitate collaboration between researchers, academics, and industry professionals.",
+    question: "What services does Zep Research offer?",
+    answer: "Zep Research provides a wide range of academic support services, including organizing conferences and webinars, managing peer reviews, facilitating journal and publication submissions, promoting events, assisting with manuscript preparation, securing research grants, and offering training workshops and networking opportunities to foster academic collaboration.",
   },
   {
-    question: "How can I participate in a Zep Research conference?",
-    answer: "Researchers can participate by submitting papers for presentation, attending as delegates, joining panel discussions, or exhibiting innovative work. We have various participation options to suit different academic and professional needs, with clear submission guidelines available on our website.",
+    question: "How does Zep Research support academic publishing?",
+    answer: "We offer comprehensive support for academic publishing, from manuscript preparation to peer review management. Our platform connects researchers with reputable journals and provides opportunities to publish across various disciplines, ensuring high visibility and contributing to the global exchange of scholarly knowledge",
   },
   {
-    question: "What benefits do researchers gain from Zep Research initiatives?",
-    answer: "Researchers benefit through increased visibility for their work, networking opportunities with global experts, potential collaboration prospects, publication opportunities in respected journals, and access to cutting-edge insights across various fields. Our platform serves as a bridge between academic research and practical industry applications.",
+    question: "Can Zep Research help with securing research grants?",
+    answer: "Yes, Zep Research offers assistance in navigating the research grants process. Our team provides guidance on identifying funding opportunities, preparing proposals, and ensuring compliance with grant requirements, giving researchers the best chance of securing financial support for their projects.",
   },
   {
-    question: "Does Zep Research offer any publication opportunities?",
-    answer: "Yes, Zep Research facilitates publication opportunities through partnerships with reputable academic journals and our own conference proceedings. Selected high-quality research papers presented at our conferences are often considered for publication in special issues of partner journals.",
+    question: "What networking opportunities are available through Zep Research?",
+    answer: "Zep Research fosters global collaboration by organizing events that connect academics, researchers, and professionals. Our conferences, webinars, and networking sessions provide a platform for exchanging ideas, forming partnerships, and advancing research, creating opportunities for meaningful, long-term collaborations.",
   },
   {
-    question: "How does Zep Research ensure quality in its academic initiatives?",
-    answer: "We maintain rigorous quality standards through blind peer-review processes, distinguished academic committees, strict selection criteria for presentations, and continuous feedback mechanisms. Our editorial boards consist of respected experts who ensure all published and presented work meets international academic standards.",
+    question: "What types of training does Zep Research provide?",
+    answer: "We offer specialized research training and workshops designed to enhance skills in academic writing, research methodologies, and publication processes. Our training programs are tailored to meet the needs of researchers at all levels, ensuring participants can improve their work and professional development.",
+  },
+  {
+    question: "How does Zep Research promote academic events?",
+    answer: "Zep Research uses strategic promotion and marketing techniques to enhance the visibility of academic conferences and webinars. From social media campaigns to targeted outreach, we ensure your event reaches a broad audience, maximizing participation and impact within the academic community.",
+  },
+
+   {
+    question: "What makes Zep Research’s virtual event solutions stand out?",
+    answer: "Zep Research offers the best virtual conference platforms, allowing for seamless virtual event management and ensuring high attendee engagement. From conference registration to post-event follow-up, we provide everything needed to deliver a successful online academic event. Our platforms are ideal for hosting interactive sessions, workshops, and large-scale virtual conferences globally",
+  },
+  {
+    question: "How does Zep Research handle conference paper submission for events?",
+    answer: "Zep Research simplifies the conference paper submission process through an easy-to-use system integrated into our conference planner platform. This system enables researchers to submit their work for peer review and publication in conjunction with our global conferences and virtual event solutions, ensuring high visibility and academic recognition.",
   },
 ];
 export default function Home() {

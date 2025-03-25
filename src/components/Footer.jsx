@@ -58,7 +58,7 @@ export default function Footer() {
           href: "/research-training-workshops",
         },
         { name: "Event Promotion & Marketing", href: "/event-promotion-marketing" },
-        { name: "Journals & Publications", href: "/Journals&Publications" },
+        // { name: "Journals & Publications", href: "/Journals&Publications" },
         { name: "Conferences & Webinars", href: "/conferences-webinars" },
         { name: "Peer Review Management", href: "/peer-review-management" },
         { name: "Networking & Collaboration", href: "/networking-collaboration" },
@@ -68,17 +68,17 @@ export default function Footer() {
     {
       title: "Resources & Event",
       items: [
-        { name: "Courses", href: "/Courses" },
+        { name: "Courses", href: "/courses" },
         { name: "Conference", href: "/conference" },
       ],
     },
     {
       title: "Quick Links",
       items: [
-        { name: "AboutUs", href: "/ZepResarch" },
-        { name: "Blogs", href: "/Blogs" },
+        { name: "AboutUs", href: "/About" },
+        { name: "Blogs", href: "/blog" },
         { name: "Gallery", href: "/Gallery" },
-        { name: "ContactUs", href: "/ContactUs" },
+        { name: "ContactUs", href: "/contact" },
       ],
     },
     {

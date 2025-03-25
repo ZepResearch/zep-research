@@ -100,6 +100,7 @@ export async function middleware(request) {
 // Configure which routes this middleware should apply to
 export const config = {
   matcher: [
+    '/api/:path*',
     '/api/chat/:path*',
     '/api/upload/:path*',
     '/api/oauth2-redirect/:path*'
