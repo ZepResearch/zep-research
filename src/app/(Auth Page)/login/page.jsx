@@ -74,7 +74,7 @@ export default function LoginForm() {
 
       // Notify components about auth state change
       notifyAuthChange()
-
+      toast
       toast({
         title: "Login successful",
         description: "You have been logged in successfully.",
@@ -82,7 +82,7 @@ export default function LoginForm() {
 
       // Longer delay to ensure auth state propagates
       setTimeout(() => {
-        router.push("/dashboard")
+        router.push("/")
         router.refresh()
       }, 500)
     } catch (error) {
@@ -174,7 +174,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-base absolute inset-0 z-50 bg-white">
+    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-base  inset-0  bg-white">
       <Card className="w-full max-w-md">
         <CardHeader className="flex flex-col items-center gap-2">
           <div

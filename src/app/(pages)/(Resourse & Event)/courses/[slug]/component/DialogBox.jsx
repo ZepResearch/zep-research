@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+"use client"
 
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  CreditCard,
-  User,
-  Mail,
-  Phone,
-  MapPin,
-  Building,
-  Flag,
-} from "lucide-react";
-import axios from "axios";
+import { useState } from "react"
+
+import "react-phone-number-input/style.css"
+import PhoneInput from "react-phone-number-input"
+import { motion, AnimatePresence } from "framer-motion"
+import { X, CreditCard, User, Mail, Phone, MapPin, Building, Flag } from "lucide-react"
 
 export default function RegistrationDialog({
   isOpen = false,
@@ -31,66 +23,110 @@ export default function RegistrationDialog({
     state: "",
     zip: "",
     country: "",
-  });
+  })
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
   const handlePhoneChange = (value) => {
-    setFormData({ ...formData, phone: value });
-  };
+    setFormData({ ...formData, phone: value })
+  }
 
-  const backendHost = "https://zep-backend.onrender.com"; //change this to your backend host
+  const generateOrderId = () => {
+    return `ORD${Date.now()}${Math.floor(Math.random() * 1000)}`
+  }
 
   const paymentCCAvenue = async () => {
-    let paymentData = {
-      merchant_id: "3697787",
-      order_id: "ORD" + Date.now(),
-      amount: price,
-      currency: currency, 
-      billing_email: formData.email,
-      billing_name: formData.name,
-      billing_address: formData.address,
-      billing_city: formData.city,
-      billing_state: formData.state,
-      billing_zip: formData.zip,
-      billing_country: formData.country,
-      redirect_url: `${backendHost}/api/ccavenue-handle`,
-      cancel_url: `${backendHost}/api/ccavenue-handle`,
-      merchant_param1: "Extra Information",
-      merchant_param2: "Extra Information",
-      merchant_param3: "Extra Information",
-      merchant_param4: "Extra Information",
-      language: "EN",
-      billing_tel: formData.phone,
-    };
-
     try {
+      setIsLoading(true)
+      const host = process.env.NEXT_PUBLIC_APP_URL 
 
-      await axios.post(`${backendHost}/api/payment-notification`, {
-        ...formData,
+      const paymentData = {
+        merchant_id: process.env.NEXT_PUBLIC_CCAVENUE_MERCHANT_ID,
+        order_id: generateOrderId(),
         amount: price,
         currency: currency,
-        order_id: paymentData.order_id,
-       phone:paymentData.billing_tel
-      });
-      
-      const response = await axios.post(
-        `${backendHost}/api/ccavenue-initiate`,
-        paymentData
-      );
-      const { encRequest, accessCode } = response.data;
-      //	https://secure.ccavenue.com
-      const URL = `https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&merchant_id=${paymentData.merchant_id}&encRequest=${encRequest}&access_code=${accessCode}`;
-      window.location.href = URL;
-    } catch (error) {
-      console.error("Error initiating payment:", error);
-    }
-  };
+        redirect_url: `${host}/api/ccavenue/handle`,
+        cancel_url: `${host}/api/ccavenue/handle`,
+        billing_email: formData.email,
+        billing_name: formData.name,
+        billing_address: formData.address,
+        billing_city: formData.city,
+        billing_state: formData.state,
+        billing_zip: formData.zip,
+        billing_country: formData.country,
+        billing_tel: formData.phone,
+        language: "EN",
+      }
 
-  const inputClasses =
-    "mt-1 block w-full py-1.5 px-1 rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm transition-all duration-200 ease-in-out border-2";
-  const labelClasses = "block text-sm font-medium text-gray-700 mb-1";
+      // First, get the encrypted order from your backend
+      const response = await fetch("/api/ccavenue/encrypt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(paymentData),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to encrypt order data")
+      }
+
+      const { encRequest } = await response.json()
+
+      // Create form and submit
+      const form = document.createElement("form")
+      form.method = "POST"
+      form.action = "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"
+
+      // Add hidden fields
+      const fields = {
+        encRequest,
+        access_code: process.env.NEXT_PUBLIC_CCAVENUE_ACCESS_CODE,
+        merchant_id: process.env.NEXT_PUBLIC_CCAVENUE_MERCHANT_ID,
+      }
+
+      Object.entries(fields).forEach(([key, value]) => {
+        const input = document.createElement("input")
+        input.type = "hidden"
+        input.name = key
+        input.value = value
+        form.appendChild(input)
+      })
+
+      document.body.appendChild(form)
+      form.submit()
+    } catch (error) {
+      console.error("Payment initiation failed:", error)
+      alert("Failed to initiate payment. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.phone || !formData.zip || !formData.country) {
+      alert("Please fill in all required fields")
+      return
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      alert("Please enter a valid email address")
+      return
+    }
+
+    paymentCCAvenue()
+  }
+
+  const inputclasses =
+    "mt-1 block w-full py-1.5 px-1 rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm transition-all duration-200 ease-in-out border-2"
+  const labelClasses = "block text-sm font-medium text-gray-700 mb-1"
 
   return (
     <AnimatePresence>
@@ -112,17 +148,13 @@ export default function RegistrationDialog({
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
             >
-              <div className="bg-gradient-to-br from-primary to-primary-dark px-4 py-4 sm:px-6">
-                <h3 className="text-2xl font-bold leading-6 text-blue-800 mb-2">
-                  {title}
-                </h3>
-                <p className="text-primary-foreground">
-                  Fill in your details to complete the registration for
-                </p>
+              <div className=" px-4 py-4 sm:px-6">
+                <h3 className="text-2xl font-bold leading-6  mb-2">{title}</h3>
+                <p className="">Fill in your details to complete the registration for</p>
               </div>
               <hr />
               <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 [&>input]:bg-slate-100">
-                <form className="space-y-4  ">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -138,7 +170,7 @@ export default function RegistrationDialog({
                       id="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={inputClasses}
+                      className={inputclasses}
                       required
                     />
                   </motion.div>
@@ -157,7 +189,7 @@ export default function RegistrationDialog({
                       id="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={inputClasses}
+                      className={inputclasses}
                       required
                     />
                   </motion.div>
@@ -171,19 +203,19 @@ export default function RegistrationDialog({
                       Phone
                     </label>
                     <PhoneInput
-                    value={formData.phone}
-                    onChange={handlePhoneChange}
-                    inputClass="!rounded-md !border-0 !shadow-sm !ring-1 !ring-inset !ring-gray-300"
-                    className="w-full  px-2 border-2  [&>input]:py-1 [&>input]:border-l-2 "
-                    required
-                  />
-                      {/* <input
+                      value={formData.phone}
+                      onChange={handlePhoneChange}
+                      inputclass="!rounded-md !border-0 !shadow-sm !ring-1 !ring-inset !ring-gray-300"
+                      className="w-full  px-2 border-2  [&>input]:py-1 [&>input]:border-l-2 "
+                      required
+                    />
+                    {/* <input
                         type="tel"
                         name="phone"
                         id="phone"
                         value={formData.}
                         onChange={}
-                        className={inputClasses}
+                        className={inputclasses}
                       /> */}
                   </motion.div>
                   <motion.div
@@ -201,7 +233,7 @@ export default function RegistrationDialog({
                       id="address"
                       value={formData.address}
                       onChange={handleInputChange}
-                      className={inputClasses}
+                      className={inputclasses}
                     />
                   </motion.div>
                   <div className="grid grid-cols-2 gap-4">
@@ -220,7 +252,7 @@ export default function RegistrationDialog({
                         id="city"
                         value={formData.city}
                         onChange={handleInputChange}
-                        className={inputClasses}
+                        className={inputclasses}
                       />
                     </motion.div>
                     <motion.div
@@ -237,7 +269,7 @@ export default function RegistrationDialog({
                         id="state"
                         value={formData.state}
                         onChange={handleInputChange}
-                        className={inputClasses}
+                        className={inputclasses}
                       />
                     </motion.div>
                   </div>
@@ -256,7 +288,7 @@ export default function RegistrationDialog({
                         id="zip"
                         value={formData.zip}
                         onChange={handleInputChange}
-                        className={inputClasses}
+                        className={inputclasses}
                         required
                       />
                     </motion.div>
@@ -275,23 +307,24 @@ export default function RegistrationDialog({
                         id="country"
                         value={formData.country}
                         onChange={handleInputChange}
-                        className={inputClasses}
+                        className={inputclasses}
                         required
                       />
                     </motion.div>
                   </div>
+                  <motion.button
+                    type="submit"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    disabled={isLoading}
+                    className="inline-flex w-full justify-center rounded-md border py-2 drop-shadow-sm px-4 text-base font-medium shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm transition-all duration-200 ease-in-out disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  >
+                    <CreditCard className="mr-2" />
+                    {isLoading ? "Processing..." : `Pay Now ( ₹ ${price} )`}
+                  </motion.button>
                 </form>
               </div>
-              <div className="bg-blue-950 px-4 py-3 sm:flex sm:flex-row justify-end sm:px-6">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={paymentCCAvenue}
-                  className="inline-flex w-full justify-center rounded-md border py-2 bg-primary px-4  text-base font-medium text-blue-500 shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm transition-all duration-200 ease-in-out"
-                >
-                  <CreditCard className="mr-2" />
-                  Pay Now ( ₹ {price} )
-                </motion.button>
+              <div className="bg-slate-50 px-4 py-3 sm:flex sm:flex-row justify-end sm:px-6">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -305,7 +338,7 @@ export default function RegistrationDialog({
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClose}
-                className="absolute right-2 top-2 text-blue-400 hover:text-blue-900 transition-colors duration-200"
+                className="absolute right-2 top-2 transition-colors duration-200"
                 aria-label="Close"
               >
                 <X className="h-6 w-6" />
@@ -315,5 +348,6 @@ export default function RegistrationDialog({
         </motion.div>
       )}
     </AnimatePresence>
-  );
+  )
 }
+

@@ -118,7 +118,7 @@ export default function RegisterForm() {
       console.log("User authenticated:", authData.record);
       
       // Redirect to dashboard
-      router.push('/dashboard');
+      router.push('/');
     } catch (err) {
       console.error('Registration error:', err);
       

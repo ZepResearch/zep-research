@@ -151,8 +151,8 @@ function CallToAction() {
       </p>
       <div className="mt-2">
         <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm/6 font-medium text-pink-600"
+          href="/login"
+          className="inline-flex items-center gap-2 text-sm/6 font-medium text-cyan-600"
         >
           Register Now 
           <ArrowLongRightIcon className="size-5" />

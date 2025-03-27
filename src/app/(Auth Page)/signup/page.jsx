@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="h-full absolute w-full z-50 bg-gray-50 flex flex-col justify-center  sm:px-6 lg:px-8">
+    <div className="h-full  w-full  bg-gray-50 flex flex-col justify-center  sm:px-6 lg:px-8 py-20">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Create your account
