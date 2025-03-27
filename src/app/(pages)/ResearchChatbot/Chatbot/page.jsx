@@ -11,10 +11,11 @@ import {
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { ArrowLeft } from "lucide-react"
-import Chat from "./components/chat"
+
 import { Card } from "@/components/ui/card"
 import FileUpload from "./components/FileUpload"
 import PdfPreview from "./components/PdfPreview"
+import Chat from "./components/Chat"
 
 export default function ResearchChatbot() {
   const [pdfContent, setPdfContent] = useState(null)
