@@ -21,28 +21,28 @@ const features = [
     description:
       "Expertly organized events that connect academics and foster meaningful interactions.",
     icon: <IconPodium />,
-    href: "/conferences",
+    href: "/conferences-webinars",
   },
   {
     title: "Journals & Publications",
     description:
       "Diverse platforms for showcasing research, advancing knowledge, and academic visibility.",
     icon: <IconNotebook />,
-    href: "/publications",
+    href: "/",
   },
   {
     title: "Peer Review Management",
     description:
       "Streamlined process connecting researchers with reviewers for quality feedback.",
     icon: <IconTournament />,
-    href: "/peer-review",
+    href: "/peer-review-management",
   },
   {
     title: "Event Promotion & Marketing",
     description:
       "Strategic strategies to enhance event visibility and attract broad participation",
     icon: <IconAd />,
-    href: "/marketing",
+    href: "/event-promotion-marketing",
   },
   {
     title: "Manuscript Preparation",
@@ -63,14 +63,14 @@ const features = [
     description:
       "Opportunities to connect with global academics for collaborative projects and growth.",
     icon: <IconAffiliate />,
-    href: "/networking",
+    href: "/networking-collaboration",
   },
   {
     title: "Research Training & Workshops",
     description:
       "Specialized sessions to build expertise in research methods and academic writing.",
     icon: <IconTrendingUp />,
-    href: "/"
+    href: "/research-training-workshops"
   },
 ];
 
