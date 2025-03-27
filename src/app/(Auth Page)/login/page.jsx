@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast"
 import Image from "next/image"
 import logox from "../../../assets/whitelogo.svg"
 import { getPocketBaseClient, isUserAuthenticated } from "@/lib/pocketbase"
+import Link from "next/link"
 
 export default function LoginForm() {
   const router = useRouter()
@@ -231,7 +232,7 @@ export default function LoginForm() {
               </a>
             </div>
             <Button type="submit" className="w-full bg-gradient-to-r from-cyan-400 to-blue-500" disabled={isLoading}>
-              {isLoading ? "Signing in..." : "Sign in"}
+              {isLoading ? "Loging in..." : "Login in"}
             </Button>
           </form>
 
@@ -239,9 +240,11 @@ export default function LoginForm() {
             <span className="text-xs text-muted-foreground">Or</span>
           </div>
 
-          {/* <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={googleLoading}>
-            {googleLoading ? "Connecting..." : "Login with Google"}
-          </Button> */}
+        <Link href="/signup">
+          <Button variant="outline" className="w-full" >
+          Create new account
+          </Button>
+        </Link>
         </CardContent>
       </Card>
     </div>
