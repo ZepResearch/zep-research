@@ -1,4 +1,3 @@
-// app/actions/contact.js
 "use server"
 
 import { Resend } from "resend"
@@ -23,16 +22,26 @@ export async function submitContactForm(formData) {
     const email = formData.get("email")
     const subject = formData.get("subject")
     const message = formData.get("message")
+    const phoneNumber = formData.get("phoneNumber")
 
     // Validate form data
-    if (!name || !email || !subject || !message) {
+    if (!name || !email || !subject || !message || !phoneNumber) {
       return { 
         success: false, 
-        message: "Please fill out all fields" 
+        message: "Please fill out all fields, including phone number" 
       }
     }
 
-    const data = { name, email, subject, message }
+    // Optional: Add phone number validation if needed
+    const phoneRegex = /^\+?[1-9]\d{1,14}$/
+    if (!phoneRegex.test(phoneNumber)) {
+      return {
+        success: false,
+        message: "Please enter a valid phone number"
+      }
+    }
+
+    const data = { name, email, subject, message, phoneNumber }
     
     // Send email to admin
     await resend.emails.send({

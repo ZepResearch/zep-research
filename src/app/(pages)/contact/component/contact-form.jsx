@@ -9,11 +9,13 @@ import { Label } from "@/components/ui/label"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { submitContactForm } from "@/app/actions/contact"
+import "react-phone-number-input/style.css"
+import PhoneInput from "react-phone-number-input"
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formState, setFormState] = useState(null)
-  const [formReset, setFormReset] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState("")
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -21,11 +23,14 @@ export function ContactForm() {
     
     try {
       const formData = new FormData(event.target)
+      formData.append('phoneNumber', phoneNumber)
+      
       const result = await submitContactForm(formData)
       setFormState(result)
       
       if (result.success) {
         event.target.reset()
+        setPhoneNumber("")
       }
     } catch (error) {
       setFormState({
@@ -78,14 +83,28 @@ export function ContactForm() {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="subject">Subject</Label>
-            <Input
-              id="subject"
-              name="subject"
-              placeholder="What is your inquiry about?"
-              required
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone Number</Label>
+              <PhoneInput
+                international
+                defaultCountry="US"
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                placeholder="Enter phone number"
+                className="w-full"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="subject">Subject</Label>
+              <Input
+                id="subject"
+                name="subject"
+                placeholder="What is your inquiry about?"
+                required
+              />
+            </div>
           </div>
 
           <div className="space-y-2">

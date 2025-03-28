@@ -118,6 +118,12 @@ const ContactFormEmail = (data) => {
                   <div class="label">Email</div>
                   <div class="value">${data.email}</div>
               </div>
+              ${data.phoneNumber ? `
+              <div class="field">
+                  <div class="label">Phone Number</div>
+                  <div class="value">${data.phoneNumber}</div>
+              </div>
+              ` : ''}
               <div class="field">
                   <div class="label">Subject</div>
                   <div class="value">${data.subject}</div>
