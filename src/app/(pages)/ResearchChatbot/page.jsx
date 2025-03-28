@@ -11,6 +11,8 @@ import TestimonialCard from "./components/testimonial-card"
 import DemoChatbot from "./components/demo-chatbot"
 import logo from '../../../assets/logo.svg'
 import Image from "next/image"
+import ResearchPaperAIHero from "./components/hero-animation"
+import { Heading, Subheading } from "@/components/ui/text"
 
 export default function Home() {
   const [isHovered, setIsHovered] = useState(false)
@@ -18,98 +20,8 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-        <div className="container px-4 md:px-6 mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-col gap-6"
-            >
-                <Link href="/" title="Home">
-                <Image src={logo} alt='logo' className="h-12 w-auto" />
-              </Link>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 px-3 py-1 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm"
-              >
-
-                <span className="flex h-2 w-2 rounded-full bg-emerald-500 mr-2"></span>
-                Revolutionize Your Research Process
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white"
-              >
-                Chat With Your <span className="text-cyan-400">Research Papers</span> Like Never Before
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl"
-              >
-                Upload your publications and research papers, then ask questions, get summaries, and extract insights
-                through natural conversation.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <Link href="/ResearchChatbot/Chatbot" title="Login">
-
-                <Button
-                  size="lg"
-                  className="relative group bg-gradient-to-tr from-cyan-400 to-blue-400"
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
-                >
-                  <span>Try It Now</span>
-                  <motion.div animate={{ x: isHovered ? 5 : 0 }} transition={{ duration: 0.2 }}>
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </motion.div>
-                </Button>
-                </Link>
-                
-                {/* <Button size="lg" variant="outline">
-                  See How It Works
-                </Button> */}
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="relative"
-            >
-              <HeroAnimation />
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Background decorative elements */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ delay: 0.8, duration: 1 }}
-          className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
-        >
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-cyatext-cyan-500/20 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
-        </motion.div>
-      </section>
-
+     
+      <ResearchPaperAIHero/>
       {/* Features Section */}
       <section className="py-20 bg-white dark:bg-slate-950">
         <div className="container px-4 md:px-6 mx-auto max-w-7xl">
@@ -118,37 +30,37 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-16"
+            className="text-center mb-8"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            <Heading >
               Powerful Features for Researchers
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+            </Heading>
+            <Subheading className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
               Our AI-powered chatbot transforms how you interact with academic publications and research papers.
-            </p>
+            </Subheading>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard
-              icon={<Upload className="h-10 w-10 text-cyan-500" />}
+              icon={<Upload className="h-10 w-10 text-teal-300" />}
               title="Easy PDF Upload"
               description="Seamlessly upload multiple research papers and publications with our intuitive interface."
               delay={0.1}
             />
             <FeatureCard
-              icon={<MessageSquare className="h-10 w-10 text-cyan-500" />}
+              icon={<MessageSquare className="h-10 w-10 text-teal-300" />}
               title="Natural Conversations"
               description="Ask questions in plain language and get accurate, contextual responses from your documents."
               delay={0.2}
             />
             <FeatureCard
-              icon={<Zap className="h-10 w-10 text-cyan-500" />}
+              icon={<Zap className="h-10 w-10 text-teal-300" />}
               title="Instant Insights"
               description="Extract key findings, methodologies, and conclusions without reading entire papers."
               delay={0.3}
             />
             <FeatureCard
-              icon={<FileText className="h-10 w-10 text-cyan-500" />}
+              icon={<FileText className="h-10 w-10 text-teal-300" />}
               title="Citation Support"
               description="Get properly formatted citations and references from your uploaded papers."
               delay={0.4}
@@ -156,7 +68,7 @@ export default function Home() {
             <FeatureCard
               icon={
                 <svg
-                  className="h-10 w-10 text-cyan-500"
+                  className="h-10 w-10 text-teal-300"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +89,7 @@ export default function Home() {
             <FeatureCard
               icon={
                 <svg
-                  className="h-10 w-10 text-cyan-500"
+                  className="h-10 w-10 text-teal-300"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +112,7 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-900 rounded-3xl mx-12">
+      <section className="py-20 rounded-3xl mx-12">
         <div className="container px-4 md:px-6 mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -209,10 +121,10 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">How It Works</h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+            <Heading as="h1" >How It Works</Heading>
+            <Subheading c>
               Three simple steps to transform your research experience
-            </p>
+            </Subheading>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -223,7 +135,7 @@ export default function Home() {
               transition={{ delay: 0.1, duration: 0.5 }}
               className="flex flex-col items-center text-center"
             >
-              <div className="w-16 h-16 rounded-full border-2 text-cyan-500/10 flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full border-2 text-cyan-500/10 flex items-center justify-center mb-6 drop-shadow-md">
                 <span className="text-2xl font-bold text-cyan-500">1</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-slate-900 dark:text-white">Upload Your PDFs</h3>
@@ -239,7 +151,7 @@ export default function Home() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="flex flex-col items-center text-center"
             >
-              <div className="w-16 h-16 rounded-full border-2 text-cyan-500/10 flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full border-2 text-cyan-500/10 flex items-center justify-center mb-6 drop-shadow-md">
                 <span className="text-2xl font-bold text-cyan-500">2</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-slate-900 dark:text-white">AI Processes Content</h3>
@@ -255,7 +167,7 @@ export default function Home() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="flex flex-col items-center text-center"
             >
-              <div className="w-16 h-16 rounded-full border-2 text-cyan-500/10 flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full border-2 text-cyan-500/10 flex items-center justify-center mb-6 drop-shadow-md">
                 <span className="text-2xl font-bold text-cyan-500">3</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-slate-900 dark:text-white">Chat and Discover</h3>
@@ -296,7 +208,7 @@ export default function Home() {
       </section> */}
 
       {/* Testimonials */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-900">
+      <section className="py-12  dark:bg-slate-900">
         <div className="container px-4 md:px-6 mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -305,10 +217,10 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">What Researchers Say</h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+            <Heading >What Researchers Say</Heading>
+            <Subheading >
               Hear from academics and researchers who have transformed their workflow
-            </p>
+            </Subheading>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -335,7 +247,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-tr from-cyan-400 to-blue-400 text-white mx-12 my-8 rounded-3xl">
+      <section className="py-20 bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-600 text-white mx-12 my-8 rounded-3xl">
         <div className="container px-4 md:px-6 mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

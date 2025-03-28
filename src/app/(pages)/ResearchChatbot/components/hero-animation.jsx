@@ -1,203 +1,195 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
+import { Pacifico } from "next/font/google"
+import Image from "next/image"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-export default function HeroAnimation() {
-  // Start with isAnimating and particles as false/empty
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [particles, setParticles] = useState([])
+const pacifico = Pacifico({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-pacifico",
+})
 
-  // Only initialize animations after component mounts on client
-  useEffect(() => {
-    // Generate particles only on client side
-    const newParticles = Array.from({ length: 15 }).map(() => ({
-      x: Math.floor(Math.random() * 500),
-      y: Math.floor(Math.random() * 500),
-      delay: Math.floor(Math.random() * 5),
-      duration: 5 + Math.floor(Math.random() * 10),
-    }))
+function ElegantShape({
+  className,
+  delay = 0,
+  width = 400,
+  height = 100,
+  rotate = 0,
+  gradient = "from-white/[0.08]",
+}) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: -150,
+        rotate: rotate - 15,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        rotate: rotate,
+      }}
+      transition={{
+        duration: 2.4,
+        delay,
+        ease: [0.23, 0.86, 0.39, 0.96],
+        opacity: { duration: 1.2 },
+      }}
+      className={cn("absolute", className)}
+    >
+      <motion.div
+        animate={{
+          y: [0, 15, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        style={{
+          width,
+          height,
+        }}
+        className="relative"
+      >
+        <div
+          className={cn(
+            "absolute inset-0 rounded-full",
+            "bg-gradient-to-r to-transparent",
+            gradient,
+            "backdrop-blur-[2px] border-2 border-cyan-500/[0.3]",
+            "shadow-[0_8px_32px_0_rgba(6,182,212,0.2)]",
+            "after:absolute after:inset-0 after:rounded-full",
+            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.3),transparent_70%)]",
+          )}
+        />
+      </motion.div>
+    </motion.div>
+  )
+}
 
-    setParticles(newParticles)
-    setIsAnimating(true)
-
-    // Set up interval to restart animation
-    const interval = setInterval(() => {
-      setIsAnimating(false)
-      setTimeout(() => setIsAnimating(true), 100)
-    }, 10000)
-
-    return () => clearInterval(interval)
-  }, [])
+export default function ResearchPaperAIHero() {
+  const fadeUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        delay: 0.5 + i * 0.2,
+        ease: [0.25, 0.4, 0.25, 1],
+      },
+    }),
+  }
 
   return (
-    <div className="relative w-full h-[500px] bg-white dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden">
-      {/* PDF Document */}
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: isAnimating ? "0%" : "100%" }}
-        transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-        className="absolute top-10 left-10 w-[70%] h-[80%] bg-slate-100 dark:bg-slate-700 rounded-lg shadow-md"
-      >
-        {/* PDF Header */}
-        <div className="h-8 bg-primary/10 rounded-t-lg flex items-center px-4">
-          <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
-          <div className="text-xs text-slate-600 dark:text-slate-300 ml-2">research-paper.pdf</div>
-        </div>
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwNmI2ZDQiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptNiA2djZoNnYtNmgtNnptLTEyIDBoNnY2aC02di02em0xMiAwaDZ2NmgtNnYtNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/[0.1] via-transparent to-teal-500/[0.1] blur-3xl" />
 
-        {/* PDF Content */}
-        <div className="p-6">
-          <div className="w-full h-6 bg-slate-200 dark:bg-slate-600 rounded mb-4"></div>
-          <div className="w-3/4 h-6 bg-slate-200 dark:bg-slate-600 rounded mb-8"></div>
+      <div className="absolute inset-0 overflow-hidden">
+        <ElegantShape
+          delay={0.3}
+          width={600}
+          height={140}
+          rotate={12}
+          gradient="from-cyan-500/[0.3]"
+          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+        />
 
-          <div className="w-full h-4 bg-slate-200 dark:bg-slate-600 rounded mb-2"></div>
-          <div className="w-full h-4 bg-slate-200 dark:bg-slate-600 rounded mb-2"></div>
-          <div className="w-2/3 h-4 bg-slate-200 dark:bg-slate-600 rounded mb-6"></div>
+        <ElegantShape
+          delay={0.5}
+          width={500}
+          height={120}
+          rotate={-15}
+          gradient="from-teal-500/[0.3]"
+          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+        />
 
-          <div className="w-full h-4 bg-slate-200 dark:bg-slate-600 rounded mb-2"></div>
-          <div className="w-full h-4 bg-slate-200 dark:bg-slate-600 rounded mb-2"></div>
-          <div className="w-5/6 h-4 bg-slate-200 dark:bg-slate-600 rounded mb-6"></div>
+        <ElegantShape
+          delay={0.4}
+          width={300}
+          height={80}
+          rotate={-8}
+          gradient="from-cyan-400/[0.3]"
+          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+        />
 
-          <div className="w-full h-32 bg-slate-200 dark:bg-slate-600 rounded mb-6"></div>
+        <ElegantShape
+          delay={0.6}
+          width={200}
+          height={60}
+          rotate={20}
+          gradient="from-teal-400/[0.3]"
+          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+        />
 
-          <div className="w-full h-4 bg-slate-200 dark:bg-slate-600 rounded mb-2"></div>
-          <div className="w-4/5 h-4 bg-slate-200 dark:bg-slate-600 rounded mb-2"></div>
-          <div className="w-3/4 h-4 bg-slate-200 dark:bg-slate-600 rounded"></div>
-        </div>
-      </motion.div>
+        <ElegantShape
+          delay={0.7}
+          width={150}
+          height={40}
+          rotate={-25}
+          gradient="from-cyan-300/[0.3]"
+          className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
+        />
+      </div>
 
-      {/* Chat Interface */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: isAnimating ? 1 : 0, scale: isAnimating ? 1 : 0.9 }}
-        transition={{ duration: 0.5, delay: 1.5 }}
-        className="absolute bottom-10 right-10 w-[60%] h-[60%] bg-white dark:bg-slate-900 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden"
-      >
-        {/* Chat Header */}
-        <div className="h-12 bg-primary flex items-center px-4 text-white">
-          <span className="font-medium">Research Assistant</span>
-        </div>
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Company Logo */}
+          {/* <motion.div custom={0} variants={fadeUpVariants} initial="hidden" animate="visible" className="mb-8 md:mb-12">
+            <Image
+              src="/placeholder.svg?height=80&width=80"
+              alt="Research AI Logo"
+              width={80}
+              height={80}
+              className="mx-auto"
+            />
+          </motion.div> */}
 
-        {/* Chat Messages */}
-        <div className="p-4 h-[calc(100%-96px)] overflow-y-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: isAnimating ? 1 : 0, y: isAnimating ? 0 : 10 }}
-            transition={{ duration: 0.3, delay: 2 }}
-            className="mb-4 max-w-[80%] bg-slate-100 dark:bg-slate-800 p-3 rounded-lg"
-          >
-            <p className="text-sm text-slate-700 dark:text-slate-300">
-              I've analyzed your research paper on quantum computing. What would you like to know about it?
+          {/* Heading Title */}
+          <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 md:mb-8 tracking-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-gray-800 to-gray-600">Research</span>
+              <br />
+              <span
+                className={cn(
+                  "bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-600 ",
+                  pacifico.className,
+                )}
+              >
+                Assistant AI
+              </span>
+            </h1>
+          </motion.div>
+
+          {/* Subtitle */}
+          <motion.div custom={2} variants={fadeUpVariants} initial="hidden" animate="visible">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
+              Revolutionize your academic research with our AI-powered assistant. Analyze papers, extract insights, and
+              accelerate your discoveries.
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: isAnimating ? 1 : 0, y: isAnimating ? 0 : 10 }}
-            transition={{ duration: 0.3, delay: 2.5 }}
-            className="mb-4 max-w-[80%] ml-auto bg-primary/10 p-3 rounded-lg"
-          >
-            <p className="text-sm text-slate-700 dark:text-slate-300">
-              What are the key findings in the methodology section?
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: isAnimating ? 1 : 0, y: isAnimating ? 0 : 10 }}
-            transition={{ duration: 0.3, delay: 3 }}
-            className="mb-4 max-w-[80%] bg-slate-100 dark:bg-slate-800 p-3 rounded-lg"
-          >
-            <p className="text-sm text-slate-700 dark:text-slate-300">
-              The methodology section describes a novel approach to quantum error correction using topological qubits.
-              The key findings include:
-            </p>
-            <ul className="list-disc pl-5 mt-2 text-sm text-slate-700 dark:text-slate-300">
-              <motion.li
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isAnimating ? 1 : 0 }}
-                transition={{ duration: 0.2, delay: 3.2 }}
+          {/* Button to redirect to Chatbot */}
+          <motion.div custom={3} variants={fadeUpVariants} initial="hidden" animate="visible" className="mt-8">
+            <Link href="ResearchChatbot/Chatbot">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white px-8 py-6 rounded-full text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                A 42% reduction in decoherence compared to previous methods
-              </motion.li>
-              <motion.li
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isAnimating ? 1 : 0 }}
-                transition={{ duration: 0.2, delay: 3.4 }}
-              >
-                Successful implementation on a 20-qubit system
-              </motion.li>
-              <motion.li
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isAnimating ? 1 : 0 }}
-                transition={{ duration: 0.2, delay: 3.6 }}
-              >
-                Verification through 5 independent experimental trials
-              </motion.li>
-            </ul>
+                Start Researching Now
+              </Button>
+            </Link>
           </motion.div>
         </div>
+      </div>
 
-        {/* Chat Input */}
-        <div className="h-12 border-t border-slate-200 dark:border-slate-700 flex items-center px-4">
-          <div className="flex-1 h-8 bg-slate-100 dark:bg-slate-800 rounded-full px-4"></div>
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            className="w-8 h-8 bg-primary rounded-full ml-2 flex items-center justify-center text-white cursor-pointer"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M22 2L11 13"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M22 2L15 22L11 13L2 9L22 2Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Animated Particles - Always render the container but only populate with particles on client */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isAnimating ? 0.7 : 0 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="absolute inset-0 pointer-events-none"
-        suppressHydrationWarning
-      >
-        {particles.map((particle, i) => (
-          <motion.div
-            key={i}
-            initial={{
-              x: particle.x,
-              y: particle.y,
-              opacity: 0,
-            }}
-            animate={{
-              x: particle.x + 50,
-              y: particle.y + 50,
-              opacity: [0, 0.5, 0],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: particle.delay,
-            }}
-            className="absolute w-2 h-2 rounded-full bg-primary/30"
-            suppressHydrationWarning
-          />
-        ))}
-      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/80 pointer-events-none" />
     </div>
   )
 }

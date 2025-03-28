@@ -11,6 +11,7 @@ import { UpComingConf } from "@/components/UpComingConf";
 import { Why } from "@/components/Why";
 import { Testimonials } from "@/components/testimonials";
 import { FaqSection } from "@/components/faq";
+import { CTACarousel } from "@/components/Cta-carousel";
 
 
 const DEMO_FAQS = [
@@ -48,6 +49,24 @@ const DEMO_FAQS = [
     answer: "Zep Research simplifies the conference paper submission process through an easy-to-use system integrated into our conference planner platform. This system enables researchers to submit their work for peer review and publication in conjunction with our global conferences and virtual event solutions, ensuring high visibility and academic recognition.",
   },
 ];
+
+const slides = [
+  {
+    id: 1,
+    image: "/Cta/chatbot.webp",
+    title: "AI Research Chatbot – Chat with Your PDFs",
+    description: "Upload research papers and chat with your documents. Get instant insights and summaries with AI-powered assistance!",
+    href: "/ResearchChatbot",
+  },
+  {
+    id: 2,
+    image: "/Cta/course.webp",
+    title: "Master Data Analytics & Data Science",
+    description: "Learn from industry experts and build your career in AI and data science. Enroll now and start your journey!",
+    href: "/courses",
+  },
+ 
+]
 export default function Home() {
   return (
   <main>
@@ -55,6 +74,7 @@ export default function Home() {
     <CoOrganizationLogos/>
     <Welcome/>
     <FeaturesXX/>
+    <CTACarousel slides={slides} showControls={true}/>
     <UpComingConf/>
     <Why/>
     <Testimonials/>
