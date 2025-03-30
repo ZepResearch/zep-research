@@ -21,7 +21,7 @@ const Chat = ({ pdfContent, onRelevantPageFound }) => {
             isPremium: userLimit.isPremium,
           })
 
-          // If user has already reached their limit and is not premium, redirect to payment page
+          // If user has already reached their limit and is not premium, redirect to ResearchChatbot/payment page
           if (userLimit.messageCount >= 5 && !userLimit.isPremium) {
             setMessages((prev) => [
               ...prev,
@@ -32,7 +32,7 @@ const Chat = ({ pdfContent, onRelevantPageFound }) => {
             ])
 
             setTimeout(() => {
-              window.location.href = "/payment"
+              window.location.href = "/ResearchChatbot/payment"
             }, 2000)
           }
         }
@@ -64,7 +64,7 @@ const Chat = ({ pdfContent, onRelevantPageFound }) => {
         isPremium: limitResult.isPremium,
       })
 
-      // If limit reached and not premium, redirect to payment page
+      // If limit reached and not premium, redirect to ResearchChatbot/payments page
       if (limitResult.reachedLimit && !limitResult.isPremium) {
         setMessages((prev) => [
           ...prev,
@@ -75,7 +75,7 @@ const Chat = ({ pdfContent, onRelevantPageFound }) => {
         ])
 
         setTimeout(() => {
-          window.location.href = "/payment"
+          window.location.href = "/ResearchChatbot/payment"
         }, 2000)
 
         setIsLoading(false)
@@ -128,7 +128,7 @@ const Chat = ({ pdfContent, onRelevantPageFound }) => {
       {!messageLimit.isPremium && (
         <div className="px-3 py-1 bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-300 text-xs flex justify-between">
           <span>Free messages: {5 - messageLimit.count} remaining</span>
-          <a href="/payment" className="underline">
+          <a href="/ResearchChatbot/payment" className="underline">
             Upgrade
           </a>
         </div>

@@ -59,7 +59,7 @@ export default function ResearchChatbot() {
               })
 
               // Redirect to payment page
-              router.push("/payment")
+              router.push("/ResearchChatbot/payment")
             }
           } catch (error) {
             console.error("Error checking message limit:", error)

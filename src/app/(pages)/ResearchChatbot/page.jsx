@@ -1,21 +1,15 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, FileText, MessageSquare, Upload, Zap } from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
+import {  FileText, MessageSquare, Upload, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import FeatureCard from "./components/feature-card"
-import HeroAnimation from "./components/hero-animation"
 import TestimonialCard from "./components/testimonial-card"
-import DemoChatbot from "./components/demo-chatbot"
-import logo from '../../../assets/logo.svg'
-import Image from "next/image"
+
 import ResearchPaperAIHero from "./components/hero-animation"
 import { Heading, Subheading } from "@/components/ui/text"
 
 export default function Home() {
-  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <div className="flex flex-col min-h-screen">
