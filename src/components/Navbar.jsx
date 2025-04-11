@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Book, LogOut, Menu, Sunset, Trees, User, Zap, Settings } from "lucide-react"
+import { Book, LogOut, Menu, Sunset, Trees, User, Zap, Settings, MessageSquare } from "lucide-react"
 import logox from "../assets/logo.svg"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
@@ -370,11 +370,43 @@ const Navbar1 = ({
                       </>
                     )}
                   </div>
+
+                  {/* WhatsApp button for mobile */}
+                  <div className="mt-4 flex justify-center">
+                    <a
+                      href="https://wa.me/8260080050"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex flex-col items-center"
+                    >
+                      <Button size="icon" className="rounded-full bg-green-500 hover:bg-green-600 h-12 w-12">
+                        <img src="/whatsapp.png" className="h-12 w-12 text-white" />
+                        <span className="sr-only">Contact via WhatsApp</span>
+                      </Button>
+                      <span className="text-xs font-medium mt-1 text-green-600">Chat with us</span>
+                    </a>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
           </div>
         </div>
+      </div>
+
+      {/* WhatsApp Floating Button - Desktop */}
+      <div className="fixed right-4 top-2 z-50 hidden lg:flex flex-col items-center">
+        <a
+          href="https://wa.me/8260080050"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center"
+        >
+          <Button size="icon" className="rounded-full bg-green-500 hover:bg-green-600 h-12 w-12 shadow-lg">
+            <img src="/whatsapp.png" className="h-12 w-12 text-white" />
+            <span className="sr-only">Contact via WhatsApp</span>
+          </Button>
+          <span className="text-xs font-medium mt-1 text-green-600">Chat with us</span>
+        </a>
       </div>
     </section>
   )
@@ -458,4 +490,3 @@ const renderMobileMenuItem = (item) => {
 }
 
 export { Navbar1 }
-

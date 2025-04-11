@@ -27,10 +27,10 @@ export const metadata = {
 };
 const demoData = {
   logo: {
-    url: "https://www.shadcnblocks.com",
-    src: "https://www.shadcnblocks.com/images/block/block-1.svg",
-    alt: "blocks for shadcn/ui",
-    title: "Shadcnblocks.com",
+    url: "https://www.zepresearch.com",
+    src: "https://www.zepresearch.com/images/block/block-1.svg",
+    alt: "logo",
+    title: "Zepresearch.com",
   },
   menu: [
     {
@@ -153,17 +153,6 @@ export default function RootLayout({ children }) {
         <Footer/>
         <Toaster /> 
         <LineMessengerButton/>
-        <a
-              href="https://wa.me/your_whatsapp_number"
-              className="fixed w-[50px] h-[50px] sm:top-3 bottom-3 text-xs sm:right-10 right-3 rounded-full text-center   z-50 flex flex-col items-center justify-center md:w-[50px] md:h-[50px] md:bottom-5 md:right-5 font-bold font-sans text-green-600 "
-              aria-label="Chat on WhatsApp"
-            >
-            <div>
-             <Image alt="whatsapplogo" src={whatsapplogo} className="" />
-
-             
-            </div>
-            </a>
       </body>
     </html>
   );  
