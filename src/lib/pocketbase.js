@@ -90,7 +90,7 @@ export const logout = () => {
 
 
 export async function getGalleryImages(page = 1, perPage = 50) {
-  const pb = getPocketBase()
+  const pb = getPocketBaseClient()
 
   try {
     // Fetch gallery images with pagination
