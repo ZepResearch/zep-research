@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server"
-import { client } from "@/lib/pocketbase"
+import  {getPocketBaseClient}  from "@/lib/pocketbase"
+
+let pb = getPocketBaseClient()
 
 export async function GET(request) {
   const url = new URL(request.url)
@@ -12,7 +14,7 @@ export async function GET(request) {
 
   try {
     // Exchange the authorization code for an access token
-    await client.collection("users").authWithOAuth2Code("google", code, state, `${url.origin}/api/oauth2-redirect`)
+    await pb.collection("users").authWithOAuth2Code("google", code, state, `${url.origin}/api/oauth2-redirect`)
 
     // Redirect to dashboard on success
     return NextResponse.redirect(new URL("/dashboard", url.origin))

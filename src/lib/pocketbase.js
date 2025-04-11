@@ -115,7 +115,7 @@ export async function getGalleryImages(page = 1, perPage = 50) {
 
 // Function to fetch a single gallery image by ID
 export async function getGalleryImage(id) {
-  const pb = getPocketBase()
+  const pb = getPocketBaseClient()
 
   try {
     const record = await pb.collection("gallery").getOne(id)
