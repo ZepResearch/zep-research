@@ -47,12 +47,12 @@ export function LineMessengerButton({
       <Button
         size="icon"
         className={cn(
-          "h-12 w-12 rounded-full shadow-lg transition-all duration-300",
-          isOpen ? "bg-slate-500 hover:bg-slate-500/90" : "bg-[#06C755] hover:bg-[#06C755]/90",
+          "h-16 w-16 rounded-full shadow-lg transition-all duration-300",
+          isOpen ? "bg-slate-500 hover:bg-slate-500/90" : "bg-green-600 hover:bg-[#06C755]/90",
         )}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {isOpen ? <X className="h-5 w-5" /> : <MessageCircle className="h-5 w-5" />}
+        {isOpen ? <X className="h-5 w-5" /> : <img src="/line.png" className="h-16 w-16" />}
         <span className="sr-only">{isOpen ? "Close Line Messenger chat" : "Open Line Messenger chat"}</span>
       </Button>
     </div>

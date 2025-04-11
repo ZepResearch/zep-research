@@ -10,6 +10,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { LineMessengerButton } from "@/components/line-messenger-button";
 import whatsapplogo from "@/assets/whatsapp.png";
 import Image from "next/image";
+import TawkToChat from "@/components/TawkToChat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -130,6 +131,10 @@ const demoData = {
       title: "Contact",
       url: "/contact",
     },
+    {
+      title: "Gallery",
+      url: "/Gallery",
+    },
   ],
   mobileExtraLinks: [
     { name: "Press", url: "/press" },
@@ -153,6 +158,7 @@ export default function RootLayout({ children }) {
         <Footer/>
         <Toaster /> 
         <LineMessengerButton/>
+        <TawkToChat/>
       </body>
     </html>
   );  

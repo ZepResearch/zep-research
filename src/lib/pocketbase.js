@@ -88,3 +88,49 @@ export const logout = () => {
   }
 }
 
+
+export async function getGalleryImages(page = 1, perPage = 50) {
+  const pb = getPocketBase()
+
+  try {
+    // Fetch gallery images with pagination
+    const resultList = await pb.collection("gallery").getList(page, perPage, {
+      sort: "-created",
+    })
+
+    // Map the records to our ImageType
+    return resultList.items.map((record) => ({
+      id: record.id,
+      title: record.title || "",
+      description: record.description || "",
+      image: record.image,
+      created: record.created,
+      updated: record.updated,
+    }))
+  } catch (error) {
+    console.error("Error fetching gallery images:", error)
+    return []
+  }
+}
+
+// Function to fetch a single gallery image by ID
+export async function getGalleryImage(id) {
+  const pb = getPocketBase()
+
+  try {
+    const record = await pb.collection("gallery").getOne(id)
+
+    return {
+      id: record.id,
+      title: record.title || "",
+      description: record.description || "",
+      image: record.image,
+      created: record.created,
+      updated: record.updated,
+    }
+  } catch (error) {
+    console.error(`Error fetching gallery image with ID ${id}:`, error)
+    return null
+  }
+}
+
