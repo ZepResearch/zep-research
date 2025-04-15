@@ -5,22 +5,30 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Cancellation Policy | Zepresearch | International Journal Publication and Conference",
+  title: "Canilation-Policy | International Journal Publication and Conference",
   description: "Leading platform for international journal publications, academic conferences, and advanced courses in Data Science and AI.",
-  keywords: ["research journal", "international publication", "academic conference", "data science courses"],
+  keywords: [
+    "research journal",
+    "international publication",
+    "academic conference",
+    "data science courses"
+  ],
   openGraph: {
     title: "Zep Research | International Journal Publication",
     description: "Leading platform for international journal publications and conferences",
     type: "website",
-    url: "https://zepresearch.com",
-    images: [{ url: "/og-image.jpg" }],
+    url: "https://zepresearch.com/CancilationPolicy",
+    images: ["/og-image.jpg"]
   },
   twitter: {
     card: "summary_large_image",
     title: "Zep Research | International Journal Publication",
     description: "Leading platform for international journal publications and conferences",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.jpg"]
   },
+  alternates: {
+    canonical: "https://zepresearch.com/CancilationPolicy"
+  }
 };
 
 export default function CancellationPolicy() {

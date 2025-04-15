@@ -4,23 +4,32 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export const metadata = {
-  title: "Refund Policy | Zepresearch | International Journal Publication and Conference",
+  title: "Refund | International Journal Publication and Conference",
   description: "Leading platform for international journal publications, academic conferences, and advanced courses in Data Science and AI.",
-  keywords: ["research journal", "international publication", "academic conference", "data science courses"],
+  keywords: [
+    "research journal",
+    "international publication",
+    "academic conference",
+    "data science courses"
+  ],
   openGraph: {
     title: "Zep Research | International Journal Publication",
     description: "Leading platform for international journal publications and conferences",
     type: "website",
-    url: "https://zepresearch.com",
-    images: [{ url: "/og-image.jpg" }],
+    url: "https://zepresearch.com/Refund",
+    images: ["/og-image.jpg"]
   },
   twitter: {
     card: "summary_large_image",
     title: "Zep Research | International Journal Publication",
     description: "Leading platform for international journal publications and conferences",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.jpg"]
   },
+  alternates: {
+    canonical: "https://zepresearch.com/Refund"
+  }
 };
+
 
 export default function Refund() {
   const refundSections = [

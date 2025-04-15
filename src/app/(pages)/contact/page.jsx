@@ -3,10 +3,31 @@ import { ContactForm } from "./component/contact-form"
 import { MapPin, Mail, Phone, Globe } from "lucide-react"
 
 export const metadata = {
-  title: "Contact Us | Zep Research",
-  description:
-    "Get in touch with Zep Research for inquiries about conferences, research initiatives, and collaboration opportunities.",
-}
+  title: "Contact Us | Zepresearch | International Journal Publication and Conference",
+  description: "Leading platform for international journal publications, academic conferences, and advanced courses in Data Science and AI.",
+  keywords: [
+    "research journal",
+    "international publication",
+    "academic conference",
+    "data science courses"
+  ],
+  openGraph: {
+    title: "Zep Research | International Journal Publication",
+    description: "Leading platform for international journal publications and conferences",
+    type: "website",
+    url: "https://zepresearch.com/contact",
+    images: ["/og-image.jpg"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zep Research | International Journal Publication",
+    description: "Leading platform for international journal publications and conferences",
+    images: ["/og-image.jpg"]
+  },
+  alternates: {
+    canonical: "https://zepresearch.com/contact"
+  }
+};
 
 // Sample connection points for the map
 const connectionPoints = [

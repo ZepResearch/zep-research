@@ -8,7 +8,7 @@ export const metadata = {
     title: 'Zep Research | International Journal Publication',
     description: 'Leading platform for international journal publications and conferences',
     type: 'website',
-    url: 'https://zepresearch.com',
+    url: 'https://zepresearch.com/courses',
     images: [
       {
         url: '/og-image.jpg',
@@ -25,7 +25,7 @@ export const metadata = {
     images: ['/og-image.jpg'],
   },
   alternates: {
-    canonical: 'https://zepresearch.com',
+    canonical: 'https://zepresearch.com/courses',
   },
 };
 

@@ -1,9 +1,32 @@
 // src/app/register/page.js
 import RegisterForm from "./components/RegisterForm";
 
+
 export const metadata = {
-  title: 'Register - Research Platform',
-  description: 'Create your research account',
+  title: "Sign-Up | Zepresearch | International Journal Publication and Conference",
+  description: "Leading platform for international journal publications, academic conferences, and advanced courses in Data Science and AI.",
+  keywords: [
+    "research journal",
+    "international publication",
+    "academic conference",
+    "data science courses"
+  ],
+  openGraph: {
+    title: "Zep Research | International Journal Publication",
+    description: "Leading platform for international journal publications and conferences",
+    type: "website",
+    url: "https://zepresearch.com/signup",
+    images: ["/og-image.jpg"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zep Research | International Journal Publication",
+    description: "Leading platform for international journal publications and conferences",
+    images: ["/og-image.jpg"]
+  },
+  alternates: {
+    canonical: "https://zepresearch.com/signup"
+  }
 };
 
 export default function RegisterPage() {
