@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 
 
 export function LineMessengerButton({
-  lineUrl = "https://line.me/R/ti/p/abinash.zepresearch",
+  lineUrl = "https://line.me/R/ti/p/xanFL3Y-rm",
   customText = "Chat with us on Line",
   position = "bottom-left",
   showOnMobile = true,

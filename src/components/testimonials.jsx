@@ -18,7 +18,8 @@ import { Heading, Subheading } from './ui/text'
 const testimonials = [
   {
     img: '/testimonials/t1.jpg',
-    name: 'Tina Yards',
+    name: 'Saif Algebory',
+    country: 'Iraq',
     title: 'VP of Research, Protocol',
     quote:
       'I attended MEET24 in Seoul as an advisory member. A well-managed conference with insightful speakers and great networking.',
@@ -26,6 +27,7 @@ const testimonials = [
   {
     img: '/testimonials/t2.jpg',
     name: 'Thamer Yousif ',
+    country: 'Iraq',
     title: 'Professor in Public Health and Health Profession Education',
     quote:
       'The sessions were excellent. Conducting them more frequently would enhance engagement and experience-sharing in the future.',
@@ -33,20 +35,23 @@ const testimonials = [
   {
     img: '/testimonials/t3.png',
     name: 'Miles Peroja Viado ',
+    country: 'Philippines',
     title: 'Former Instructor at Nevada City, California',
     quote:
       'I was a proud presenter and member of this reputable organization, which supports speakers, mentors, and researchers. It also provides a platform for publishing papers. Thank you, and congratulations!👋',
   },
   {
     img: '/testimonials/t4.jpg',
-    name: 'Ahmed Jalal ',
+    name: 'Dr. Abdulwahed Jalal Nori ',
+    country: 'Malaysia',
     title: 'Senior Political Analyst',
     quote:
       'ZEP Research organizes global conferences uniting experts to present research, discuss trends, and network with industry leaders.',
   },
   {
     img: '/testimonials/t5.jpg',
-    name: 'Jhanghiz Syahrivar ',
+    name: 'Jhanghiz Syahrivar, ',
+    country: 'Indonesia',
     title: 'Associate Professor of Marketing Innovation and Consumer Ethics',
     quote: 'I joined MEET24 in Seoul as an advisory member. The well-managed conference featured engaging speakers and valuable networking.',
   },
@@ -57,11 +62,61 @@ const testimonials = [
   //   quote:
   //     'I ve published more high-impact papers this year than ever before, thanks to the collaborative opportunities Zep Research provides.',
   // }, 
+  {
+    img: '/testimonials/t6.png',
+    name: 'Alfe Solina',
+    country: '',
+    title: 'Keynote Speaker',
+    quote: 'Congratulations Zep Research and to the host institution, Indraprastha College for Women, Delhi University. Thank you for inviting me as one of the Keynote Speakers.',
+  },
+  {
+    img: '/testimonials/t7.png',
+    name: 'Jocelyn Sagun-de Vera',
+    country: '',
+    title: 'ZEP Research Committee Member',
+    quote: 'An incredible experience connecting with brilliant minds in our field. Grateful for the opportunity to present my research and be part of the organizing committee.',
+  },
+  {
+    img: '/testimonials/t8.png',
+    name: 'Laatiri Youssef',
+    country: '',
+    title: 'Researcher',
+    quote: 'Thank you ZEP Research for the platform to publish our work. Your support for researchers across different fields is truly helping improve scientific research quality.',
+  },
+  {
+    img: '/testimonials/t9.png',
+    name: 'Rich Monreal',
+    country: '',
+    title: 'Technical Committee Board Member',
+    quote: 'Honored to serve as a Board Member and speaker. ZEP Research excellently bridges academia and industry, empowering research leaders globally.',
+  },
+  {
+    img: '/testimonials/t10.png',
+    name: 'Cynthia Ala Manalad',
+    country: '',
+    title: 'Conference Attendee',
+    quote: 'A profound and wonderful conference! Gathering exceptional research internationally enriches our knowledge horizon. The keynote speakers did a superb job.',
+  },
+  {
+    img: '/testimonials/t11.png',
+    name: 'Annalyn Y. Buenaseda',
+    country: '',
+    title: 'Board Committee Member & Moderator',
+    quote: 'Sincere gratitude for the opportunity to serve on the board and as a moderator. Its been an honor to contribute to ZEP Research and publish with your organization.',
+  },
+  {
+    img: '/testimonials/t12.png',
+    name: 'Malou Hernandez Gomez',
+    country: '',
+    title: 'Advisory Board Committee Member',
+    quote: 'Deeply grateful to Zep Research for the chance to publish our work and serve as advisory board committee. The organizers are very kind and accommodating.',
+  },
 ]
 
 function TestimonialCard({
   name,
   title,
+  country,
   img,
   children,
   bounds,
@@ -112,7 +167,7 @@ function TestimonialCard({
       <img
         alt=""
         src={img}
-        className="absolute inset-x-0 top-0 aspect-square w-full object-cover"
+        className="absolute inset-x-0 top-0 aspect-square w-full object-contain"
       />
       <div
         aria-hidden="true"
@@ -137,6 +192,7 @@ function TestimonialCard({
               {title}
             </span>
           </p>
+          <p className='text-white'>{country}</p>
         </figcaption>
       </figure>
     </motion.div>
@@ -197,12 +253,13 @@ export function Testimonials() {
           '[--scroll-padding:max(theme(spacing.6),calc((100vw-theme(maxWidth.2xl))/2))] lg:[--scroll-padding:max(theme(spacing.8),calc((100vw-theme(maxWidth.7xl))/2))]',
         ])}
       >
-        {testimonials.map(({ img, name, title, quote }, testimonialIndex) => (
+        {testimonials.map(({ img, name, title, quote ,country}, testimonialIndex) => (
           <TestimonialCard
             key={testimonialIndex}
             name={name}
             title={title}
             img={img}
+            country={country}
             bounds={bounds}
             scrollX={scrollX}
             onClick={() => scrollTo(testimonialIndex)}

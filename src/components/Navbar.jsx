@@ -394,7 +394,7 @@ const Navbar1 = ({
       </div>
 
       {/* WhatsApp Floating Button - Desktop */}
-      <div className="fixed right-4 top-2 z-50 hidden lg:flex flex-col items-center">
+      <div className="fixed left-24 bottom-2 z-50 hidden lg:flex flex-col items-center">
         <a
           href="https://wa.me/917848854815"
           target="_blank"
