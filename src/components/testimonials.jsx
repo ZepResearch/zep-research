@@ -110,6 +110,12 @@ const testimonials = [
     country: '',
     title: 'Advisory Board Committee Member',
     quote: 'Deeply grateful to Zep Research for the chance to publish our work and serve as advisory board committee. The organizers are very kind and accommodating.',
+  },  {
+    img: '/testimonials/t13.jpg',
+    name: 'Prof. Dr. Ipseeta Nanda',
+    country: 'India',
+    title: 'Professor, IILM University',
+    quote: 'A distinct honor to be associated with Zep Research. Their dedication to supporting researchers worldwide is highly commendable. Grateful for the opportunity to contribute to advancing global research initiatives.',
   },
 ]
 

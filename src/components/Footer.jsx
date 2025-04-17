@@ -86,7 +86,7 @@ export default function Footer() {
       items: [
         { name: "Terms and Condition", href: "/TermsAndCondition" },
         { name: "Refund Policy", href: "/Refund" },
-        { name: "Cancilation Policy", href: "/CancilationPolicy" },
+        { name: "Cancellation Policy", href: "/CancilationPolicy" },
         { name: "Privacy Policy", href: "/PrivacyPolicy" },
       ],
     },
