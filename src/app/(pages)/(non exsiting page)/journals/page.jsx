@@ -23,7 +23,7 @@ export default async function JournalsPage() {
         {journals.map((journal) => (
           <Link href={`/journals/${journal.id}`} key={journal.id} className="group">
             <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-gray-300">
-              <div className="relative aspect-[3/4] w-full overflow-hidden">
+              <div className="relative h-[300px] bg-gradient-to-t from-blue-300 to-blue-800 w-full overflow-hidden">
                 {journal.imgs ? (
                   <Image
                     src={`https://zep-research.pockethost.io/api/files/Journals/${journal.id}/${journal.imgs}`}
