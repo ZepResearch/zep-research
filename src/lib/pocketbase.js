@@ -134,3 +134,31 @@ export async function getGalleryImage(id) {
   }
 }
 
+
+
+
+export async function getJournals() {
+  try {
+    const pb = getPocketBaseClient()
+
+    // Fetch all journals sorted by creation date (newest first)
+    const records = await pb.collection("Journals").getFullList({
+      sort: "-created",
+    })
+
+    return records
+  } catch (error) {
+    console.error("Error fetching journals:", error)
+    return []
+  }
+}
+export async function getJournalById(id) {
+  try {
+    const pb = getPocketBaseClient()
+    const record = await pb.collection("Journals").getOne(id)
+    return record
+  } catch (error) {
+    console.error(`Error fetching journal with ID ${id}:`, error)
+    return null
+  }
+}

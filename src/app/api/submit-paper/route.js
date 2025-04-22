@@ -25,6 +25,7 @@ export async function POST(request) {
       department: formData.get("department"),
       organization: formData.get("organization"),
       message: formData.get("message"),
+      journal_name: formData.get("journal_name"),
     }
 
     // Create a new FormData for PocketBase (needed for file upload)

@@ -55,9 +55,9 @@ export function getUserEmailTemplate(data) {
       <p>We have received your submission and our review committee will evaluate it shortly. You will be notified about the status of your submission in the coming weeks.</p>
       
       <p>Here's a summary of your submission:</p>
-      <ul>
+      <ul>journal_name
         <li><strong>Paper Title:</strong> ${data.paper_title}</li>
-       
+         <li><strong>Journal Title:</strong> ${data.journal_name}</li>
         <li><strong>Submission Date:</strong> ${new Date().toLocaleDateString()}</li>
       </ul>
       
@@ -147,6 +147,10 @@ export function getAdminEmailTemplate(data, fileUrl) {
         <tr>
           <th>Field</th>
           <th>Value</th>
+        </tr>
+        <tr>
+          <td>Journal name</td>
+          <td>${data.journal_name}</td>
         </tr>
         <tr>
           <td>Author</td>
