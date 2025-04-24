@@ -2,8 +2,17 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn, FaYoutube } from "react-icons/fa"
-import logox from '../assets/logo.svg'
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedinIn,
+  FaYoutube,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaEnvelope,
+} from "react-icons/fa"
+import logox from "../assets/logo.svg"
 import Image from "next/image"
 function FloatingPaths({ position }) {
   // Increased number of paths and made them more visible
@@ -131,11 +140,30 @@ export default function Footer() {
               {/* <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-cyan-400 dark:from-cyan-400 dark:to-cyan-200">
                 ZEP Research
               </h2> */}
-              <Image src={logox
-              } className=" mb-4 w-3/4" alt="logo" />
-              <p className="text-sm  font-medium text-neutral-700 dark:text-neutral-300 mb-4 max-w-xs">
+              <Image src={logox || "/placeholder.svg"} className=" mb-4 w-3/4" alt="logo" />
+              <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-4 max-w-xs">
                 Empowering researchers with comprehensive services and resources for academic excellence.
               </p>
+              {/* Contact Information */}
+              <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
+                <div className="flex items-start">
+                  <FaMapMarkerAlt className="mt-1 mr-1 w-12 text-cyan-600 dark:text-cyan-400" />
+                  <span>DCB-330, 3rd Floor, DLF Cyber City, Patia, Bhubaneswar, ODISHA - 751024 India</span>
+                </div>
+                <div className="flex items-center">
+                  <FaPhone className="mr-2 text-cyan-600 dark:text-cyan-400" />
+                  <span>+91 78488 54815 </span>
+                </div>
+                <div className="flex items-center">
+                  <FaEnvelope className="mr-2 text-cyan-600 dark:text-cyan-400" />
+                  <a
+                    href="mailto:info@zepresearch.com"
+                    className="hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors"
+                  >
+                    info@zepresearch.com
+                  </a>
+                </div>
+              </div>
             </motion.div>
           </div>
 
@@ -196,4 +224,3 @@ export default function Footer() {
     </footer>
   )
 }
-

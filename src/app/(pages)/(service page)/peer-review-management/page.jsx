@@ -115,7 +115,7 @@ function PeerReviewManagement() {
             <h2 className='sm:text-3xl text-2xl py-4 text-left font-JosefinSans leading-tight'>
               Benefits of Our Peer Review Management Service
             </h2>
-            <img src="https://res.cloudinary.com/dwlhesiyi/image/upload/v1726470072/pdxfe0atpybsbjvuzirx.png" alt="" className="sm:pl-16 p-12 sm:p-0" />
+            <img  src="https://plus.unsplash.com/premium_photo-1661756429488-a6a0e12bd210?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className=" rounded-2xl sm:p-0" />
           </div>
 
           <div className="space-y-6 lg:space-y-10 md:pt-24">

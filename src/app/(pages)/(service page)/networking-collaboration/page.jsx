@@ -47,8 +47,8 @@ function NetworkingCollaboration() {
   <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-start">
     <div className="lg:col-span-7">
     
-      <div className=" flex  justify-center items-center sm:pt-24 ">
-       <img src="https://res.cloudinary.com/dwlhesiyi/image/upload/v1726482086/uli2ntgqkw22vfigdtkt.png" alt=""  className='sm:h-3/5 sm:w-3/5'/>
+      <div className=" flex  justify-center items-center  rounded-2xl ">
+      <img className='rounded-3xl' src="https://images.unsplash.com/flagged/photo-1564445476463-7833c341e914?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="imggif" />
       </div>
 
     </div>
@@ -124,7 +124,7 @@ function NetworkingCollaboration() {
       </h2>
       
       <div>
-        <img src="https://res.cloudinary.com/dwlhesiyi/image/upload/v1726481931/kugkezmqx54t4zqtp8ae.png" alt="imggif" />
+        <img className='rounded-3xl' src="https://images.unsplash.com/photo-1723210733871-733bf1f9ff93?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="imggif" />
       </div>
     </div>
     <div className="lg:col-span-2">

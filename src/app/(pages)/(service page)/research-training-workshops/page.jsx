@@ -111,7 +111,7 @@ Our Research Training & Workshops at Zep Research are tailored to help academics
     <div className="lg:w-3/4">
         <h2  className='sm:text-3xl text-2xl py-4 text-center font-JosefinSans leading-tight'>
 Benefits of Our Research Training & Workshops      </h2>
-     <img src="https://res.cloudinary.com/dwlhesiyi/image/upload/v1726480853/hy0bfaazugwcujdqvmss.png" alt="" className="sm:ml-12 p-12 sm:p-0"/>
+     <img className='rounded-2xl' src="https://plus.unsplash.com/premium_photo-1705267936187-aceda1a6c1a6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
      
     </div>
   

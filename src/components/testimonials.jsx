@@ -22,7 +22,7 @@ const testimonials = [
     country: 'Iraq',
     title: 'VP of Research, Protocol',
     quote:
-      'I attended MEET24 in Seoul as an advisory member. A well-managed conference with insightful speakers and great networking.',
+      'My recent engagement with Core Research Foundation or Zep Research was through the 8th International Conference on Management, Education, and Emerging Technology (MEET24) held in Seoul, South Korea. I was honored to be invited as a member of the advisory committee. Prior to the conference, we participated in a mini webinar designed to connect like-minded researchers, which was a valuable networking opportunity.',
   },
   {
     img: '/testimonials/t2.jpg',
@@ -38,7 +38,7 @@ const testimonials = [
     country: 'Philippines',
     title: 'Former Instructor at Nevada City, California',
     quote:
-      'I was a proud presenter and member of this reputable organization, which supports speakers, mentors, and researchers. It also provides a platform for publishing papers. Thank you, and congratulations!👋',
+      'I was once a presenter and member of this organization ,Proud to be a part of it ,The legit organization that caters you as a speaker presenter a mentor or as an evaluator ..so you can published also your paper ..Thank you so much and more power! God bless and congratulations',
   },
   {
     img: '/testimonials/t4.jpg',
@@ -53,7 +53,7 @@ const testimonials = [
     name: 'Jhanghiz Syahrivar, ',
     country: 'Indonesia',
     title: 'Associate Professor of Marketing Innovation and Consumer Ethics',
-    quote: 'I joined MEET24 in Seoul as an advisory member. The well-managed conference featured engaging speakers and valuable networking.',
+    quote: 'My recent engagement with Core Research Foundation or Zep Research was through the 8th International Conference on Management, Education, and Emerging Technology (MEET24) held in Seoul, South Korea. I was honored to be invited as a member of the advisory committee. Prior to the conference, we participated in a mini webinar designed to connect like-minded researchers, which was a valuable networking opportunity. The conference process was managed professionally and efficiently, ensuring a seamless experience.',
   },
   // {
   //   img: '/testimonials/t5.jpg',
@@ -74,42 +74,42 @@ const testimonials = [
     name: 'Jocelyn Sagun-de Vera',
     country: '',
     title: 'ZEP Research Committee Member',
-    quote: 'An incredible experience connecting with brilliant minds in our field. Grateful for the opportunity to present my research and be part of the organizing committee.',
+    quote: 'It was an incredible experience to connect, share ideas, and learn from so many brilliant minds in our field. I am especially grateful for the opportunity to present my research and to be a part of the ZEP Research organizing committee. Your hard work and dedication truly made this event a remarkable success!',
   },
   {
     img: '/testimonials/t8.png',
     name: 'Laatiri Youssef',
     country: '',
     title: 'Researcher',
-    quote: 'Thank you ZEP Research for the platform to publish our work. Your support for researchers across different fields is truly helping improve scientific research quality.',
+    quote: 'Congratulations Zep Research and to the host institution, the Indraprastha College for Women, Delhi University.Thank you for inviting me as one of the Keynote Speakers.',
   },
   {
     img: '/testimonials/t9.png',
     name: 'Rich Monreal',
     country: '',
     title: 'Technical Committee Board Member',
-    quote: 'Honored to serve as a Board Member and speaker. ZEP Research excellently bridges academia and industry, empowering research leaders globally.',
+    quote: 'It’s an honor to be associated with ZEP Research. I am grateful for the opportunity to serve as a Technical Committee Board Member and to share my expertise as a speaker at various international conferences. ZEP Research plays a pivotal role in bridging the gap between academia and industry, empowering future research leaders to thrive. Congratulations on your impactful work—I’m always excited to collaborate at global conferences and contribute to such a dynamic community.',
   },
   {
     img: '/testimonials/t10.png',
     name: 'Cynthia Ala Manalad',
     country: '',
     title: 'Conference Attendee',
-    quote: 'A profound and wonderful conference! Gathering exceptional research internationally enriches our knowledge horizon. The keynote speakers did a superb job.',
+    quote: 'Thank you so much to Zep Research for such a profound and wonderful conference! The concept of gathering exceptional and timely researches and presenting them internationally really enriches our horizon for knowledge! The keynote speakers did a superb job in their portions and did it in a professional manner.I look forward to attending more conferences brought by the organization!',
   },
   {
     img: '/testimonials/t11.png',
     name: 'Annalyn Y. Buenaseda',
     country: '',
     title: 'Board Committee Member & Moderator',
-    quote: 'Sincere gratitude for the opportunity to serve on the board and as a moderator. Its been an honor to contribute to ZEP Research and publish with your organization.',
+    quote: 'My sincere gratitude for the opportunity to serve on the board committee and as a moderator. It has been an honor and a privilege to contribute to ZEP Research. I am also deeply grateful for the opportunity to publish our research with your organization. This is a significant achievement for our team, and we greatly appreciate your support and recognition.',
   },
   {
     img: '/testimonials/t12.png',
     name: 'Malou Hernandez Gomez',
     country: '',
     title: 'Advisory Board Committee Member',
-    quote: 'Deeply grateful to Zep Research for the chance to publish our work and serve as advisory board committee. The organizers are very kind and accommodating.',
+    quote: 'My deepest gratitude to Zep research for giving us the chance to publish our research paper. I am grateful to serve as advisory board committee. Being part of this organization has not only helped me grow professionally but also personally and for that, I am truly thankful.',
   },  {
     img: '/testimonials/t13.jpg',
     name: 'Prof. Dr. Ipseeta Nanda',
@@ -181,7 +181,7 @@ function TestimonialCard({
       />
       <figure className="relative p-10">
         <blockquote>
-          <p className="relative text-lg/7 text-white">
+          <p className="relative text-sm/5 text-white">
             <span aria-hidden="true" className="absolute -translate-x-full">
               “
             </span>
@@ -192,13 +192,13 @@ function TestimonialCard({
           </p>
         </blockquote>
         <figcaption className="mt-6 border-t border-white/20 pt-6">
-          <p className="text-sm/6 font-medium text-white">{name}</p>
-          <p className="text-sm/6 font-medium">
+          <p className="text-base/6 font-semibold text-white">{name}</p>
+          <p className="text-sm/4 font-medium">
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               {title}
             </span>
           </p>
-          <p className='text-white'>{country}</p>
+          <p className='text-white text-sm'>{country}</p>
         </figcaption>
       </figure>
     </motion.div>

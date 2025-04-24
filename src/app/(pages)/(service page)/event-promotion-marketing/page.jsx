@@ -116,7 +116,7 @@ function EventPromotionMarketing() {
       </h2>
       
       <div>
-        <img src="https://res.cloudinary.com/dwlhesiyi/image/upload/v1726476744/bth0h11nzs0sxvnuzvrv.png" alt="imggif" />
+        <img className='h-96 mt-2 rounded-2xl' src="https://images.unsplash.com/photo-1694109010480-2f7aa9ceb339?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="imggif" />
       </div>
       
     </div>
