@@ -11,17 +11,17 @@ const features = [
   {
     title: "Professional Conference Organizer",
     description: "Expertly planned events that foster academic collaboration, drive innovation and enhance professional development.",
-    imageUrl: "https://res.cloudinary.com/dwlhesiyi/image/upload/v1735540796/Zep%20Research%20Website%20Assets/ymsrp0veeatgq2wcbkeb.jpg"
+    imageUrl: "/gallery/21.jpg"
   },
   {
     title: "Publishing Opportunities",
     description: "Access diverse academic journals and platforms, enabling scholars to showcase their research and advance knowledge.",
-    imageUrl: "https://res.cloudinary.com/dwlhesiyi/image/upload/v1735540877/Zep%20Research%20Website%20Assets/kfmcjeiqi0cqqj3kirhf.jpg"
+    imageUrl: "/gallery/17.jpg"
   },
   {
     title: "Global Network",
     description: "Connect with a worldwide community of researchers, academics, and professionals to collaborate and share insights.",
-    imageUrl: "https://res.cloudinary.com/dwlhesiyi/image/upload/v1727876295/Gallery/jxouvaqolvravdgpj5rl.jpg"
+    imageUrl: "/gallery/19.jpg"
   }
 ]
 
