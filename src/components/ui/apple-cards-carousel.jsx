@@ -120,22 +120,49 @@ export const Carousel = ({ items, initialScroll = 0 }) => {
             ))}
           </div>
         </div>
-        <div className="absolute left-0 right-0 -bottom-10 z-10 flex justify-center gap-2 mb-4 ">
-          <button
-            className="z-40 sm:h-14 sm:w-14 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
-            onClick={scrollLeft}
-            disabled={!canScrollLeft}
-          >
-            <IconArrowNarrowLeft className="h-6 w-6 text-gray-100" />
-          </button>
-          <button
-            className="z-40 sm:h-14 sm:w-14 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
-            onClick={scrollRight}
-            disabled={!canScrollRight}
-          >
-            <IconArrowNarrowRight className="h-6 w-6 text-gray-100" />
-          </button>
-        </div>
+
+
+        <div className="absolute left-0 right-0 md:bottom-1/2 bottom-0 z-10 flex justify-center gap-2 mb-4 mx-24">
+  {/* Left button - positioned on left side for desktop/tablet, bottom for mobile */}
+  <div className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-auto">
+    <button
+      className="z-40 h-14 w-14 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
+      onClick={scrollLeft}
+      disabled={!canScrollLeft}
+    >
+      <IconArrowNarrowLeft className="h-6 w-6 text-gray-100" />
+    </button>
+  </div>
+  
+  {/* Right button - positioned on right side for desktop/tablet, bottom for mobile */}
+  <div className="hidden sm:block absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-auto">
+    <button
+      className="z-40 h-14 w-14 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
+      onClick={scrollRight}
+      disabled={!canScrollRight}
+    >
+      <IconArrowNarrowRight className="h-6 w-6 text-gray-100" />
+    </button>
+  </div>
+  
+  {/* Mobile buttons - centered at bottom */}
+  <div className="sm:hidden absolute left-0 right-0 -bottom-10 z-10 flex justify-center gap-2 mb-4">
+    <button
+      className="z-40 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity pointer-events-auto"
+      onClick={scrollLeft}
+      disabled={!canScrollLeft}
+    >
+      <IconArrowNarrowLeft className="h-6 w-6 text-gray-100" />
+    </button>
+    <button
+      className="z-40 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity pointer-events-auto"
+      onClick={scrollRight}
+      disabled={!canScrollRight}
+    >
+      <IconArrowNarrowRight className="h-6 w-6 text-gray-100" />
+    </button>
+  </div>
+</div>
       </div>
     </CarouselContext.Provider>
   );

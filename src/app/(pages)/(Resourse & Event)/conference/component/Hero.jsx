@@ -14,14 +14,14 @@ function Hero() {
 
     <div className="mt-10 relative max-w-5xl mx-auto">
       <div className="relative w-full h-96 sm:h-[480px] rounded-xl overflow-hidden">
-  <img src='/gallery/9.jpg' alt="" className="w-full h-full object-cover" />
+  <img src='/gallery/14.jpg' alt="" className="w-full h-full object-cover" />
   <div className="absolute inset-0 bg-black opacity-50"></div>
 </div>
 
       <div className="absolute inset-0 size-full">
         <div className="flex flex-col justify-center items-center size-full">
-          <a className="py-3 px-4  inline-flex items-center gap-x-2 text-sm font-medium drop-shadow-xl rounded-full border border-gray-200 bg-gradient-to-tr from-cyan-500 via-blue-500 to-blue-600 text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-           href="#">
+          <a className="py-3 px-4 text-white  inline-flex items-center gap-x-2 text-sm font-medium drop-shadow-xl rounded-full border border-gray-200 bg-gradient-to-tr from-cyan-500 via-blue-500 to-blue-600  shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+           href="/login">
             Join with us
           </a>
         </div>

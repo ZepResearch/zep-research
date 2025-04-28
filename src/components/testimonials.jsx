@@ -14,6 +14,7 @@ import useMeasure from 'react-use-measure'
 import { Container } from './ui/container'
 import { Link } from './ui/link'
 import { Heading, Subheading } from './ui/text'
+import { ArrowLongLeftIcon } from '@heroicons/react/20/solid'
 
 const testimonials = [
   {
@@ -229,9 +230,17 @@ export function Testimonials() {
   let { scrollX } = useScroll({ container: scrollRef })
   let [setReferenceWindowRef, bounds] = useMeasure()
   let [activeIndex, setActiveIndex] = useState(0)
-
+  let [canScrollLeft, setCanScrollLeft] = useState(false)
+  let [canScrollRight, setCanScrollRight] = useState(true)
   useMotionValueEvent(scrollX, 'change', (x) => {
     setActiveIndex(Math.floor(x / scrollRef.current.children[0].clientWidth))
+    
+    // Check if can scroll left or right
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
+    }
   })
 
   function scrollTo(index) {
@@ -240,63 +249,123 @@ export function Testimonials() {
     scrollRef.current.scrollTo({ left: (width + gap) * index })
   }
 
+  function scrollLeft() {
+    if (scrollRef.current && activeIndex > 0) {
+      scrollTo(activeIndex - 1)
+    }
+  }
+
+  function scrollRight() {
+    if (scrollRef.current && activeIndex < testimonials.length - 1) {
+      scrollTo(activeIndex + 1)
+    }
+  }
   return (
-    <div className="overflow-hidden py-32">
-      <Container>
-        <div ref={setReferenceWindowRef}>
-          <Subheading>What everyone is saying</Subheading>
-          <Heading as="h3" className="mt-2">
-            Trusted by professionals.
-          </Heading>
-        </div>
-      </Container>
-      <div
-        ref={scrollRef}
-        className={clsx([
-          'mt-16 flex gap-8 px-[var(--scroll-padding)]',
-          '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
-          'snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth',
-          '[--scroll-padding:max(theme(spacing.6),calc((100vw-theme(maxWidth.2xl))/2))] lg:[--scroll-padding:max(theme(spacing.8),calc((100vw-theme(maxWidth.7xl))/2))]',
-        ])}
-      >
-        {testimonials.map(({ img, name, title, quote ,country}, testimonialIndex) => (
-          <TestimonialCard
-            key={testimonialIndex}
-            name={name}
-            title={title}
-            img={img}
-            country={country}
-            bounds={bounds}
-            scrollX={scrollX}
-            onClick={() => scrollTo(testimonialIndex)}
-          >
-            {quote}
-          </TestimonialCard>
-        ))}
-        <div className="w-[42rem] shrink-0 sm:w-[54rem]" />
+    <div className="overflow-hidden py-32 relative">
+    <Container>
+      <div ref={setReferenceWindowRef}>
+        <Subheading>What everyone is saying</Subheading>
+        <Heading as="h3" className="mt-2">
+          Trusted by professionals.
+        </Heading>
       </div>
-      <Container className="mt-16">
-        <div className="flex justify-between">
-          <CallToAction />
-          <div className="hidden sm:flex sm:gap-2">
-            {testimonials.map(({ name }, testimonialIndex) => (
-              <Headless.Button
-                key={testimonialIndex}
-                onClick={() => scrollTo(testimonialIndex)}
-                data-active={
-                  activeIndex === testimonialIndex ? true : undefined
-                }
-                aria-label={`Scroll to testimonial from ${name}`}
-                className={clsx(
-                  'size-2.5 rounded-full border border-transparent bg-gray-300 transition',
-                  'data-[active]:bg-gray-400 data-[hover]:bg-gray-400',
-                  'forced-colors:data-[active]:bg-[Highlight] forced-colors:data-[focus]:outline-offset-4',
-                )}
-              />
-            ))}
-          </div>
-        </div>
-      </Container>
+    </Container>
+    
+    {/* Navigation buttons - desktop view (left/right sides) */}
+    <div className="absolute z-10 w-full h-[calc(100%-16rem)] top-48 pointer-events-none">
+      {/* Left button */}
+      <div className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-auto">
+        <button
+          className="z-40 h-14 w-14 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
+          onClick={scrollLeft}
+          disabled={!canScrollLeft}
+          aria-label="Previous testimonial"
+        >
+          <ArrowLongLeftIcon className="h-6 w-6 text-gray-100" />
+        </button>
+      </div>
+      
+      {/* Right button */}
+      <div className="hidden sm:block absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-auto">
+        <button
+          className="z-40 h-14 w-14 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
+          onClick={scrollRight}
+          disabled={!canScrollRight}
+          aria-label="Next testimonial"
+        >
+          <ArrowLongRightIcon className="h-6 w-6 text-gray-100" />
+        </button>
+      </div>
     </div>
+    
+    <div
+      ref={scrollRef}
+      className={clsx([
+        'mt-16 flex gap-8 px-[var(--scroll-padding)]',
+        '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+        'snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth',
+        '[--scroll-padding:max(theme(spacing.6),calc((100vw-theme(maxWidth.2xl))/2))] lg:[--scroll-padding:max(theme(spacing.8),calc((100vw-theme(maxWidth.7xl))/2))]',
+      ])}
+    >
+      {testimonials.map(({ img, name, title, quote, country}, testimonialIndex) => (
+        <TestimonialCard
+          key={testimonialIndex}
+          name={name}
+          title={title}
+          img={img}
+          country={country}
+          bounds={bounds}
+          scrollX={scrollX}
+          onClick={() => scrollTo(testimonialIndex)}
+        >
+          {quote}
+        </TestimonialCard>
+      ))}
+      <div className="w-[42rem] shrink-0 sm:w-[54rem]" />
+    </div>
+    
+    {/* Mobile navigation buttons - centered at bottom */}
+    <div className="sm:hidden flex justify-center gap-2 mt-8">
+      <button
+        className="z-40 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
+        onClick={scrollLeft}
+        disabled={!canScrollLeft}
+        aria-label="Previous testimonial"
+      >
+        <ArrowLongLeftIcon className="h-5 w-5 text-gray-100" />
+      </button>
+      <button
+        className="z-40 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
+        onClick={scrollRight}
+        disabled={!canScrollRight}
+        aria-label="Next testimonial"
+      >
+        <ArrowLongRightIcon className="h-5 w-5 text-gray-100" />
+      </button>
+    </div>
+    
+    <Container className="mt-16">
+      <div className="flex justify-between">
+        <CallToAction />
+        <div className="hidden sm:flex sm:gap-2">
+          {testimonials.map(({ name }, testimonialIndex) => (
+            <Headless.Button
+              key={testimonialIndex}
+              onClick={() => scrollTo(testimonialIndex)}
+              data-active={
+                activeIndex === testimonialIndex ? true : undefined
+              }
+              aria-label={`Scroll to testimonial from ${name}`}
+              className={clsx(
+                'size-2.5 rounded-full border border-transparent bg-gray-300 transition',
+                'data-[active]:bg-gray-400 data-[hover]:bg-gray-400',
+                'forced-colors:data-[active]:bg-[Highlight] forced-colors:data-[focus]:outline-offset-4',
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    </Container>
+  </div>
   )
 }

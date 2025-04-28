@@ -46,15 +46,16 @@ function Hero() {
             Elevate research and publication through expertly managed, innovative conferences.
           </p>
           <div className='gap-4 flex flex-col md:flex-row'>
-          <Link href="/About">
-          <Button size="lg" className="mt-8 " variant="outline">
-            Learn More
+          <Link href="/conference">
+        <Button size="lg" className="mt-8 bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-base ">
+          Upcoming Conferences
           </Button>
           </Link>
-          <Link href="/conference">
-        <Button size="lg" className="mt-8 " variant="outline">
-          Explore Conferences
+          <Link href="/About">
+          <Button size="lg" className="mt-8 font-semibold" variant="outline" >
+            Learn More
           <ChevronRightIcon className="ml-2 h-6 w-6" /> 
+
           </Button>
           </Link>
           </div>
