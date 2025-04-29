@@ -99,19 +99,15 @@ function ManuscriptPreparation() {
       </div>
 
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="lg:w-3/4">
+        <div className="grid md:grid-cols-1 gap-12">
+          <div className="">
             <h2 className="sm:text-3xl text-2xl py-4 text-center font-JosefinSans leading-tight">
               Benefits of Our Manuscript Preparation Service
             </h2>
-            <img 
-              src="https://images.unsplash.com/photo-1506513083865-434a8a207e11?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-              alt="" 
-              className="p-12 sm:p-0 rounded-3xl"
-            />
+           
           </div>
 
-          <div className="space-y-6 lg:space-y-10 md:pt-24">
+          <div className="space-y-6 lg:space-y-10 md:pt-2 max-w-3xl mx-auto">
             {benefits.map((b) => (
               <div className="flex gap-x-5 sm:gap-x-8" key={b.title}>
                 <span className="shrink-0 text-cyan-500 inline-flex justify-center items-center size-[46px] rounded-full border border-gray-200 bg-white shadow-sm mx-auto dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200">

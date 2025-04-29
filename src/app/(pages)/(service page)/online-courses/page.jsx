@@ -64,39 +64,21 @@ function OnlineCourses() {
 
   return (
     <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-24">
-      <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-start">
+      <div >
         <div className="lg:col-span-7">
           <div className="grid grid-cols-12 gap-2 sm:gap-6 items-center lg:-translate-x-10">
-            <div className="col-span-4">
-              <img
-                className="rounded-xl"
-                src="https://images.unsplash.com/photo-1582079768381-0e81b88db423?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Features Image"
-              />
-            </div>
+          
 
-            <div className="col-span-3">
-              <img
-                className="rounded-xl"
-                src="https://plus.unsplash.com/premium_photo-1661630824245-e84544864438?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Features Image"
-              />
-            </div>
+        
 
-            <div className="col-span-5">
-              <img
-                className="rounded-xl"
-                src="https://images.unsplash.com/photo-1628752230442-34126c035654?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3DD"
-                alt="Features Image"
-              />
-            </div>
+      
           </div>
         </div>
 
         <div className="mt-5 sm:mt-10 lg:mt-0 lg:col-span-5">
           <div className="space-y-6 sm:space-y-8">
             <div className="space-y-2 md:space-y-4">
-              <h2 className="font-bold text-3xl lg:text-4xl text-gray-800 font-JosefinSans ">Online Courses</h2>
+              <h2 className="font-bold text-3xl lg:text-4xl text-gray-800 font-JosefinSans text-center ">Online Courses</h2>
               <p className="text-gray-700 font-PTSerif">
                 At Zep Research, we believe in empowering researchers and academics through continuous learning. Our
                 Online Courses are designed to enhance your research skills, knowledge, and professional development
@@ -210,9 +192,9 @@ function OnlineCourses() {
           </div>
         </div>
       </div>
-      <div className="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
+      <div className="mt-5 lg:mt-16 grid lg:grid-cols-1 gap-8 lg:gap-12">
         <div className="lg:col-span-1">
-          <h2 className="font-bold text-2xl md:text-3xl text-gray-800 font-JosefinSans">
+          <h2 className="font-bold text-2xl md:text-3xl text-gray-800 font-JosefinSans text-center">
             Benefits of Our Online Courses
           </h2>
 
@@ -221,7 +203,7 @@ function OnlineCourses() {
           </div>
         </div>
         <div className="lg:col-span-2">
-          <div className="grid sm:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid sm:grid-cols-1 gap-8 md:gap-12">
             {benefits.map((b) => (
               <div key={b.title} className="flex gap-x-5">
                 <div className="shrink-0 mt-1 size-6 text-cyan-600">{b.icon}</div>
@@ -246,71 +228,73 @@ function OnlineCourses() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {courses.map((course) => (
-            <div
-              key={course.id}
-              className="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl hover:shadow-md transition"
-            >
-              <div className="h-52 flex flex-col justify-center items-center bg-cyan-50 rounded-t-xl overflow-hidden">
-                <img
-                  className="w-full h-full object-cover"
-                  src={course.image || "/placeholder.svg"}
-                  alt={course.title}
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 font-JosefinSans">{course.title}</h3>
-                <div className="mt-3 flex items-center gap-x-2">
-                  <span className="text-2xl font-bold text-cyan-600 font-JosefinSans">{course.price}</span>
+        {courses.map((course) => (
+          <div
+            key={course.id}
+            className="relative h-64 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
+            style={{
+              backgroundImage: `linear-gradient(to right, rgba(14, 52, 84, 0.95), rgba(14, 52, 84, 0.8), rgba(14, 52, 84, 0.4))`,
+            }}
+          >
+            {/* Background image */}
+            <div className="absolute inset-0 -z-10">
+              <img
+                className="w-full h-full object-fill"
+                src={course.image || "/placeholder.svg"}
+                alt=""
+              />
+            </div>
+            
+            <div className="flex h-full">
+              {/* Left content */}
+              <div className="w-2/3 p-6 flex flex-col justify-between text-white">
+                <div>
+                  <span className="inline-block px-3 py-1 bg-cyan-500 rounded-full text-xs font-medium mb-3">
+                    Data Science & AI
+                  </span>
+                  <h3 className="text-2xl font-bold mb-2 font-JosefinSans">
+                    {course.title || "Data Science & AI Masters 2025 - From Python To Gen AI"}
+                  </h3>
+                  <p className="text-sm text-gray-200 mb-4 font-PTSerif">
+                    Master Data Science and AI: Learn Python, EDA, Stats, SQL, Machine Learning, NLP, Deep Learning and Gen AI
+                  </p>
                 </div>
-                <p className="mt-3 text-gray-600 font-PTSerif">
-                  <span className="font-semibold">Duration:</span> {course.duration}
-                </p>
-                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                  <div className="flex items-start gap-x-3">
-                    <div className="shrink-0">
-                      <img
-                        className="size-10 rounded-full"
-                        src="/instructor.webp"
-                        alt="Instructor"
-                      />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-800 font-JosefinSans">Dr. Satyajit Pattnaik</h4>
-                      <p className="text-sm text-gray-600 font-PTSerif">Lead Data/AI Consultant</p>
-                      <p className="text-sm text-gray-600 font-PTSerif mt-1">
-                        13+ years experience in Data Analytics and Data Sciences across telecom, cyber security,
-                        insurance, e-commerce, and more.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-5">
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold font-JosefinSans">₹5999</span>
                   <a
-                    href={course.url}
-                    className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-cyan-600 text-white hover:bg-cyan-700 disabled:opacity-50 disabled:pointer-events-none"
+                    href={course.url || "#"}
+                    className="py-2 px-4 bg-cyan-500 rounded-md text-sm font-semibold hover:bg-cyan-600 transition"
                   >
-                    Enroll Now
-                    <svg
-                      className="shrink-0 size-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="m9 18 6-6-6-6" />
-                    </svg>
+                    Know More
                   </a>
                 </div>
               </div>
+              
+              {/* Right content - Instructor */}
+              <div className="w-1/3 flex flex-col items-center justify-center p-4">
+                <div className="relative w-24 h-24 mb-2">
+                  <div className="absolute inset-0 rounded-full border-4 border-blue-400 opacity-30"></div>
+                  <img
+                    className="w-full h-full rounded-full object-cover p-1"
+                    src="/instructor.webp"
+                    alt="Dr.Satyajit Pattnaik"
+                  />
+                  <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-full bg-white"></div>
+                  </div>
+                </div>
+                <h4 className="text-white text-center font-semibold font-JosefinSans mt-1">
+                  Dr.Satyajit Pattnaik
+                </h4>
+                <p className="text-gray-200 text-xs text-center font-PTSerif">
+                  Lead Data/AI Consultant
+                </p>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
       </div>
     </div>
   )

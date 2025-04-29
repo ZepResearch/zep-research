@@ -93,19 +93,19 @@ function EventPromotionMarketing() {
  
   <div className="mt-20 grid grid-cols-12 items-center gap-x-2 sm:gap-x-6 lg:gap-x-8">
     <div className="hidden md:block col-span-4 md:col-span-3">
-      <img className="rounded-xl" src="https://images.pexels.com/photos/3023317/pexels-photo-3023317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Features Image"/>
+      <img className="rounded-xl" src="/gallery/1.jpg" alt="Features Image"/>
     </div>
     
     <div className="col-span-4 md:col-span-3">
-      <img className="rounded-xl" src="https://images.pexels.com/photos/3171811/pexels-photo-3171811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Features Image"/>
+      <img className="rounded-xl" src="/gallery/2.jpg" alt="Features Image"/>
     </div>
     
     <div className="col-span-4 md:col-span-3">
-      <img className="rounded-xl" src="https://images.pexels.com/photos/3171820/pexels-photo-3171820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Features Image"/>
+      <img className="rounded-xl" src="/gallery/3.jpg" alt="Features Image"/>
     </div>
    
     <div className="col-span-4 md:col-span-3">
-      <img className="rounded-xl" src="https://images.pexels.com/photos/301987/pexels-photo-301987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Features Image"/>
+      <img className="rounded-xl" src="/gallery/4.jpg" alt="Features Image"/>
     </div>
   </div>
 
@@ -116,7 +116,7 @@ function EventPromotionMarketing() {
       </h2>
       
       <div>
-        <img className='h-96 mt-2 rounded-2xl' src="https://images.unsplash.com/photo-1694109010480-2f7aa9ceb339?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="imggif" />
+        <img className=' mt-2 rounded-2xl object-contain' src="/gallery/16.jpg"  alt="imggif" />
       </div>
       
     </div>
