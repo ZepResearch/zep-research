@@ -28,7 +28,7 @@ const features = [
     description:
       "Diverse platforms for showcasing research, advancing knowledge, and academic visibility.",
     icon: <IconNotebook />,
-    href: "/",
+    href: "/journals",
   },
   {
     title: "Peer Review Management",

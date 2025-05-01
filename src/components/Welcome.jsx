@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from 'lucide-react'
 import { FeatureCard } from "./ui/feature-card"
 import { Heading, Subheading } from '@/components/ui/text'
+import Link from "next/link"
 
 const features = [
   {
@@ -58,11 +59,15 @@ export default function Welcome() {
            Our mission is to drive academic growth and innovation through exceptional academic interactions.
           </p>
           <div className="flex flex-col gap-3 min-[400px]:flex-row">
+            <Link href="/About">
             <Button size="lg" className="bg-gradient-to-tr from-cyan-400 to-blue-500 " >
               Learn more
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
+            </Link>
+            <Link href="/conference">
             <Button variant="outline" className='py-3 border-blue-400 text-blue-500'>Explore Upcoming Conferences</Button>
+            </Link>
           </div>
         </motion.div>
 

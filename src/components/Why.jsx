@@ -1,7 +1,8 @@
-import { MoveRight, PhoneCall } from "lucide-react";
+import {  MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heading } from "./ui/text";
+import Link from "next/link";
 
 function Why() {
   return (
@@ -22,12 +23,16 @@ function Why() {
               </p>
             </div>
             <div className="flex flex-row gap-4">
+              <Link href="/contact" >
               <Button size="lg" className="gap-4 drop-shadow-sm" variant="outline">
                 Jump on a call <PhoneCall className="w-4 h-4" />
               </Button>
+              </Link>
+              <Link href="/signup">
               <Button size="lg" className="gap-4 bg-gradient-to-tr from-cyan-400 to-blue-500">
                 Sign up here <MoveRight className="w-4 h-4" />
               </Button>
+              </Link>
             </div>
           </div>
           <div className="grid grid-cols-1 gap-8 ">

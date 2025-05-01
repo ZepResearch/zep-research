@@ -6,9 +6,10 @@ import { ChevronDown, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Heading, Subheading } from "./ui/text";
+import Link from "next/link";
 
 const FaqSection = React.forwardRef(
-  ({ className, title, description, items, contactInfo, ...props }, ref) => {
+  ({ className, title, description, items, contactInfo ,contactPath, ...props }, ref) => {
     return (
       (<section
         ref={ref}
@@ -57,9 +58,11 @@ const FaqSection = React.forwardRef(
               <p className="text-xs text-muted-foreground mb-4">
                 {contactInfo.description}
               </p>
+              <Link href={contactInfo.contactPath}>
               <Button size="sm" onClick={contactInfo.onContact}>
                 {contactInfo.buttonText}
               </Button>
+              </Link>
             </motion.div>
           )}
         </div>

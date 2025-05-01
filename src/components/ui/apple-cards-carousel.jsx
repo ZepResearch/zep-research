@@ -272,6 +272,12 @@ export const CardX = ({ card, index, layout = false }) => {
             <p className="text-white text-sm md:text-base font-bold font-sans text-left drop-shadow-md">
               📅{card.date}
             </p>
+            <button
+              className="mt-12 py-2 px-3 rounded-2xl text-white text-sm md:text-base font-bold font-sans text-left drop-shadow-md bg-gradient-to-r from-indigo-400 to-cyan-400"
+             
+            >
+              Learn More
+              </button>
           </div>
         </div>
         <BlurImage
