@@ -192,7 +192,7 @@ export default function CourseContactForm() {
               </div>
               <div>
                 <h4 className="font-semibold text-lg">Phone</h4>
-                <p>+852 51359932</p>
+                <p>+91 78488 54815</p>
               </div>
             </div>
           
