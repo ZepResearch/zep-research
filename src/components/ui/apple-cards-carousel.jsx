@@ -247,46 +247,46 @@ export const CardX = ({ card, index, layout = false }) => {
       </AnimatePresence>
       
       <motion.a
-        layoutId={layout ? `card-${card.title}` : undefined}
-        href={card.websiteUrl}
-        className="rounded-3xl bg-gray-700 dark:bg-neutral-900 h-80 w-56 md:h-[40rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10"
-      >
-        <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
-        <div className="relative z-40 p-8">
-          {/* <motion.p
-            layoutId={layout ? `category-${card.category}` : undefined}
-            className="text-white text-sm md:text-base font-medium font-sans text-left drop-shadow-md"
-          >
-            📍 {card.location}
-          </motion.p> */}
-          <motion.p
-            layoutId={layout ? `title-${card.title}` : undefined}
-            className="text-white text-xl md:text-3xl font-semibold max-w-xs text-left [text-wrap:balance] font-sans mt-2 drop-shadow-2xl "
-          >
-            {card.title}
-          </motion.p>
-          <div className="flex flex-col justify-start items-start px-2 pt-3">
-            <p className="text-white text-sm md:text-base font-bold font-sans text-left drop-shadow-md">
-              📍 {card.location}
-            </p>
-            <p className="text-white text-sm md:text-base font-bold font-sans text-left drop-shadow-md">
-              📅{card.date}
-            </p>
-            <button
-              className="mt-12 py-2 px-3 rounded-2xl text-white text-sm md:text-base font-bold font-sans text-left drop-shadow-md bg-gradient-to-r from-indigo-400 to-cyan-400"
-             
-            >
-              Learn More
-              </button>
-          </div>
-        </div>
-        <BlurImage
-          src={card.img}
-          alt={card.title}
-          fill
-          className="object-cover absolute z-10 inset-0 bg-black opacity-70"
-        />
-      </motion.a>
+  layoutId={layout ? `card-${card.title}` : undefined}
+  href={card.websiteUrl}
+  className="rounded-3xl bg-gray-700 dark:bg-neutral-900 h-80 w-56 md:h-[40rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10"
+>
+  <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
+  
+  {/* Main content area - flex-1 to take available space */}
+  <div className="relative z-40 p-8 flex-1 flex flex-col">
+    <motion.p
+      layoutId={layout ? `title-${card.title}` : undefined}
+      className="text-white text-xl md:text-3xl font-semibold max-w-xs text-left [text-wrap:balance] font-sans mt-2 drop-shadow-2xl"
+    >
+      {card.title}
+    </motion.p>
+    
+    <div className="flex flex-col justify-start items-start px-2 pt-3">
+      <p className="text-white text-sm md:text-base font-bold font-sans text-left drop-shadow-md">
+        📍 {card.location}
+      </p>
+      <p className="text-white text-sm md:text-base font-bold font-sans text-left drop-shadow-md">
+        📅{card.date}
+      </p>
+    </div>
+    
+    {/* Spacer to push button to bottom */}
+    <div className="flex-1"></div>
+    
+    {/* Button positioned at bottom */}
+    <button className="mt-auto py-2 px-3 w-1/2 rounded-2xl text-white text-sm md:text-base font-bold font-sans text-left drop-shadow-md bg-gradient-to-r from-indigo-400 to-cyan-400">
+      Learn More
+    </button>
+  </div>
+  
+  <BlurImage
+    src={card.img}
+    alt={card.title}
+    fill
+    className="object-cover absolute z-10 inset-0 bg-black opacity-70"
+  />
+</motion.a>
     </>
   );
 };
