@@ -37,7 +37,7 @@ function Why() {
           </div>
           <div className="grid grid-cols-1 gap-8 ">
             <div className="bg-muted rounded-md aspect-video rounded-3x">
-          <img src="/gallery/21.jpg" 
+          <img src="/gallery/7.jpg" 
           className="rounded-3xl"
           alt="" />
 

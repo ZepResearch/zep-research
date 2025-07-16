@@ -14,7 +14,7 @@ function Hero() {
 
     <div className="mt-10 relative max-w-5xl mx-auto">
       <div className="relative w-full h-96 sm:h-[480px] rounded-xl overflow-hidden">
-  <img src='/gallery/14.jpg' alt="" className="w-full h-full object-cover" />
+  <img src='/gallery/11.jpg' alt="" className="w-full h-full object-cover" />
   <div className="absolute inset-0 bg-black opacity-50"></div>
 </div>
 

@@ -116,7 +116,7 @@ function EventPromotionMarketing() {
       </h2>
       
       <div>
-        <img className=' mt-2 rounded-2xl object-contain' src="/gallery/16.jpg"  alt="imggif" />
+        <img className=' mt-2 rounded-2xl object-contain' src="/gallery/11.jpg"  alt="imggif" />
       </div>
       
     </div>

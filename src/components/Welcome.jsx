@@ -12,17 +12,17 @@ const features = [
   {
     title: "Professional Conference Organizer",
     description: "Expertly planned events that foster academic collaboration, drive innovation and enhance professional development.",
-    imageUrl: "/gallery/21.jpg"
+    imageUrl: "/gallery/1.jpg"
   },
   {
     title: "Publishing Opportunities",
     description: "Access diverse academic journals and platforms, enabling scholars to showcase their research and advance knowledge.",
-    imageUrl: "/gallery/17.jpg"
+    imageUrl: "/gallery/18.jpg"
   },
   {
     title: "Global Network",
     description: "Connect with a worldwide community of researchers, academics, and professionals to collaborate and share insights.",
-    imageUrl: "/gallery/19.jpg"
+    imageUrl: "/gallery/10.jpg"
   }
 ]
 
