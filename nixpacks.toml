@@ -1,0 +1,10 @@
+[phases.setup]
+nixPkgs = [
+  "cairo",
+  "libjpeg",
+  "pango",
+  "giflib",
+  "pkg-config",
+  "gcc",
+  "gnumake"
+]

@@ -6,7 +6,7 @@ const nextConfig = {
   experimental: {
     serverActions: {},
   },
-  serverExternalPackages: ['canvas', 'pdfjs-dist'], 
+  serverComponentsExternalPackages: ['canvas','pdf-parse']
 };
 
 export default nextConfig;
