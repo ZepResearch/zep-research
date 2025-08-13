@@ -1,7 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { isUserAuthenticated } from "@/lib/pocketbase"
 import CoOrganizationLogos from "@/components/Co-OrganiztionLogo"
 import Hero from "@/components/Hero"
 import Welcome from "@/components/Welcome"
@@ -11,6 +9,7 @@ import { Why } from "@/components/Why"
 import { Testimonials } from "@/components/testimonials"
 import { FaqSection } from "@/components/faq"
 import { CTACarousel } from "@/components/Cta-carousel"
+import { FlagAnimation } from "@/components/Flaganimation"
 
 const DEMO_FAQS = [
   {
@@ -75,42 +74,11 @@ const slides = [
 ]
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const checkAuth = () => {
-      const authenticated = isUserAuthenticated()
-      setIsLoggedIn(authenticated)
-      setIsLoading(false)
-    }
-
-    // Check auth on initial load
-    checkAuth()
-
-    // Listen for auth changes
-    window.addEventListener("authStateChanged", checkAuth)
-
-    return () => {
-      window.removeEventListener("authStateChanged", checkAuth)
-    }
-  }, [])
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    )
-  }
-
-  // If user is logged in, show the research feed
-
-
-  // Otherwise show the landing page
   return (
     <main>
       <Hero />
+      <FlagAnimation/>
       <CoOrganizationLogos />
       <Welcome />
       <FeaturesXX />
