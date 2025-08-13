@@ -11,7 +11,6 @@ const nextConfig = {
   experimental: {
     serverActions: {}, 
   },
-  serverExternalPackages: ['pdf-parse'], 
 };
 
 export default nextConfig;
