@@ -115,12 +115,12 @@ const demoData = {
           icon: <IconPodium className="size-5 shrink-0" />,
           url: "/conference",
         },
-        {
-          title: "ChatBot",
-          description: "Interact with our AI-powered chatbot for assistance and support.",
-          icon: <FaRobot className="size-5 shrink-0" />,
-          url: "/ResearchChatbot",
-        },
+        // {
+        //   title: "ChatBot",
+        //   description: "Interact with our AI-powered chatbot for assistance and support.",
+        //   icon: <FaRobot className="size-5 shrink-0" />,
+        //   url: "/ResearchChatbot",
+        // },
       ],
     },
     {

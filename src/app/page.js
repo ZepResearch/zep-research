@@ -55,14 +55,14 @@ const DEMO_FAQS = [
 ]
 
 const slides = [
-  {
-    id: 1,
-    image: "/Cta/chatbot.webp",
-    title: "AI Research Chatbot – Chat with Your PDFs",
-    description:
-      "Upload research papers and chat with your documents. Get instant insights and summaries with AI-powered assistance!",
-    href: "/ResearchChatbot",
-  },
+  // {
+  //   id: 1,
+  //   image: "/Cta/chatbot.webp",
+  //   title: "AI Research Chatbot – Chat with Your PDFs",
+  //   description:
+  //     "Upload research papers and chat with your documents. Get instant insights and summaries with AI-powered assistance!",
+  //   href: "/ResearchChatbot",
+  // },
   {
     id: 2,
     image: "/Cta/course.webp",

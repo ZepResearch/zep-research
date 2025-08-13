@@ -216,13 +216,9 @@ const Navbar1 = ({
   }
 
   return (
-    <section className="py-4  top-0 left-0 right-0 z-30 shadow-lg backdrop-blur-sm bg-white/80 border-b border-orange-100/50 relative overflow-hidden">
+    <section className="py-4  top-0 left-0 right-0 z-50 shadow-lg backdrop-blur-sm bg-white/80 border-b border-orange-100/50 relative overflow-hidden">
       {/* Indian flag inspired blur background overlay */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-r from-orange-400/30 to-orange-300/30 blur-2xl"></div>
-        <div className="absolute top-1/3 left-0 w-full h-1/3 bg-gradient-to-r from-white/40 to-gray-100/40 blur-2xl"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-r from-green-400/30 to-green-500/30 blur-2xl"></div>
-      </div>
+     
 
       {/* Subtle moving blur elements */}
       <div className="absolute inset-0 opacity-10">
@@ -244,7 +240,7 @@ const Navbar1 = ({
         />
       </div>
 
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto relative z-50">
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             <a href={"/"} className="flex items-center gap-2 font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-slate-300 to-green-600 ">
