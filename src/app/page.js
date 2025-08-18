@@ -9,7 +9,6 @@ import { Why } from "@/components/Why"
 import { Testimonials } from "@/components/testimonials"
 import { FaqSection } from "@/components/faq"
 import { CTACarousel } from "@/components/Cta-carousel"
-import { FlagAnimation } from "@/components/Flaganimation"
 
 const DEMO_FAQS = [
   {
@@ -78,7 +77,6 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <FlagAnimation/>
       <CoOrganizationLogos />
       <Welcome />
       <FeaturesXX />
