@@ -8,6 +8,73 @@ import PaperSubmissionForm from "./components/Form"
 
 export const dynamic = "force-dynamic"
 
+// Generate metadata for the page
+export async function generateMetadata({ params }) {
+  const journal = await getJournalById(params.id)
+
+  if (!journal) {
+    return {
+      title: "Journal Not Found",
+    }
+  }
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://yourdomain.com"
+  const canonicalUrl = `${baseUrl}/journals/${params.id}`
+  
+  const imageUrl = journal.imgs
+    ? `https://zep-research.pockethost.io/api/files/Journals/${journal.id}/${journal.imgs}`
+    : journal.img || `${baseUrl}/og-image.jpg`
+
+  return {
+    title: journal.title || "Untitled Journal",
+    description: `Submit your research paper to ${journal.title || "our journal"}${journal.issncode ? ` (ISSN: ${journal.issncode})` : ""}. Review our submission guidelines and upload your manuscript.`,
+    keywords: [
+      journal.title,
+      "research journal",
+      "paper submission",
+      "academic publishing",
+      journal.issncode,
+    ].filter(Boolean),
+    authors: [{ name: "Zep Research" }],
+    openGraph: {
+      title: journal.title || "Untitled Journal",
+      description: `Submit your research paper to ${journal.title || "our journal"}`,
+      url: canonicalUrl,
+      siteName: "Zep Research",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: journal.title || "Journal cover",
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: journal.title || "Untitled Journal",
+      description: `Submit your research paper to ${journal.title || "our journal"}`,
+      images: [imageUrl],
+    },
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  }
+}
+
 export default async function JournalDetailPage({ params }) {
   const journal = await getJournalById(params.id)
 

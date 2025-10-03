@@ -239,9 +239,7 @@ export default function LoginForm() {
                   Remember me
                 </Label>
               </div>
-              <a className="text-sm underline hover:no-underline" href="/forgot-password">
-                Forgot password?
-              </a>
+          
             </div>
             <Button type="submit" className="w-full bg-gradient-to-r from-cyan-400 to-blue-500" disabled={isLoading}>
               {isLoading ? "Loging in..." : "Login in"}

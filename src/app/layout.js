@@ -25,7 +25,11 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Zep Research | International Journal Publication and Conference | Data and AI Courses",
   description: "Zep Research is a platform for researchers, scientists, and academics to collaborate, share knowledge, and learn from each other.",
+  alternates: {
+    canonical: "https://www.zepresearch.com/", // replace with your actual domain
+  },
 };
+
 const demoData = {
   logo: {
     url: "https://www.zepresearch.com",

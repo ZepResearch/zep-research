@@ -4,6 +4,14 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { getJournals } from "@/lib/pocketbase"
 
 export const dynamic = "force-dynamic"
+export const metadata = {
+  title: "Journals | Zep Research",
+  description: "Browse academic journals on Zep Research",
+  metadataBase: new URL("https://zepresearch.com"),
+  alternates: {
+    canonical: "https://zepresearch.com/journals",
+  },
+};
 
 export default async function JournalsPage() {
   const journals = await getJournals()
