@@ -9,7 +9,7 @@ export const metadata = {
   description: "Leading platform for international journal publications, academic conferences, and advanced courses in Data Science and AI.",
   keywords: "research journal, international publication, academic conference, data science courses, Blogs",
    alternates: {
-    canonical: "https://www.zepresearch.com/blog", // replace with your actual domain
+    canonical: "https://zepresearch.com/blog", // replace with your actual domain
   },
   openGraph: {
     title: "Zep Research | International Journal Publication",

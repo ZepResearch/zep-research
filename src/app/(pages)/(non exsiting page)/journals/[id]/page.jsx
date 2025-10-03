@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
     }
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://yourdomain.com"
+  const baseUrl = "https://zepresearch.com"
   const canonicalUrl = `${baseUrl}/journals/${params.id}`
   
   const imageUrl = journal.imgs
