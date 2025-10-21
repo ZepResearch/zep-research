@@ -13,7 +13,7 @@ const FaqSection = React.forwardRef(
       <section
         ref={ref}
         className={cn(
-          "py-4 w-full max-w-full overflow-hidden bg-gradient-to-b from-transparent via-muted/50 to-transparent",
+          "py-12 w-full max-w-full overflow-hidden bg-gradient-to-b from-transparent via-muted/50 to-transparent",
           className,
         )}
         {...props}
@@ -26,7 +26,7 @@ const FaqSection = React.forwardRef(
             transition={{ duration: 0.5 }}
             className="w-full max-w-full text-center mb-8 sm:mb-12"
           >
-            <Heading className="text-xl sm:text-2xl lg:text-3xl px-2">{title}</Heading>
+            <Heading className="text-xl sm:text-2xl lg:text-6xl px-2">{title}</Heading>
 
             {description && (
               <Subheading className="text-sm sm:text-base text-muted-foreground mt-4 px-4">{description}</Subheading>
@@ -54,7 +54,7 @@ const FaqSection = React.forwardRef(
               <p className="text-sm font-medium text-foreground mb-1">{contactInfo.title}</p>
               <p className="text-xs text-muted-foreground mb-4 px-2">{contactInfo.description}</p>
               <Link href={contactInfo.contactPath}>
-                <Button size="sm" onClick={contactInfo.onContact}>
+                <Button size="sm" onClick={contactInfo.onContact} className="bg-gradient-to-tr from-cyan-400 to-blue-500 text-white">
                   {contactInfo.buttonText}
                 </Button>
               </Link>

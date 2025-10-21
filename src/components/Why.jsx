@@ -7,7 +7,7 @@ import Link from "next/link";
 function Why() {
   return (
     (<div className="w-full py-12 lg:py-20">
-      <div className="container mx-auto max-w-7xl">
+      <div className=" mx-auto max-w-screen-2xl px-4 md:px-8">
         <div className="grid grid-cols-1 gap-8 items-center md:grid-cols-2">
           <div className="flex gap-4 flex-col">
             <div>

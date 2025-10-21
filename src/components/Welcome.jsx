@@ -38,7 +38,7 @@ export default function Welcome() {
 
   return (
     <div className="min-h-full  bg-white overflow-hidden my-8 ">
-      <div className="container px-4 md:px-6 flex flex-col lg:flex-row items-center justify-between gap-8 py-12 mx-auto  max-w-screen-2xl ">
+      <div className="px-4 md:px-6 flex flex-col lg:flex-row items-center justify-between gap-8 py-12 mx-auto  max-w-screen-2xl ">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}

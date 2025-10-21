@@ -9,6 +9,7 @@ import { Why } from "@/components/Why"
 import { Testimonials } from "@/components/testimonials"
 import { FaqSection } from "@/components/faq"
 import { CTACarousel } from "@/components/Cta-carousel"
+import ConferenceVideoSection from "@/components/VideoSection"
 
 const DEMO_FAQS = [
   {
@@ -84,6 +85,7 @@ export default function Home() {
       <UpComingConf />
       <Why />
       <Testimonials />
+      <ConferenceVideoSection/>
       <FaqSection
         title="Frequently Asked Questions"
         description="Everything you need to know about our platform"
