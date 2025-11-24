@@ -53,9 +53,9 @@ export function ConferenceCard({ conference }) {
             <span className="text-xs font-medium text-slate-700 dark:text-slate-300">{conference.date}</span>
           </div>
           {conference.cpd_accredited && conference.cpd_hours && (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 border-2 px-3 rounded-3xl border-blue-700">
               <Clock className="h-3 w-3 text-blue-600 dark:text-blue-400 flex-shrink-0" />
-              <span className="text-xs font-bold text-blue-600 dark:text-blue-400">{conference.cpd_hours}h</span>
+              <span className="text-base font-bold text-blue-600 dark:text-blue-400">{conference.cpd_hours} hr</span>
             </div>
           )}
         </div>
