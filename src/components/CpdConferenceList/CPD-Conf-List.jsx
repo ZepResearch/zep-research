@@ -6,6 +6,7 @@ import { ConferenceCard } from "./conference-card"
 import { AlertCircle, Loader2 } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { getPocketBaseClient } from "@/lib/pocketbase"
+import Image from "next/image"
 
 export function ConferenceListSection() {
   const [conferences, setConferences] = useState([])
@@ -85,14 +86,28 @@ export function ConferenceListSection() {
       <div className=" px-4 sm:px-6 lg:px-8">
         <div className="mb-8 border-b-2 border-blue-200 dark:border-blue-900 pb-6">
           <div className="flex items-start gap-3 mb-3">
-            <div className="w-1 h-8 bg-gradient-to-b from-blue-600 to-blue-800 rounded-full"></div>
             <div>
-              <h1 className="text-2xl md:text-4xl font-medium bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent  mb-1">
+             
+              <div className="flex flex-col md:flex-row justify-center items-center">
+                <div>
+ <Image
+                src="/cpd2.png"
+                alt="CPD"
+                width={150}
+                height={200}
+                className="mb-2"
+              />
+                </div>
+                <div>
+  <h1 className="text-2xl md:text-4xl font-medium bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent  mb-1">
                 List of Upcoming Scopus International Conferences
               </h1>
               <p className="text-sm md:text-2xl text-slate-600 dark:text-slate-400 font-bold">
-                CPD Accredited IFERP Conference List in CPD Directory
+                CPD Accredited  Conference List in CPD Directory
               </p>
+                </div>
+              </div>
+            
             </div>
           </div>
         </div>

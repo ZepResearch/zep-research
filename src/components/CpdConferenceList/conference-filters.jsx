@@ -19,7 +19,6 @@ const COUNTRIES = [
   "Singapore",
   "Dubai",
   "Thailand",
-  "Online",
 ]
 
 const TOPICS = [
@@ -28,6 +27,7 @@ const TOPICS = [
   "Medicine",
   "Law",
   "Business",
+  "Science",
   "Technology",
   "Education",
   "Finance",
