@@ -10,6 +10,7 @@ import { Testimonials } from "@/components/testimonials"
 import { FaqSection } from "@/components/faq"
 import { CTACarousel } from "@/components/Cta-carousel"
 import ConferenceVideoSection from "@/components/VideoSection"
+import CPDConfList, { ConferenceListSection } from "@/components/CpdConferenceList/CPD-Conf-List"
 
 const DEMO_FAQS = [
   {
@@ -80,6 +81,7 @@ export default function Home() {
       <Hero />
       <CoOrganizationLogos />
       <Welcome />
+      <ConferenceListSection/> 
       <FeaturesXX />
       <CTACarousel slides={slides} showControls={true} />
       <UpComingConf />
