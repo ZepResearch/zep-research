@@ -192,7 +192,7 @@ export default async function JournalsPage() {
                       <span>Sustainability & Entrepreneurship</span>
                     </div>
                   </div>
-                  
+                  <Link href="https://journal.zepresearch.com/fmsi" className="block">
                   <button className="w-full group/btn relative px-8 py-4 bg-gradient-to-r from-blue-600 to-sky-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-sky-600 to-blue-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                     <span className="relative flex items-center justify-center gap-2">
@@ -200,6 +200,7 @@ export default async function JournalsPage() {
                       Submit Your Paper
                     </span>
                   </button>
+                  </Link>
                   
                   <div className="flex items-center justify-center gap-2 text-slate-500 text-xs">
                     <Lightbulb className="w-4 h-4" />
