@@ -44,7 +44,7 @@
     "html-react-parser": "^5.2.2",
     "lucide-react": "^0.469.0",
     "motion": "^12.5.0",
-    "next": "15.1.3",
+    "next": "15.1.9",
     "next-rate-limit": "^0.0.3",
     "next-seo": "^6.6.0",
     "next-sitemap": "^4.2.3",
