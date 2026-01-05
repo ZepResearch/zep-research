@@ -32,8 +32,8 @@ const journalData = [
     color: "from-pink-300 via-teal-purple-400 to-pink-900",
     accentColor: "white",
     features: [
-      { icon: Users, title: "Community Health", subtitle: "Health Promotion", color: "pink" },
-      { icon: Lightbulb, title: "Digital Health", subtitle: "Healthcare Innovation", color: "purple" }
+      { icon: Users, title: "Community Health", subtitle: "Health Promotion", color: "slate" },
+      { icon: Lightbulb, title: "Digital Health", subtitle: "Healthcare Innovation", color: "slate" }
     ],
     topics: [
       "Chronic Disease Prevention & Management",
