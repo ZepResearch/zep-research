@@ -82,9 +82,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium">Address</h3>
                     <p className="text-muted-foreground">
-
-                    DCB-330,
-3rd Floor, DLF Cyber City, Patia, Bhubaneswar, ODISHA - 751024 India
+Flat No: 202
+Plot.no.2028/2044, Sai Aarti Enclave, Behind Tanishq Chandasekharpur, Bhubaneshwar, India
                     </p>
                   </div>
                 </div>

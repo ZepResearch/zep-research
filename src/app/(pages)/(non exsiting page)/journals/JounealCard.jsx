@@ -15,8 +15,8 @@ const journalData = [
     color: "from-blue-800 via-blue-800 to-gray-900",
     accentColor: "blue",
     features: [
-      { icon: TrendingUp, title: "Strategy & Innovation", subtitle: "Business & Digital", color: "blue" },
-      { icon: Users, title: "People & Society", subtitle: "HR & Policy", color: "sky" }
+      { icon: TrendingUp, title: "Strategy & Innovation", subtitle: "Business & Digital", color: "slate" },
+      { icon: Users, title: "People & Society", subtitle: "HR & Policy", color: "slate" }
     ],
     topics: [
       "Business Strategy & Marketing",

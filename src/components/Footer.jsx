@@ -151,7 +151,8 @@ export default function Footer() {
               <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
                 <div className="flex items-start">
                   <FaMapMarkerAlt className="mt-1 mr-1 w-12 text-cyan-600 dark:text-cyan-400" />
-                  <span>DCB-330, 3rd Floor, DLF Cyber City, Patia, Bhubaneswar, ODISHA - 751024 India</span>
+                  <span>Flat No: 202
+Plot.no.2028/2044, Sai Aarti Enclave, Behind Tanishq Chandasekharpur, Bhubaneshwar, India</span>
                 </div>
                 <div className="flex items-center">
                   <FaPhone className="mr-2 text-cyan-600 dark:text-cyan-400" />
