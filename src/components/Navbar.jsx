@@ -1,9 +1,6 @@
-
-
 "use client"
 
-import { useState, useEffect } from "react"
-import { Book, LogOut, Menu, Sunset, Trees, User, Zap, Settings, MessageSquare } from "lucide-react"
+import { Book, Menu, Sunset, Trees, Zap } from "lucide-react"
 import logox from "../assets/logo.svg"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
@@ -16,16 +13,8 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image from "next/image"
-import { getPocketBaseClient, isUserAuthenticated, getCurrentUser } from "@/lib/pocketbase" // Import helper functions
+import Link from "next/link"
 
 const Navbar1 = ({
   logo = {
@@ -115,108 +104,10 @@ const Navbar1 = ({
   ],
 
   auth = {
-    login: { text: "Log in", url: "/login" },
-    signup: { text: "Sign up", url: "/signup" },
+    login: { text: "Log in", url: "https://publication.zepresearch.com/login" },
+    signup: { text: "Sign up", url: "https://publication.zepresearch.com/signup" },
   },
 }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [userData, setUserData] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  // Function to check and update auth state
-  const checkAuthState = () => {
-    const authenticated = isUserAuthenticated()
-    // console.log("Auth check:", authenticated, "Current user:", getCurrentUser())
-    setIsLoggedIn(authenticated)
-
-    if (authenticated) {
-      const user = getCurrentUser()
-      // console.log("User data loaded:", user)
-      setUserData(user)
-    } else {
-      setUserData(null)
-    }
-
-    setIsLoading(false)
-  }
-
-  useEffect(() => {
-    // Add a small delay for the initial check to ensure client-side code is fully loaded
-    const initialCheckTimeout = setTimeout(() => {
-      checkAuthState()
-    }, 100)
-
-    // Remove the interval that's causing the loop
-    // const intervalId = setInterval(checkAuthState, 1000);
-
-    const handleStorageChange = (event) => {
-      if (event.key === "pocketbase_auth") {
-        checkAuthState()
-      }
-    }
-
-    window.addEventListener("storage", handleStorageChange)
-
-    const pb = getPocketBaseClient()
-    const unsubscribe = pb.authStore.onChange(() => {
-      checkAuthState()
-    })
-
-    const handleAuthEvent = () => {
-      checkAuthState()
-    }
-
-    window.addEventListener("authStateChanged", handleAuthEvent)
-
-    return () => {
-      clearTimeout(initialCheckTimeout)
-      // clearInterval(intervalId) // Remove this line
-      window.removeEventListener("storage", handleStorageChange)
-      window.removeEventListener("authStateChanged", handleAuthEvent)
-      unsubscribe()
-    }
-  }, [])
-
-  const handleLogout = async () => {
-    const pb = getPocketBaseClient()
-    pb.authStore.clear()
-
-    // Also clear from localStorage
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("pocketbase_auth")
-    }
-
-    setIsLoggedIn(false)
-    setUserData(null)
-
-    // Dispatch custom event to notify other components
-    window.dispatchEvent(new Event("authStateChanged"))
-
-    // Use client-side navigation instead of full page reload
-    window.location.href = "/"
-  }
-
-  // Get user initials for avatar fallback
-  const getUserInitials = () => {
-    if (!userData || !userData.name) return "U"
-
-    const nameParts = userData.name.split(" ")
-    if (nameParts.length >= 2) {
-      return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase()
-    }
-    return userData.name[0].toUpperCase()
-  }
-
-  // Use email for name if name is not available
-  const getDisplayName = () => {
-    if (userData?.name) return userData.name
-    if (userData?.email) {
-      // Use the part before @ as name
-      return userData.email.split("@")[0]
-    }
-    return "User"
-  }
-
   return (
     <section className="py-4 fixed top-0 left-0 right-0 z-30 shadow-md bg-white">
       <div className="container mx-auto">
@@ -232,61 +123,16 @@ const Navbar1 = ({
             </div>
           </div>
           <div className="flex gap-2">
-            {isLoading ? (
-              // Show a skeleton loader while loading
-              <div className="w-[160px] h-9 bg-gray-100 animate-pulse rounded-md"></div>
-            ) : isLoggedIn ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src={
-                          userData?.avatar
-                            ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${userData.collectionId}/${userData.id}/${userData.avatar}`
-                            : ""
-                        }
-                        alt="Profile"
-                      />
-                      <AvatarFallback>{getUserInitials()}</AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <div className="flex flex-col space-y-1 p-2">
-                    <p className="text-sm font-medium leading-none">{getDisplayName()}</p>
-                    <p className="text-xs leading-none text-muted-foreground">{userData?.email || ""}</p>
-                  </div>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <a href="/profile" className="cursor-pointer flex w-full items-center">
-                      <User className="mr-2 h-4 w-4" />
-                      <span>Profile</span>
-                    </a>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <a href="/settings" className="cursor-pointer flex w-full items-center">
-                      <Settings className="mr-2 h-4 w-4" />
-                      <span>Settings</span>
-                    </a>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <>
-                <Button asChild variant="outline" size="sm" className="hover:border-cyan-400 px-4">
-                  <a href={auth.login.url}>{auth.login.text}</a>
-                </Button>
-                <Button asChild size="sm" className="bg-gradient-to-tr from-cyan-400 to-blue-500 px-8">
-                  <a href={auth.signup.url}>{auth.signup.text}</a>
-                </Button>
-              </>
-            )}
+            <Link href={"https://publication.zepresearch.com/login"}>
+            <Button asChild variant="outline" size="sm" className="hover:border-cyan-400 px-4">
+              <a>{auth.login.text}</a>
+            </Button>
+            </Link>
+             <Link href={"https://publication.zepresearch.com/signup"}>
+            <Button asChild size="sm" className="bg-gradient-to-tr from-cyan-400 to-blue-500 px-8">
+              <a >{auth.signup.text}</a>
+            </Button>
+            </Link>
           </div>
         </nav>
         <div className="block lg:hidden">
@@ -312,7 +158,7 @@ const Navbar1 = ({
                   <Accordion type="single" collapsible className="flex w-full flex-col gap-4">
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
-                  <div className="border-t py-4">
+                  {/* <div className="border-t py-4">
                     <div className="grid grid-cols-2 justify-start">
                       {mobileExtraLinks.map((link, idx) => (
                         <a
@@ -324,53 +170,18 @@ const Navbar1 = ({
                         </a>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    {isLoading ? (
-                      // Show a skeleton loader while loading
-                      <div className="w-full h-20 bg-gray-100 animate-pulse rounded-md"></div>
-                    ) : isLoggedIn ? (
-                      <>
-                        <div className="flex items-center gap-2 p-2">
-                          <Avatar className="h-8 w-8">
-                            <AvatarImage
-                              src={
-                                userData?.avatar
-                                  ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${userData.collectionId}/${userData.id}/${userData.avatar}`
-                                  : ""
-                              }
-                              alt="Profile"
-                            />
-                            <AvatarFallback>{getUserInitials()}</AvatarFallback>
-                          </Avatar>
-                          <div className="flex flex-col">
-                            <p className="text-sm font-medium">{getDisplayName()}</p>
-                            <p className="text-xs text-muted-foreground">{userData?.email || ""}</p>
-                          </div>
-                        </div>
-                        <a href="/profile" className="flex items-center gap-2 rounded-md p-2 hover:bg-muted">
-                          <User className="h-4 w-4" />
-                          <span>Profile</span>
-                        </a>
-                        <a href="/settings" className="flex items-center gap-2 rounded-md p-2 hover:bg-muted">
-                          <Settings className="h-4 w-4" />
-                          <span>Settings</span>
-                        </a>
-                        <Button variant="destructive" size="sm" className="mt-2" onClick={handleLogout}>
-                          <LogOut className="mr-2 h-4 w-4" />
-                          Log out
-                        </Button>
-                      </>
-                    ) : (
-                      <>
-                        <Button asChild variant="outline" size="sm" className="hover:border-cyan-400 px-4">
-                          <a href={auth.login.url}>{auth.login.text}</a>
-                        </Button>
-                        <Button asChild size="sm" className="bg-gradient-to-tr from-cyan-400 to-blue-500 px-8">
-                          <a href={auth.signup.url}>{auth.signup.text}</a>
-                        </Button>
-                      </>
-                    )}
+                  </div> */}
+                  <div className="flex flex-col  justify-center items-center gap-3">
+                        <Link href={"https://publication.zepresearch.com/login"}>
+                    <Button  variant="outline" size="sm" className="hover:border-cyan-400 px-4">
+                    {auth.login.text}
+                    </Button>
+                    </Link>
+                     <Link href={"https://publication.zepresearch.com/signup"}>
+                    <Button  size="sm" className="bg-gradient-to-tr from-cyan-400 to-blue-500 px-8">
+                     {auth.signup.text}
+                    </Button>
+                     </Link>
                   </div>
 
                   {/* WhatsApp button for mobile */}
@@ -414,8 +225,6 @@ const Navbar1 = ({
   )
 }
 
-// Keep these unchanged
-// Keep these unchanged
 const renderMenuItem = (item) => {
   if (item.items) {
     return (
