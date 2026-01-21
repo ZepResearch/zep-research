@@ -126,7 +126,7 @@ export default function TermsAndConditions() {
 
           <div className="mt-8 text-center">
             <h2 className="text-xl font-semibold mb-4">Contact Us</h2>
-            <p className="text-muted-foreground">Phone: +91 7358737843</p>
+            <p className="text-muted-foreground">Phone: +91 78488 54815</p>
             <p className="text-muted-foreground">Email: info@zepresearch.com</p>
           </div>
 

@@ -113,7 +113,7 @@ export default function Footer() {
       icon: <FaInstagram />,
       href: "https://www.instagram.com/zepresearch/",
     },
-    { icon: <FaTwitter />, href: "https://x.com/Zepresearch" },
+  
     {
       icon: <FaLinkedinIn />,
       href: "https://www.linkedin.com/company/zep-research/",

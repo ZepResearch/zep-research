@@ -1,13 +1,16 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
 import PocketBase from "pocketbase"
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 
-// Initialize PocketBase client
+// Initialize PocketBase client outside component to avoid recreating
 const pb = new PocketBase("https://zep-research.pockethost.io")
+
+// Disable auto-cancellation
+pb.autoCancellation(false)
 
 const ImageGallery = () => {
   const [images, setImages] = useState([])
@@ -17,59 +20,125 @@ const ImageGallery = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [selectedImage, setSelectedImage] = useState(null)
+  
+  // Use ref to track mounted state and prevent state updates after unmount
+  const isMounted = useRef(true)
+  const abortControllerRef = useRef(null)
 
   const itemsPerPage = 12
 
-  // Function to construct PocketBase image URL
-  const getImageUrl = (record, filename = "") => {
-    const imageFile = filename || record.image
-    return `${pb.baseUrl}/api/files/${record.collectionId}/${record.id}/${record.field}`
-  }
+  // Get the correct file field name from record
+  const getFileField = useCallback((record) => {
+    // Common field names for images in PocketBase
+    const possibleFields = ['image', 'file', 'photo', 'picture', 'media', 'avatar']
+    
+    for (const field of possibleFields) {
+      if (record[field]) {
+        return record[field]
+      }
+    }
+    
+    // If no common field found, try to find any field that looks like a filename
+    for (const key in record) {
+      if (typeof record[key] === 'string' && 
+          (record[key].includes('.jpg') || 
+           record[key].includes('.jpeg') || 
+           record[key].includes('.png') || 
+           record[key].includes('.gif') || 
+           record[key].includes('.webp'))) {
+        return record[key]
+      }
+    }
+    
+    return null
+  }, [])
 
-  // Function to get thumbnail URL (if you have different sizes)
-  const getThumbnailUrl = (record) => {
-    return `${getImageUrl(record)}?thumb=400x400`
-  }
+  // Optimized image URL construction
+  const getImageUrl = useCallback((record) => {
+    if (!record || !record.collectionId || !record.id) return null
+    
+    const fileField = getFileField(record)
+    if (!fileField) return null
+    
+    return `${pb.baseUrl}/api/files/${record.collectionId}/${record.id}/${fileField}`
+  }, [getFileField])
 
-  // Fetch images from PocketBase
-  const fetchImages = async (page) => {
+  // Get thumbnail URL with optimization
+  const getThumbnailUrl = useCallback((record) => {
+    const baseUrl = getImageUrl(record)
+    return baseUrl ? `${baseUrl}?thumb=400x400` : null
+  }, [getImageUrl])
+
+  // Optimized fetch with proper cancellation handling
+  const fetchImages = useCallback(async (page) => {
+    // Cancel previous request if it exists
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+
+    // Create new abort controller for this request
+    abortControllerRef.current = new AbortController()
+
     try {
       setLoading(true)
       setError(null)
 
       const resultList = await pb.collection("gallery").getList(page, itemsPerPage, {
-        sort: "created", // Sort by newest first
-        // You can add filters here if needed
-        // filter: 'status = "published"',
+        sort: "-created", // Sort by newest first (use - for descending)
+        requestKey: `gallery_page_${page}`, // Unique key for this request
+        $cancelKey: `gallery_page_${page}`, // Alternative cancellation key
       })
 
-      setImages(resultList.items )
-      setTotalPages(resultList.totalPages)
-      setTotalItems(resultList.totalItems)
+      console.log("Fetched records:", resultList.items) // Debug log to see the data structure
+
+      // Only update state if component is still mounted
+      if (isMounted.current) {
+        setImages(resultList.items)
+        setTotalPages(resultList.totalPages)
+        setTotalItems(resultList.totalItems)
+      }
     } catch (err) {
+      // Ignore cancellation errors
+      if (err.isAbort || err.name === 'AbortError') {
+        return
+      }
+      
       console.error("Error fetching images:", err)
-      setError("Failed to load images. Please try again.")
+      if (isMounted.current) {
+        setError("Failed to load images. Please try again.")
+      }
     } finally {
-      setLoading(false)
+      if (isMounted.current) {
+        setLoading(false)
+      }
     }
-  }
+  }, [itemsPerPage])
 
   // Load images on component mount and page change
   useEffect(() => {
+    isMounted.current = true
     fetchImages(currentPage)
-  }, [currentPage])
 
-  // Handle page navigation
-  const goToPage = (page) => {
-    if (page >= 1 && page <= totalPages) {
+    return () => {
+      isMounted.current = false
+      // Cancel any pending requests on unmount
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+    }
+  }, [currentPage, fetchImages])
+
+  // Handle page navigation with optimization
+  const goToPage = useCallback((page) => {
+    if (page >= 1 && page <= totalPages && page !== currentPage) {
       setCurrentPage(page)
       // Scroll to top when changing pages
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
-  }
+  }, [currentPage, totalPages])
 
-  // Generate page numbers for pagination
-  const getPageNumbers = () => {
+  // Memoized page numbers generation
+  const pageNumbers = useCallback(() => {
     const pages = []
     const maxVisiblePages = 5
 
@@ -85,7 +154,7 @@ const ImageGallery = () => {
     }
 
     return pages
-  }
+  }, [currentPage, totalPages])()
 
   if (error) {
     return (
@@ -103,10 +172,12 @@ const ImageGallery = () => {
       <h1 className="text-3xl font-bold mb-6 text-center">Image Gallery</h1>
 
       {/* Gallery Stats */}
-      <div className="text-center mb-6 text-sm text-muted-foreground">
-        Showing {(currentPage - 1) * itemsPerPage + 1} - {Math.min(currentPage * itemsPerPage, totalItems)} of{" "}
-        {totalItems} images
-      </div>
+      {totalItems > 0 && (
+        <div className="text-center mb-6 text-sm text-muted-foreground">
+          Showing {(currentPage - 1) * itemsPerPage + 1} -{" "}
+          {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} images
+        </div>
+      )}
 
       {/* Loading State */}
       {loading ? (
@@ -117,60 +188,81 @@ const ImageGallery = () => {
       ) : (
         <>
           {/* Image Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-            {images.map((record) => (
-              <Dialog key={record.id}>
-                <DialogTrigger asChild>
-                  <div
-                    className="relative aspect-square cursor-pointer hover:opacity-80 transition-opacity group"
-                    onClick={() => setSelectedImage(record)}
-                  >
-                    <Image
-                      src={getThumbnailUrl(record) || "/placeholder.svg"}
-                      alt={record.title || `Gallery image ${record.id}`}
-                      fill
-                      className="object-cover rounded-lg"
-                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                      loading="lazy"
-                      onError={(e) => {
-                        // Fallback to original image if thumbnail fails
-                        const target = e.target 
-                        target.src = getImageUrl(record)
-                      }}
-                    />
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 rounded-lg" />
-                  </div>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl">
-                  <DialogTitle className="sr-only">{record.title || `Gallery image ${record.id}`}</DialogTitle>
-                  <div className="relative">
-                    <Image
-                      src={getImageUrl(record) || "/placeholder.svg"}
-                      alt={record.title || `Enlarged image ${record.id}`}
-                      width={800}
-                      height={600}
-                      className="w-full h-auto object-contain max-h-[80vh]"
-                      priority
-                    />
-                    {/* Image info */}
-                    {(record.title || record.description) && (
-                      <div className="mt-4 text-center">
-                        {record.title && <h3 className="text-lg font-semibold">{record.title}</h3>}
-                        {record.description && (
-                          <p className="text-sm text-muted-foreground mt-1">{record.description}</p>
+          {images.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+              {images.map((record) => {
+                const thumbnailUrl = getThumbnailUrl(record)
+                const fullImageUrl = getImageUrl(record)
+                
+                // Skip if no valid image URL
+                if (!thumbnailUrl || !fullImageUrl) {
+                  console.warn("Missing image URL for record:", record.id, record)
+                  return null
+                }
+
+                return (
+                  <Dialog key={record.id}>
+                    <DialogTrigger asChild>
+                      <div
+                        className="relative aspect-square cursor-pointer hover:opacity-80 transition-opacity group overflow-hidden rounded-lg bg-gray-100"
+                        onClick={() => setSelectedImage(record)}
+                      >
+                        <Image
+                          src={thumbnailUrl}
+                          alt={record.title || `Gallery image ${record.id}`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                          loading="lazy"
+                          unoptimized={false}
+                          onError={(e) => {
+                            console.error("Image load error for:", thumbnailUrl)
+                            const target = e.target
+                            target.src = fullImageUrl
+                          }}
+                        />
+                        {/* Overlay on hover */}
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200" />
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl">
+                      <DialogTitle className="sr-only">
+                        {record.title || `Gallery image ${record.id}`}
+                      </DialogTitle>
+                      <div className="relative">
+                        <Image
+                          src={fullImageUrl}
+                          alt={record.title || `Enlarged image ${record.id}`}
+                          width={800}
+                          height={600}
+                          className="w-full h-auto object-contain max-h-[80vh]"
+                          priority
+                          unoptimized={false}
+                        />
+                        {/* Image info */}
+                        {(record.title || record.description) && (
+                          <div className="mt-4 text-center">
+                            {record.title && <h3 className="text-lg font-semibold">{record.title}</h3>}
+                            {record.description && (
+                              <p className="text-sm text-muted-foreground mt-1">{record.description}</p>
+                            )}
+                          </div>
                         )}
                       </div>
-                    )}
-                  </div>
-                </DialogContent>
-              </Dialog>
-            ))}
-          </div>
+                    </DialogContent>
+                  </Dialog>
+                )
+              })}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No images found in the gallery.</p>
+            </div>
+          )}
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-2">
+            <div className="flex justify-center items-center space-x-2 flex-wrap gap-y-2">
               {/* Previous Button */}
               <Button
                 variant="outline"
@@ -183,17 +275,21 @@ const ImageGallery = () => {
               </Button>
 
               {/* First page */}
-              {getPageNumbers()[0] > 1 && (
+              {pageNumbers[0] > 1 && (
                 <>
-                  <Button variant={1 === currentPage ? "default" : "outline"} size="sm" onClick={() => goToPage(1)}>
+                  <Button
+                    variant={1 === currentPage ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => goToPage(1)}
+                  >
                     1
                   </Button>
-                  {getPageNumbers()[0] > 2 && <span className="px-2">...</span>}
+                  {pageNumbers[0] > 2 && <span className="px-2">...</span>}
                 </>
               )}
 
               {/* Page numbers */}
-              {getPageNumbers().map((pageNum) => (
+              {pageNumbers.map((pageNum) => (
                 <Button
                   key={pageNum}
                   variant={pageNum === currentPage ? "default" : "outline"}
@@ -205,9 +301,11 @@ const ImageGallery = () => {
               ))}
 
               {/* Last page */}
-              {getPageNumbers()[getPageNumbers().length - 1] < totalPages && (
+              {pageNumbers[pageNumbers.length - 1] < totalPages && (
                 <>
-                  {getPageNumbers()[getPageNumbers().length - 1] < totalPages - 1 && <span className="px-2">...</span>}
+                  {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
+                    <span className="px-2">...</span>
+                  )}
                   <Button
                     variant={totalPages === currentPage ? "default" : "outline"}
                     size="sm"
@@ -228,13 +326,6 @@ const ImageGallery = () => {
                 Next
                 <ChevronRight className="h-4 w-4" />
               </Button>
-            </div>
-          )}
-
-          {/* Empty state */}
-          {images.length === 0 && !loading && (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">No images found in the gallery.</p>
             </div>
           )}
         </>
