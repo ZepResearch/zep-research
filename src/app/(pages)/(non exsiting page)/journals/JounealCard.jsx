@@ -100,7 +100,7 @@ function JournalCard() {
               <div className="space-y-6" key={currentJournal.id}>
                 <div className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-${currentJournal.accentColor}-600/30 to-${currentJournal.accentColor}-500/30 rounded-full border border-${currentJournal.accentColor}-500/50 backdrop-blur-sm transition-all duration-700`}>
                   <FileText className={`w-4 h-4 text-${currentJournal.accentColor}-300`} />
-                  <span className={`text-${currentJournal.accentColor}-200 text-sm font-medium`}>Peer-Reviewed Journal</span>
+                  <span className={`text-white text-sm font-medium`}>Peer-Reviewed Journal</span>
                 </div>
                 
                 <h1 className={`text-4xl md:text-5xl font-bold  text-white leading-tight transition-all duration-700`}>

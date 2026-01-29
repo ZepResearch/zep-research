@@ -1,22 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { getJournals } from "@/lib/pocketbase"
-import { FileText, TrendingUp, Users, Lightbulb } from 'lucide-react';
-import JournalCard from "./JounealCard";
-
-export const dynamic = "force-dynamic"
-export const metadata = {
-  title: "Journals | Zep Research",
-  description: "Browse academic journals on Zep Research",
-  metadataBase: new URL("https://zepresearch.com"),
-  alternates: {
-    canonical: "https://zepresearch.com/journals",
-  },
-};
+import { getAllJournals } from "@/lib/journals"
+import JournalCard from "./JounealCard"
 
 export default async function JournalsPage() {
-  const journals = await getJournals()
+  const journals = await getAllJournals()
 
   return (
     <div className="container mx-auto py-24">
@@ -28,7 +17,7 @@ export default async function JournalsPage() {
           Explore our collection of academic journals and research publications
         </p>
       </div>
-        <JournalCard/>
+      <JournalCard/>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {journals.map((journal) => (
           <Link href={`/journals/${journal.id}`} key={journal.id} className="group">
@@ -112,5 +101,3 @@ export default async function JournalsPage() {
     </div>
   )
 }
-
-
