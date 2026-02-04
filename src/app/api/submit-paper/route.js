@@ -65,7 +65,7 @@ export async function POST(request) {
     // Send notification email to admin
     await resend.emails.send({
       from: "ZepResearch|Submission <info@zepresearch.com>",
-      to: "info@zepresearch.com", // Replace with actual admin email
+      to: "contact@zepresearch.net", // Replace with actual admin email
       subject: "New Journal Submission - from Zepresearch",
       html: getAdminEmailTemplate(data, fileUrl),
     })
