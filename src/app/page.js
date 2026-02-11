@@ -12,6 +12,7 @@ import { CTACarousel } from "@/components/Cta-carousel"
 import ConferenceVideoSection from "@/components/VideoSection"
 import CPDConfList, { ConferenceListSection } from "@/components/CpdConferenceList/CPD-Conf-List"
 import { CPDCtaSection } from "@/components/Cta-Section-For-CPD"
+import TrashImagslider from "@/components/TrashImageSlider"
 
 const DEMO_FAQS = [
   {
@@ -90,6 +91,7 @@ export default function Home() {
       <Why />
       <Testimonials />
       <ConferenceVideoSection/>
+      <TrashImagslider/>
       <FaqSection
         title="Frequently Asked Questions"
         description="Everything you need to know about our platform"
