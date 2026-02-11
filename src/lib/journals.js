@@ -1,12 +1,14 @@
-import  { getPocketBaseClient } from "./pocketbase.js";
+import { getPocketBaseClient } from "./pocketbase.js";
 
 let pb = getPocketBaseClient();
+
 /**
  * Fetch a paginated list of journals
  */
 export async function getJournalsPageinated(page = 1, pageSize = 50) {
   const resultList = await pb.collection('Journals').getList(page, pageSize, {
     sort: '-created',
+    cache: 'no-store', // Add this
   });
   return resultList;
 }
@@ -17,8 +19,9 @@ export async function getJournalsPageinated(page = 1, pageSize = 50) {
 export async function getAllJournals() {
   const records = await pb.collection('Journals').getFullList({
     sort: '-created',
+    cache: 'no-store', // Add this
   });
-  return records ;
+  return records;
 }
 
 /**
@@ -27,8 +30,9 @@ export async function getAllJournals() {
 export async function getJournalById(id) {
   const record = await pb.collection('Journals').getOne(id, {
     expand: 'relField1,relField2.subRelField',
+    cache: 'no-store', // Add this
   });
-  return record ;
+  return record;
 }
 
 /**
@@ -37,8 +41,9 @@ export async function getJournalById(id) {
 export async function getJournalByField(fieldName, value) {
   const record = await pb.collection('Journals').getFirstListItem(`${fieldName}="${value}"`, {
     expand: 'relField1,relField2.subRelField',
+    cache: 'no-store', // Add this
   });
-  return record ;
+  return record;
 }
 
 /**
@@ -48,6 +53,7 @@ export async function searchJournals(filter, page = 1, pageSize = 50) {
   const resultList = await pb.collection('Journals').getList(page, pageSize, {
     filter,
     sort: '-created',
+    cache: 'no-store', // Add this
   });
   return resultList;
 }
