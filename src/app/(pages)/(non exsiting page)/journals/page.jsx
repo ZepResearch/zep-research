@@ -4,8 +4,21 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { getAllJournals } from "@/lib/journals"
 import JournalCard from "./JounealCard"
 
+// Revalidate every 60 seconds
+export const revalidate = 60
+export const dynamic = 'force-dynamic'
+
+
 export default async function JournalsPage() {
-  const journals = await getAllJournals()
+  let journals = []
+  
+  try {
+    journals = await getAllJournals()
+  } catch (error) {
+    console.error("Failed to fetch journals:", error)
+    // Return empty array or show error state
+    journals = []
+  }
 
   return (
     <div className="container mx-auto py-24">
