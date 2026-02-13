@@ -3,6 +3,10 @@ import { Heading } from "./ui/text";
 
 const logos = [
   {
+    name: "sulu",
+    src: "/co-org/sulu.png",
+  },
+  {
     name: "Company 1",
     src: "https://res.cloudinary.com/dwlhesiyi/image/upload/v1730747171/pather%20logo/pagmkfmpwxmpa8szlvcy.jpg  ",
   },

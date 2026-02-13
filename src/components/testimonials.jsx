@@ -1,22 +1,477 @@
-'use client'
+"use client";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { Container } from "./ui/container";
+import { Heading, Subheading } from "./ui/text";
 
-import * as Headless from '@headlessui/react'
-import { ArrowLongRightIcon } from '@heroicons/react/20/solid'
-import { clsx } from 'clsx'
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useSpring,
-} from 'framer-motion'
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
-import useMeasure from 'react-use-measure'
-import { Container } from './ui/container'
-import { Link } from './ui/link'
-import { Heading, Subheading } from './ui/text'
-import { ArrowLongLeftIcon } from '@heroicons/react/20/solid'
+function calculateGap(width) {
+  // Mobile: smaller gaps
+  if (width < 640) return 40;
+  // Tablet
+  if (width < 1024) return 50;
+  // Desktop scaling
+  const minWidth = 1024;
+  const maxWidth = 1456;
+  const minGap = 60;
+  const maxGap = 86;
+  if (width <= minWidth) return minGap;
+  if (width >= maxWidth)
+    return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
+  return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
+}
 
+export const CircularTestimonials = ({
+  testimonials,
+  autoplay = true,
+  colors = {},
+  fontSizes = {},
+}) => {
+  // Color & font config
+  const colorName = colors.name ?? "#000";
+  const colorDesignation = colors.designation ?? "#6b7280";
+  const colorTestimony = colors.testimony ?? "#4b5563";
+  const colorArrowBg = colors.arrowBackground ?? "#141414";
+  const colorArrowFg = colors.arrowForeground ?? "#f1f1f7";
+  const colorArrowHoverBg = colors.arrowHoverBackground ?? "#00a6fb";
+  const fontSizeName = fontSizes.name ?? "1.5rem";
+  const fontSizeDesignation = fontSizes.designation ?? "0.925rem";
+  const fontSizeQuote = fontSizes.quote ?? "1.125rem";
+
+  // State
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [hoverPrev, setHoverPrev] = useState(false);
+  const [hoverNext, setHoverNext] = useState(false);
+  const [containerWidth, setContainerWidth] = useState(1200);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const imageContainerRef = useRef(null);
+  const autoplayIntervalRef = useRef(null);
+
+  const testimonialsLength = useMemo(() => testimonials.length, [testimonials]);
+  const activeTestimonial = useMemo(
+    () => testimonials[activeIndex],
+    [activeIndex, testimonials]
+  );
+
+  // Responsive gap calculation and mobile detection
+  useEffect(() => {
+    function handleResize() {
+      if (imageContainerRef.current) {
+        setContainerWidth(imageContainerRef.current.offsetWidth);
+      }
+      setIsMobile(window.innerWidth < 768);
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Autoplay
+  useEffect(() => {
+    if (autoplay) {
+      autoplayIntervalRef.current = setInterval(() => {
+        setActiveIndex((prev) => (prev + 1) % testimonialsLength);
+      }, 5000);
+    }
+    return () => {
+      if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
+    };
+  }, [autoplay, testimonialsLength]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+    // eslint-disable-next-line
+  }, [activeIndex, testimonialsLength]);
+
+  // Navigation handlers
+  const handleNext = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % testimonialsLength);
+    if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
+  }, [testimonialsLength]);
+  
+  const handlePrev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + testimonialsLength) % testimonialsLength);
+    if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
+  }, [testimonialsLength]);
+
+  // Compute transforms for each image
+  function getImageStyle(index) {
+    const gap = calculateGap(containerWidth);
+    const maxStickUp = gap * 0.8;
+    const isActive = index === activeIndex;
+    const isLeft = (activeIndex - 1 + testimonialsLength) % testimonialsLength === index;
+    const isRight = (activeIndex + 1) % testimonialsLength === index;
+    
+    // Mobile: show only active image
+    if (isMobile) {
+      if (isActive) {
+        return {
+          zIndex: 3,
+          opacity: 1,
+          pointerEvents: "auto",
+          transform: `translateX(0px) translateY(0px) scale(1)`,
+          transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+        };
+      }
+      return {
+        zIndex: 1,
+        opacity: 0,
+        pointerEvents: "none",
+        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+      };
+    }
+    
+    // Desktop: show 3 images
+    if (isActive) {
+      return {
+        zIndex: 3,
+        opacity: 1,
+        pointerEvents: "auto",
+        transform: `translateX(0px) translateY(0px) scale(1) rotateY(0deg)`,
+        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+      };
+    }
+    if (isLeft) {
+      return {
+        zIndex: 2,
+        opacity: 1,
+        pointerEvents: "auto",
+        transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(15deg)`,
+        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+      };
+    }
+    if (isRight) {
+      return {
+        zIndex: 2,
+        opacity: 1,
+        pointerEvents: "auto",
+        transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(-15deg)`,
+        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+      };
+    }
+    // Hide all other images
+    return {
+      zIndex: 1,
+      opacity: 0,
+      pointerEvents: "none",
+      transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+    };
+  }
+
+  // Framer Motion variants for quote
+  const quoteVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+  };
+
+  return (
+    <div className="max-w-7xl w-full">
+      <div className="testimonial-grid">
+        {/* Images */}
+        <div className="image-container" ref={imageContainerRef}>
+          {testimonials.map((testimonial, index) => (
+            <img
+              key={testimonial.img}
+              src={testimonial.img}
+              alt={testimonial.name}
+              className="object-contain testimonial-image"
+              data-index={index}
+              style={getImageStyle(index)}
+            />
+          ))}
+        </div>
+        {/* Content */}
+        <div className="testimonial-content">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              variants={quoteVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <h3
+                className="name"
+                style={{ color: colorName, fontSize: fontSizeName }}
+              >
+                {activeTestimonial.name}
+              </h3>
+              <p
+                className="designation"
+                style={{ color: colorDesignation, fontSize: fontSizeDesignation }}
+              >
+                {activeTestimonial.title}
+                {activeTestimonial.country && ` • ${activeTestimonial.country}`}
+              </p>
+              <motion.p
+                className="quote"
+                style={{ color: colorTestimony, fontSize: fontSizeQuote }}
+              >
+                {activeTestimonial.quote.split(" ").map((word, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{
+                      filter: "blur(10px)",
+                      opacity: 0,
+                      y: 5,
+                    }}
+                    animate={{
+                      filter: "blur(0px)",
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    transition={{
+                      duration: 0.22,
+                      ease: "easeInOut",
+                      delay: 0.025 * i,
+                    }}
+                    style={{ display: "inline-block" }}
+                  >
+                    {word}&nbsp;
+                  </motion.span>
+                ))}
+              </motion.p>
+            </motion.div>
+          </AnimatePresence>
+          <div className="arrow-buttons">
+            <button
+              className="arrow-button prev-button"
+              onClick={handlePrev}
+              style={{
+                backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg,
+              }}
+              onMouseEnter={() => setHoverPrev(true)}
+              onMouseLeave={() => setHoverPrev(false)}
+              aria-label="Previous testimonial"
+            >
+              <FaArrowLeft className="arrow-icon" color={colorArrowFg} />
+            </button>
+            <button
+              className="arrow-button next-button"
+              onClick={handleNext}
+              style={{
+                backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg,
+              }}
+              onMouseEnter={() => setHoverNext(true)}
+              onMouseLeave={() => setHoverNext(false)}
+              aria-label="Next testimonial"
+            >
+              <FaArrowRight className="arrow-icon" color={colorArrowFg} />
+            </button>
+          </div>
+        </div>
+      </div>
+      <style jsx>{`
+        .testimonial-grid {
+          display: grid;
+          gap: 2rem;
+          width: 100%;
+        }
+        .image-container {
+          position: relative;
+          width: 100%;
+          height: 16rem;
+          perspective: 1000px;
+        }
+        .testimonial-image {
+          background-color: #ffffff;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-radius: 1rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .testimonial-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 0 1rem;
+        }
+        .name {
+          font-weight: bold;
+          margin-bottom: 0.25rem;
+          font-size: 1.25rem;
+        }
+        .designation {
+          margin-bottom: 1.5rem;
+          font-size: 0.875rem;
+        }
+        .quote {
+          line-height: 1.75;
+          font-size: 1rem;
+        }
+        .arrow-buttons {
+          display: flex;
+          gap: 1rem;
+          padding-top: 2rem;
+          justify-content: center;
+        }
+        .arrow-button {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background-color 0.3s;
+          border: none;
+          flex-shrink: 0;
+        }
+        .arrow-icon {
+          font-size: 1.25rem;
+        }
+        
+        /* Small Mobile (320px - 480px) */
+        @media (max-width: 480px) {
+          .testimonial-grid {
+            gap: 1.5rem;
+          }
+          .image-container {
+            height: 14rem;
+          }
+          .testimonial-content {
+            padding: 0 0.5rem;
+          }
+          .name {
+            font-size: 1.125rem;
+          }
+          .designation {
+            font-size: 0.8125rem;
+            margin-bottom: 1.25rem;
+          }
+          .quote {
+            font-size: 0.9375rem;
+          }
+          .arrow-buttons {
+            gap: 0.75rem;
+            padding-top: 1.5rem;
+          }
+          .arrow-button {
+            width: 2.25rem;
+            height: 2.25rem;
+          }
+          .arrow-icon {
+            font-size: 1.125rem;
+          }
+        }
+        
+        /* Mobile (481px - 639px) */
+        @media (min-width: 481px) and (max-width: 639px) {
+          .image-container {
+            height: 15rem;
+          }
+        }
+        
+        /* Tablet (640px - 767px) */
+        @media (min-width: 640px) and (max-width: 767px) {
+          .testimonial-grid {
+            gap: 2.5rem;
+          }
+          .image-container {
+            height: 18rem;
+          }
+          .name {
+            font-size: 1.375rem;
+          }
+          .designation {
+            font-size: 0.9375rem;
+          }
+          .quote {
+            font-size: 1.0625rem;
+          }
+        }
+        
+        /* Tablet to Desktop (768px - 1023px) */
+        @media (min-width: 768px) {
+          .testimonial-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+          }
+          .image-container {
+            height: 20rem;
+          }
+          .testimonial-content {
+            padding: 0;
+          }
+          .arrow-buttons {
+            padding-top: 0;
+            justify-content: flex-start;
+          }
+          .name {
+            font-size: 1.5rem;
+          }
+          .designation {
+            font-size: 0.925rem;
+          }
+          .quote {
+            font-size: 1.125rem;
+          }
+        }
+        
+        /* Desktop (1024px - 1279px) */
+        @media (min-width: 1024px) {
+          .testimonial-grid {
+            gap: 4rem;
+          }
+          .image-container {
+            height: 22rem;
+          }
+          .arrow-button {
+            width: 2.7rem;
+            height: 2.7rem;
+          }
+          .arrow-icon {
+            font-size: 1.5rem;
+          }
+        }
+        
+        /* Large Desktop (1280px - 1535px) */
+        @media (min-width: 1280px) {
+          .testimonial-grid {
+            gap: 5rem;
+          }
+          .image-container {
+            height: 24rem;
+          }
+        }
+        
+        /* Extra Large Desktop (1536px+) */
+        @media (min-width: 1536px) {
+          .image-container {
+            height: 26rem;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+// Testimonial Data
 const testimonials = [
+  {
+    img: '/testimonials/t14.jpeg',
+    name: 'Liane Vina G Ocampo',
+    country: '',
+    title: 'ZEP Research Committee Member',
+    quote: 'Being part of ZEP Research conferences has been a truly inspiring and rewarding experience in my academic journey, as these well-organized and intellectually stimulating platforms foster meaningful dialogue, global collaboration, and scholarly excellence. Through diverse and engaging sessions, I gained valuable insights, constructive feedback, and lasting professional connections that strengthened both my research impact and personal growth. ZEP Research’s commitment to quality, inclusivity, and innovation continues to motivate me to pursue research that is relevant, ethical, and transformative for society',
+  },
   {
     img: '/testimonials/t1.jpg',
     name: 'Saif Algebory',
@@ -27,7 +482,7 @@ const testimonials = [
   },
   {
     img: '/testimonials/t2.jpg',
-    name: 'Thamer Yousif ',
+    name: 'Thamer Yousif',
     country: 'Iraq',
     title: 'Professor in Public Health and Health Profession Education',
     quote:
@@ -35,15 +490,15 @@ const testimonials = [
   },
   {
     img: '/testimonials/t3.png',
-    name: 'Miles Peroja Viado ',
+    name: 'Miles Peroja Viado',
     country: 'Philippines',
     title: 'Former Instructor at Nevada City, California',
     quote:
-      'I was once a presenter and member of this organization ,Proud to be a part of it ,The legit organization that caters you as a speaker presenter a mentor or as an evaluator ..so you can published also your paper ..Thank you so much and more power! God bless and congratulations',
+      'I was once a presenter and member of this organization, Proud to be a part of it. The legit organization that caters you as a speaker presenter a mentor or as an evaluator so you can published also your paper. Thank you so much and more power! God bless and congratulations',
   },
   {
     img: '/testimonials/t4.jpg',
-    name: 'Dr. Abdulwahed Jalal Nori ',
+    name: 'Dr. Abdulwahed Jalal Nori',
     country: 'Malaysia',
     title: 'Senior Political Analyst',
     quote:
@@ -51,18 +506,11 @@ const testimonials = [
   },
   {
     img: '/testimonials/t5.jpg',
-    name: 'Jhanghiz Syahrivar, ',
+    name: 'Jhanghiz Syahrivar',
     country: 'Indonesia',
     title: 'Associate Professor of Marketing Innovation and Consumer Ethics',
     quote: 'My recent engagement with Core Research Foundation or Zep Research was through the 8th International Conference on Management, Education, and Emerging Technology (MEET24) held in Seoul, South Korea. I was honored to be invited as a member of the advisory committee. Prior to the conference, we participated in a mini webinar designed to connect like-minded researchers, which was a valuable networking opportunity. The conference process was managed professionally and efficiently, ensuring a seamless experience.',
   },
-  // {
-  //   img: '/testimonials/t5.jpg',
-  //   name: 'Harriet Arron',
-  //   title: 'Research Director, Commit',
-  //   quote:
-  //     'I ve published more high-impact papers this year than ever before, thanks to the collaborative opportunities Zep Research provides.',
-  // }, 
   {
     img: '/testimonials/t6.png',
     name: 'Alfe Solina',
@@ -82,21 +530,21 @@ const testimonials = [
     name: 'Laatiri Youssef',
     country: '',
     title: 'Researcher',
-    quote: 'Congratulations Zep Research and to the host institution, the Indraprastha College for Women, Delhi University.Thank you for inviting me as one of the Keynote Speakers.',
+    quote: 'Congratulations Zep Research and to the host institution, the Indraprastha College for Women, Delhi University. Thank you for inviting me as one of the Keynote Speakers.',
   },
   {
     img: '/testimonials/t9.png',
     name: 'Rich Monreal',
     country: '',
     title: 'Technical Committee Board Member',
-    quote: 'It’s an honor to be associated with ZEP Research. I am grateful for the opportunity to serve as a Technical Committee Board Member and to share my expertise as a speaker at various international conferences. ZEP Research plays a pivotal role in bridging the gap between academia and industry, empowering future research leaders to thrive. Congratulations on your impactful work—I’m always excited to collaborate at global conferences and contribute to such a dynamic community.',
+    quote: 'Its an honor to be associated with ZEP Research. I am grateful for the opportunity to serve as a Technical Committee Board Member and to share my expertise as a speaker at various international conferences. ZEP Research plays a pivotal role in bridging the gap between academia and industry, empowering future research leaders to thrive. Congratulations on your impactful work—Im always excited to collaborate at global conferences and contribute to such a dynamic community.',
   },
   {
     img: '/testimonials/t10.png',
     name: 'Cynthia Ala Manalad',
     country: '',
     title: 'Conference Attendee',
-    quote: 'Thank you so much to Zep Research for such a profound and wonderful conference! The concept of gathering exceptional and timely researches and presenting them internationally really enriches our horizon for knowledge! The keynote speakers did a superb job in their portions and did it in a professional manner.I look forward to attending more conferences brought by the organization!',
+    quote: 'Thank you so much to Zep Research for such a profound and wonderful conference! The concept of gathering exceptional and timely researches and presenting them internationally really enriches our horizon for knowledge! The keynote speakers did a superb job in their portions and did it in a professional manner. I look forward to attending more conferences brought by the organization!',
   },
   {
     img: '/testimonials/t11.png',
@@ -111,261 +559,57 @@ const testimonials = [
     country: '',
     title: 'Advisory Board Committee Member',
     quote: 'My deepest gratitude to Zep research for giving us the chance to publish our research paper. I am grateful to serve as advisory board committee. Being part of this organization has not only helped me grow professionally but also personally and for that, I am truly thankful.',
-  },  {
+  },
+  {
     img: '/testimonials/t13.jpg',
     name: 'Prof. Dr. Ipseeta Nanda',
     country: 'India',
     title: 'Professor, IILM University',
     quote: 'A distinct honor to be associated with Zep Research. Their dedication to supporting researchers worldwide is highly commendable. Grateful for the opportunity to contribute to advancing global research initiatives.',
   },
-]
+];
 
-function TestimonialCard({
-  name,
-  title,
-  country,
-  img,
-  children,
-  bounds,
-  scrollX,
-  ...props
-}) {
-  let ref = useRef(null)
-
-  let computeOpacity = useCallback(() => {
-    let element = ref.current
-    if (!element || bounds.width === 0) return 1
-
-    let rect = element.getBoundingClientRect()
-
-    if (rect.left < bounds.left) {
-      let diff = bounds.left - rect.left
-      let percent = diff / rect.width
-      return Math.max(0.5, 1 - percent)
-    } else if (rect.right > bounds.right) {
-      let diff = rect.right - bounds.right
-      let percent = diff / rect.width
-      return Math.max(0.5, 1 - percent)
-    } else {
-      return 1
-    }
-  }, [ref, bounds.width, bounds.left, bounds.right])
-
-  let opacity = useSpring(computeOpacity(), {
-    stiffness: 154,
-    damping: 23,
-  })
-
-  useLayoutEffect(() => {
-    opacity.set(computeOpacity())
-  }, [computeOpacity, opacity])
-
-  useMotionValueEvent(scrollX, 'change', () => {
-    opacity.set(computeOpacity())
-  })
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ opacity }}
-      {...props}
-      className="relative flex aspect-[9/16] w-72 shrink-0 snap-start scroll-ml-[var(--scroll-padding)] flex-col justify-end overflow-hidden rounded-3xl sm:aspect-[3/4] sm:w-96"
-    >
-      <img
-        alt=""
-        src={img}
-        className="absolute inset-x-0 top-0 aspect-square w-full object-contain"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black from-[calc(7/16*100%)] ring-1 ring-inset ring-gray-950/10 sm:from-25%"
-      />
-      <figure className="relative p-10">
-        <blockquote>
-          <p className="relative text-sm/5 text-white">
-            <span aria-hidden="true" className="absolute -translate-x-full">
-              “
-            </span>
-            {children}
-            <span aria-hidden="true" className="absolute">
-              ”
-            </span>
-          </p>
-        </blockquote>
-        <figcaption className="mt-6 border-t border-white/20 pt-6">
-          <p className="text-base/6 font-semibold text-white">{name}</p>
-          <p className="text-sm/4 font-medium">
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              {title}
-            </span>
-          </p>
-          <p className='text-white text-sm'>{country}</p>
-        </figcaption>
-      </figure>
-    </motion.div>
-  )
-}
-
-function CallToAction() {
-  return (
-    <div>
-      <p className="max-w-sm text-sm/6 text-gray-600">
-      Join industry leaders and innovators at our premier conference. Gain insights, network, and shape the future.
-      </p>
-      <div className="mt-2">
-        <Link
-          href="/login"
-          className="inline-flex items-center gap-2 text-sm/6 font-medium text-cyan-600"
-        >
-          Register Now 
-          <ArrowLongRightIcon className="size-5" />
-        </Link>
-      </div>
-    </div>
-  )
-}
-
-export function Testimonials() {
-  let scrollRef = useRef(null)
-  let { scrollX } = useScroll({ container: scrollRef })
-  let [setReferenceWindowRef, bounds] = useMeasure()
-  let [activeIndex, setActiveIndex] = useState(0)
-  let [canScrollLeft, setCanScrollLeft] = useState(false)
-  let [canScrollRight, setCanScrollRight] = useState(true)
-  useMotionValueEvent(scrollX, 'change', (x) => {
-    setActiveIndex(Math.floor(x / scrollRef.current.children[0].clientWidth))
-    
-    // Check if can scroll left or right
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
-    }
-  })
-
-  function scrollTo(index) {
-    let gap = 32
-    let width = scrollRef.current.children[0].offsetWidth
-    scrollRef.current.scrollTo({ left: (width + gap) * index })
-  }
-
-  function scrollLeft() {
-    if (scrollRef.current && activeIndex > 0) {
-      scrollTo(activeIndex - 1)
-    }
-  }
-
-  function scrollRight() {
-    if (scrollRef.current && activeIndex < testimonials.length - 1) {
-      scrollTo(activeIndex + 1)
-    }
-  }
-  return (
-    <div className="overflow-hidden py-32 relative">
-    <Container>
-      <div ref={setReferenceWindowRef}>
-        <Subheading>What everyone is saying</Subheading>
-        <Heading as="h3" className="mt-2">
-          Trusted by professionals.
-        </Heading>
-      </div>
-    </Container>
-    
-    {/* Navigation buttons - desktop view (left/right sides) */}
-    <div className="absolute z-10 w-full h-[calc(100%-16rem)] top-48 pointer-events-none">
-      {/* Left button */}
-      <div className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-auto">
-        <button
-          className="z-40 h-14 w-14 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
-          onClick={scrollLeft}
-          disabled={!canScrollLeft}
-          aria-label="Previous testimonial"
-        >
-          <ArrowLongLeftIcon className="h-6 w-6 text-gray-100" />
-        </button>
-      </div>
-      
-      {/* Right button */}
-      <div className="hidden sm:block absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-auto">
-        <button
-          className="z-40 h-14 w-14 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
-          onClick={scrollRight}
-          disabled={!canScrollRight}
-          aria-label="Next testimonial"
-        >
-          <ArrowLongRightIcon className="h-6 w-6 text-gray-100" />
-        </button>
-      </div>
-    </div>
-    
-    <div
-      ref={scrollRef}
-      className={clsx([
-        'mt-16 flex gap-8 px-[var(--scroll-padding)]',
-        '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
-        'snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth',
-        '[--scroll-padding:max(theme(spacing.6),calc((100vw-theme(maxWidth.2xl))/2))] lg:[--scroll-padding:max(theme(spacing.8),calc((100vw-theme(maxWidth.7xl))/2))]',
-      ])}
-    >
-      {testimonials.map(({ img, name, title, quote, country}, testimonialIndex) => (
-        <TestimonialCard
-          key={testimonialIndex}
-          name={name}
-          title={title}
-          img={img}
-          country={country}
-          bounds={bounds}
-          scrollX={scrollX}
-          onClick={() => scrollTo(testimonialIndex)}
-        >
-          {quote}
-        </TestimonialCard>
-      ))}
-      <div className="w-[42rem] shrink-0 sm:w-[54rem]" />
-    </div>
-    
-    {/* Mobile navigation buttons - centered at bottom */}
-    <div className="sm:hidden flex justify-center gap-2 mt-8">
-      <button
-        className="z-40 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
-        onClick={scrollLeft}
-        disabled={!canScrollLeft}
-        aria-label="Previous testimonial"
-      >
-        <ArrowLongLeftIcon className="h-5 w-5 text-gray-100" />
-      </button>
-      <button
-        className="z-40 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center disabled:opacity-50 transition-opacity"
-        onClick={scrollRight}
-        disabled={!canScrollRight}
-        aria-label="Next testimonial"
-      >
-        <ArrowLongRightIcon className="h-5 w-5 text-gray-100" />
-      </button>
-    </div>
-    
-    <Container className="mt-16">
-      <div className="flex justify-between">
-        <CallToAction />
-        <div className="hidden sm:flex sm:gap-2">
-          {testimonials.map(({ name }, testimonialIndex) => (
-            <Headless.Button
-              key={testimonialIndex}
-              onClick={() => scrollTo(testimonialIndex)}
-              data-active={
-                activeIndex === testimonialIndex ? true : undefined
-              }
-              aria-label={`Scroll to testimonial from ${name}`}
-              className={clsx(
-                'size-2.5 rounded-full border border-transparent bg-gray-300 transition',
-                'data-[active]:bg-gray-400 data-[hover]:bg-gray-400',
-                'forced-colors:data-[active]:bg-[Highlight] forced-colors:data-[focus]:outline-offset-4',
-              )}
-            />
-          ))}
+// Demo Component
+export const Testimonials = () => (
+  <section className="w-full">
+    {/* Header section */}
+    <div className="text-center my-8 md:my-12 px-4">
+      <Container>
+        <div>
+          <Subheading>What everyone is saying</Subheading> 
+          <Heading as="h3" className="mt-2">
+            Trusted by professionals.
+          </Heading>
         </div>
+      </Container>
+    </div>
+    
+    {/* Light testimonials section */}
+    <div className="p-4 sm:p-8 md:p-12 lg:p-16 xl:p-20 rounded-lg min-h-[300px] flex flex-wrap gap-6 items-center justify-center relative w-full">
+      <div
+        className="items-center justify-center relative flex w-full"
+        style={{ maxWidth: "1456px" }}
+      >
+        <CircularTestimonials
+          testimonials={testimonials}
+          autoplay={true}
+          colors={{
+            name: "#0a0a0a",
+            designation: "#454545",
+            testimony: "#171717",
+            arrowBackground: "#141414",
+            arrowForeground: "#f1f1f7",
+            arrowHoverBackground: "#00A6FB",
+          }}
+          fontSizes={{
+            name: "28px",
+            designation: "20px",
+            quote: "20px",
+          }}
+        />
       </div>
-    </Container>
-  </div>
-  )
-}
+    </div>
+  </section>
+);
+
+export default CircularTestimonials;

@@ -1,5 +1,5 @@
  const stats = [
-  { id: 1, name: 'events since 2005', value: '32' },
+  { id: 1, name: 'events since 2021', value: '32' },
   { id: 2, name: 'attendees on average', value: '3000+' },
   { id: 3, name: 'sessions per event', value: '165' },
    { id: 4, name: 'Creators on the platform', value: '8,000+' },
