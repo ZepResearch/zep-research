@@ -105,7 +105,7 @@ export default function CoOrganizationLogos() {
          
         </h2> */}
         <Heading as="h3" className="my-8  text-center">
-               Our Associate Partners
+               Our Associated  Partners
                 </Heading>
         <CoOrganizationLogosClient logos={logos} />
       </div>

@@ -84,7 +84,7 @@ export default function Home() {
       <CPDCtaSection/>
       <CoOrganizationLogos />
       <Welcome />
-      <ConferenceListSection/> 
+      {/* <ConferenceListSection/>  */}
       <FeaturesXX />
       <CTACarousel slides={slides} showControls={true} />
       <UpComingConf />
