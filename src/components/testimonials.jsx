@@ -219,7 +219,7 @@ export const CircularTestimonials = ({
                 {activeTestimonial.country && ` • ${activeTestimonial.country}`}
               </p>
               <motion.p
-                className="quote"
+                className="quote  overflow-y-scroll h-[300px]"
                 style={{ color: colorTestimony, fontSize: fontSizeQuote }}
               >
                 {activeTestimonial.quote.split(" ").map((word, i) => (
@@ -566,6 +566,34 @@ const testimonials = [
     country: 'India',
     title: 'Professor, IILM University',
     quote: 'A distinct honor to be associated with Zep Research. Their dedication to supporting researchers worldwide is highly commendable. Grateful for the opportunity to contribute to advancing global research initiatives.',
+  },
+  {
+    img: '/testimonials/t15.jpeg',
+    name: 'Ass. prof. Saif M. Hassan',
+    country: 'Iraq',
+    title: 'Madenat Alelem University',
+    quote: 'I have published multiple research papers with Zep Research, and each engagement has been conducted with a high level of professionalism and efficiency. Their team provides comprehensive support throughout the entire publication process, from identifying appropriate journals to ensuring successful final publication. The procedures are transparent, well-structured, and delivered within the agreed timelines. I confidently recommend Zep Research to researchers seeking dependable and high-quality publication services.',
+  },
+   {
+    img: '/testimonials/t16.jpeg',
+    name: 'Dr Mahmud Iwan Solihin ',
+    country: 'Malaysia',
+    title: 'Assoc Prof in Mechatronics Engineering, UCSI University,',
+    quote: 'I am honoured to have been a keynote speaker at ICARI 2025 in Kuala Lumpur on 14th -15th  November 2025, a truly well-organized and professional conference. The event provided an excellent platform for knowledge sharing, collaboration, and inspiring discussions among researchers and innovators from around the world.',
+  },
+  {
+    img: '/testimonials/t17.jpeg',
+    name: ' Dr. Mohamed Syed Ibrahim',
+    country: 'Oman',
+    title: 'Head of Research and Consultancy',
+    quote: 'As the Head of the Research and Consultancy Department at the University of Technology and Applied Sciences – Ibra, Oman, it is my pleasure to express sincere appreciation for the outstanding work carried out by Zep Research in organizing the recent international research conference. The event was distinguished by exceptional professionalism, meticulous planning, and a welcoming environment that strongly fostered academic exchange and collaboration. From the outset, the Zep Research team demonstrated a clear commitment to excellence, with conference logistics managed with remarkable precision, ensuring seamless scheduling, engaging sessions, and a highly interactive experience for all participants. The well-structured program provided an effective platform for both seasoned researchers and early-career scholars to present their work, gain valuable insights, and engage in meaningful dialogue. Special recognition is due to Mr. Ankit, Chief Executive Officer of Zep Research, whose vision, dedication, and proactive leadership were instrumental in the event’s success, ensuring the highest standards of quality and academic integrity. Equally commendable were the contributions of Mr. Ashok and Ms. Soumya, whose professionalism, attention to detail, prompt support to delegates, and warm hospitality significantly enhanced the overall participant experience. Overall, the conference stands as a testament to Zep Research’s ability to deliver high-impact academic events that elevate scholarly discourse and strengthen international research networks, and I look forward to future collaborations that further advance global research excellence and knowledge dissemination.',
+  },
+  {
+    img: '/testimonials/t18.jpeg',
+    name: ' ',
+    country: 'Argentina',
+    title: 'COIL Program Coordinator, GlobalEd STAR Country Director,',
+    quote: 'Participating as a Keynote Speaker at the 2nd International Conference on Applied Science, Engineering & Management (ICASEM 2025) was an inspiring and professionally enriching experience. As Professor at I.E.S. en Lenguas Vivas J.R.F. and INSPT – Universidad Tecnológica Nacional, Argentina, and STAR Scholars Country Director for Argentina, I was honored to present my keynote titled “Transforming Higher Education through Global Collaboration: COIL and the SDGs as Catalysts for Innovation.” The conference provided an exceptional platform to engage with scholars and practitioners from diverse disciplines who share a commitment to advancing innovation and sustainable development. The multidisciplinary spirit of ICASEM 2025 fostered meaningful dialogue on how applied science, engineering, and management can contribute to addressing global challenges. I particularly valued the opportunity to exchange ideas on Collaborative Online International Learning (COIL) and its potential to internationalize education, promote intercultural understanding, and support the Sustainable Development Goals. From my dual perspective as an educator and as STAR Scholars Country Director, the event reinforced the importance of building inclusive global networks that expand opportunities for academics and students in Ibero-America and beyond. The high academic standards of the conference—indexed by Scopus and supported by ZEP Research, Rourkela Institute of Technology, and The CPD Standards Office—reflected its global relevance and impact. The event created a dynamic environment for interdisciplinary exchange, critical reflection, and the development of new partnerships. Overall, ICASEM 2025 was a vibrant space for networking, knowledge sharing, and envisioning new possibilities for cross-border collaboration in higher education. I left the conference motivated and encouraged by the collective commitment to multidisciplinary excellence and innovation. I am truly grateful to the organizers for the invitation and for creating such a valuable forum for global academic exchange.',
   },
 ];
 
