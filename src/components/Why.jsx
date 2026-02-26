@@ -10,16 +10,16 @@ function Why() {
       <div className=" mx-auto max-w-screen-2xl px-4 md:px-8">
         <div className="grid grid-cols-1 gap-8 items-center md:grid-cols-2">
           <div className="flex gap-4 flex-col">
-            <div>
+            {/* <div>
               <Badge variant="outline" className={'font-mono'}>We&apos;re live!</Badge>
-            </div>
+            </div> */}
             <div className="flex gap-4 flex-col">
               <Heading>
               Why Choose Zep Research
               </Heading>
               <p
                 className="text-xl leading-relaxed tracking-tight text-muted-foreground max-w-md text-left">
-               through our comprehensive suite of services. Our expertise in organizing Conferences & Webinars ensures impactful events that foster collaboration and innovation. We offer diverse Journals & Publications to showcase your research and enhance academic visibility.
+              Our expertise in organizing Conferences & Webinars ensures impactful events that foster collaboration and innovation. We offer diverse Journals & Publications to showcase your research and enhance academic visibility.
               </p>
             </div>
             <div className="flex flex-row gap-4">
