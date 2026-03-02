@@ -14,6 +14,8 @@ import CPDConfList, { ConferenceListSection } from "@/components/CpdConferenceLi
 import { CPDCtaSection } from "@/components/Cta-Section-For-CPD"
 import TrashImagslider from "@/components/TrashImageSlider"
 import ConferenceVideoShortSection from "@/components/VideoTestimonial_yt"
+import AccessJournalCtaCard from "@/components/Access_Journal_cta-card"
+import { AnimatedStats } from "@/components/Stats"
 
 const DEMO_FAQS = [
   {
@@ -84,7 +86,9 @@ export default function Home() {
       <Hero />
       <CPDCtaSection/>
       <CoOrganizationLogos />
+      <AccessJournalCtaCard/>
       <Welcome />
+      <AnimatedStats/>
       {/* <ConferenceListSection/>  */}
       <FeaturesXX />
       <CTACarousel slides={slides} showControls={true} />
