@@ -139,6 +139,10 @@ const demoData = {
       title: "Gallery",
       url: "/Gallery",
     },
+    {
+      title: "Impact",
+      url: "/impact",
+    },
   ],
   mobileExtraLinks: [
     { name: "Press", url: "/press" },
@@ -154,7 +158,7 @@ const demoData = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-       <head>
+      <head>
         <script
           async
           src="https://analytics.zepresearch.com/script.js"
@@ -166,13 +170,13 @@ export default function RootLayout({ children }) {
       >
         <Navbar1 {...demoData} />
         {children}
-        <Footer/>
-        <Toaster /> 
-        <LineMessengerButton/>
-        <TawkToChat/>
+        <Footer />
+        <Toaster />
+        <LineMessengerButton />
+        <TawkToChat />
       </body>
     </html>
-  );  
+  );
 }
 
 
