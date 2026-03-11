@@ -109,7 +109,7 @@ export default function JournalTabs({ grouped }) {
         {journals.length === 0 ? (
           <EmptyState />
         ) : (
-          journals.map((journal) => (
+          journals.filter(j => !j.by_zep).map((journal) => (
             <Link href={`/journals/${journal.id}`} key={journal.id} className="group">
               <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-gray-300">
                 <div className="relative h-[300px] bg-gradient-to-t from-blue-300 to-blue-800 w-full overflow-hidden">

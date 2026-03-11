@@ -95,7 +95,7 @@ const ConferenceVideoShortSection = () => {
 
   return (
     <div className="bg-white py-4 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-2xl mx-auto">l̥
         {/* Header */}
         <div className="text-center mb-12">
             <Container>

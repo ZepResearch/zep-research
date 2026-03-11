@@ -22,6 +22,7 @@ export async function getAllJournals() {
 export async function getGroupedJournals() {
   const records = await pb.collection('Journals').getFullList({
     sort: '-created',
+     filter: 'by_zep != true',
     cache: 'no-store',
   });
 
