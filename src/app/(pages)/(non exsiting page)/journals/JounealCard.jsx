@@ -85,7 +85,7 @@ export default function JournalCard() {
           </div>
           <div>
             <h2 className="text-xl font-bold">ZEP Journals</h2>
-            <p className="text-slate-400 text-sm">{journals.length} peer-reviewed publications</p>
+            <p className="text-slate-400 text-sm">{journals.length} peer-reviewed Journal</p>
           </div>
         </div>
 
