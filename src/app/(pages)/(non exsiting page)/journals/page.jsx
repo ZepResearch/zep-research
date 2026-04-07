@@ -6,7 +6,7 @@
   export const dynamic = 'force-dynamic'
 
   export default async function JournalsPage() {
-    let grouped = { Scopus: [], GoogleScholar: [], ABDC: [] }
+    let grouped = { Scopus: [], GoogleScholar: [], ABDC: [] ,Wos: [] }
 
     try {
       grouped = await getGroupedJournals()

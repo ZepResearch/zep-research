@@ -22,7 +22,6 @@ export async function getAllJournals() {
 export async function getGroupedJournals() {
   const records = await pb.collection('Journals').getFullList({
     sort: '-created',
-     filter: 'by_zep != true',
     cache: 'no-store',
   });
 
@@ -30,21 +29,25 @@ export async function getGroupedJournals() {
     Scopus: [],
     GoogleScholar: [],
     ABDC: [],
+    Wos: [],
   };
 
   records.forEach((journal) => {
     const type = journal.indexType;
-    if (type === "ABDC") {
-      grouped["ABDC"].push(journal);
-    } else if (type === "GoogleScholar") {
-      grouped["GoogleScholar"].push(journal);
+    if (grouped[type] !== undefined) {
+      // For GoogleScholar, include all; for others, exclude by_zep ones
+      if (type === 'GoogleScholar' || !journal.by_zep) {
+        grouped[type].push(journal);
+      }
     } else {
-      grouped["Scopus"].push(journal);
+      if (!journal.by_zep) {
+        grouped["Scopus"].push(journal);
+      }
     }
   });
 
   return grouped;
-}
+} 
 
 export async function getJournalById(id) {
   const record = await pb.collection('Journals').getOne(id, {

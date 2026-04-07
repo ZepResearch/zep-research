@@ -36,6 +36,16 @@ const TABS = [
     badge: "bg-green-100 text-green-700",
     indicator: "bg-green-600",
   },
+   {
+    key: "Wos",
+    label: "Wos",
+    description: "Journals indexed in Web of Science — Clarivate's citation indexing service.",
+    accent: "from-purple-500 to-purple-700",
+    activeTab: "bg-purple-600 text-white border-purple-600",
+    inactiveTab: "text-gray-600 hover:text-purple-600 hover:bg-purple-50",
+    badge: "bg-purple-100 text-purple-700",
+    indicator: "bg-purple-600",
+  },
 ]
 
 function ArrowIcon() {
@@ -109,7 +119,7 @@ export default function JournalTabs({ grouped }) {
         {journals.length === 0 ? (
           <EmptyState />
         ) : (
-          journals.filter(j => !j.by_zep).map((journal) => (
+          journals.map((journal) => (
             <Link href={`/journals/${journal.id}`} key={journal.id} className="group">
               <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg border-gray-200 hover:border-gray-300">
                 <div className="relative h-[300px] bg-gradient-to-t from-blue-300 to-blue-800 w-full overflow-hidden">
