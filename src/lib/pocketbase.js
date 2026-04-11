@@ -168,3 +168,16 @@ export async function getJournalById(id) {
     return null
   }
 }
+
+export async function getLastConferenceProceedings() {
+  try {
+    const pb = getPocketBaseClient()
+    const records = await pb.collection("last_conf_proceedings").getFullList({
+      sort: "-field", // Assuming 'field' is the date field for sorting
+    })
+    return records
+  } catch (error) {
+    console.error("Error fetching last conference proceedings:", error)
+    return []
+  }
+}

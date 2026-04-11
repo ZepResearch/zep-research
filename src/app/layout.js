@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar1 } from "@/components/Navbar"
 import Footer from "@/components/Footer";
-import { Book, GalleryHorizontal, GraduationCap, GroupIcon, NotepadText, ScrollText, StarHalf, Sunset, Tickets, Trees, UserRound, UserRoundIcon, UsersRound, Zap } from "lucide-react";
+import { Book, BookAIcon, GalleryHorizontal, GraduationCap, GroupIcon, NotepadText, ScrollText, StarHalf, Sunset, Tickets, Trees, UserRound, UserRoundIcon, UsersRound, Zap } from "lucide-react";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { IconPodium } from "@tabler/icons-react";
 import { FaRegObjectGroup, FaRobot } from "react-icons/fa";
@@ -119,12 +119,12 @@ const demoData = {
           icon: <IconPodium className="size-5 shrink-0" />,
           url: "/conference",
         },
-        // {
-        //   title: "ChatBot",
-        //   description: "Interact with our AI-powered chatbot for assistance and support.",
-        //   icon: <FaRobot className="size-5 shrink-0" />,
-        //   url: "/ResearchChatbot",
-        // },
+        {
+          title: "Past Conferences",
+          description: "Explore our archive of previous conferences and events.",
+          icon: <BookAIcon className="size-5 shrink-0" />,
+          url: "/past-conferences",
+        },
       ],
     },
     {
