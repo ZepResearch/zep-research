@@ -11,7 +11,6 @@ import { LineMessengerButton } from "@/components/line-messenger-button";
 import whatsapplogo from "@/assets/whatsapp.png";
 import Image from "next/image";
 import TawkToChat from "@/components/TawkToChat";
-import UmamiAnalytics from "@/components/Umami-Anaylitcs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -159,7 +158,13 @@ const demoData = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head />
+      <head>
+        <script
+          async
+          src="https://analytics.zepresearch.com/script.js"
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+        ></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
@@ -169,8 +174,9 @@ export default function RootLayout({ children }) {
         <Toaster />
         <LineMessengerButton />
         <TawkToChat />
-        <UmamiAnalytics />
       </body>
     </html>
   );
 }
+
+
