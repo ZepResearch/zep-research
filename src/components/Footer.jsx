@@ -156,7 +156,7 @@ Plot.no.2028/2044, Sai Aarti Enclave, Behind Tanishq Chandasekharpur, Bhubaneshw
                 </div>
                 <div className="flex items-center">
                   <FaPhone className="mr-2 text-cyan-600 dark:text-cyan-400" />
-                  <span>+91 78488 54815 </span>
+                  <span>+91 82600 80050</span>
                 </div>
                 <div className="flex items-center">
                   <FaEnvelope className="mr-2 text-cyan-600 dark:text-cyan-400" />

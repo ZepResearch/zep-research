@@ -187,7 +187,7 @@ const Navbar1 = ({
                   {/* WhatsApp button for mobile */}
                   <div className="mt-4 flex justify-center">
                     <a
-                      href="https://wa.me/917848854815"
+                      href="https://wa.me/918260080050"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex flex-col items-center"
@@ -209,7 +209,7 @@ const Navbar1 = ({
       {/* WhatsApp Floating Button - Desktop */}
       <div className="fixed left-24 bottom-2 z-50 hidden lg:flex flex-col items-center">
         <a
-          href="https://wa.me/917848854815"
+          href="https://wa.me/918260080050"
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center"

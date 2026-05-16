@@ -101,7 +101,7 @@ Plot.no.2028/2044, Sai Aarti Enclave, Behind Tanishq Chandasekharpur, Bhubaneshw
                   <div>
                     <h3 className="font-medium">Phone</h3>
                     <p className="text-muted-foreground">
-                    +91 7848854815</p>
+                    +91 82600 80050</p>
                   </div>
                 </div>
 
